@@ -1,4 +1,4 @@
-package com.prabhu.springbootjpapostgresql;
+package com.dm.springbootjpapostgresql;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

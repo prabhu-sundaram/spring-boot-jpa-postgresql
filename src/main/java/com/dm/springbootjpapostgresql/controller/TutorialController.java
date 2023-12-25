@@ -1,8 +1,9 @@
-package com.prabhu.springbootjpapostgresql.controller;
+package com.dm.springbootjpapostgresql.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prabhu.springbootjpapostgresql.model.Tutorial;
-import com.prabhu.springbootjpapostgresql.repository.TutorialRepository;
+import com.dm.springbootjpapostgresql.model.Tutorial;
+import com.dm.springbootjpapostgresql.repository.TutorialRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -38,7 +39,10 @@ public class TutorialController {
 			if (title == null)
 				tutorialRepository.findAll().forEach(tutorials::add);
 			else
-				tutorialRepository.findByTitleContaining(title).forEach(tutorials::add);
+				//tutorialRepository.findByTitleContaining(title).forEach(tutorials::add);
+				tutorials.stream()
+                    .filter(Tutorial -> Tutorial.getTitle().contains(title))
+                    .collect(Collectors.toList());
 
 			if (tutorials.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -50,14 +54,29 @@ public class TutorialController {
 		}
 	}
 
+	public List<Tutorial> findByTitleContaining(String title) {
+		List<Tutorial> tutorials = new ArrayList<>();
+
+        if (title == null || title.isEmpty()) {
+            return tutorials; // If no filter is specified, return all entities
+        } else {
+            // Simulated filter logic - Filtering by name containing the filter value
+            return tutorials.stream()
+                    .filter(Tutorial -> Tutorial.getTitle().contains(title))
+                    .collect(Collectors.toList());
+        }
+	}
+
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 
 	@GetMapping("/tutorialsCount")
     public ResponseEntity<String> getTutorialsCount() {
-        String query = "SELECT COUNT(*) FROM tutorials";
-        Integer count = jdbcTemplate.queryForObject(query, Integer.class);
-        return new ResponseEntity<>("Total tutorials: " + count, HttpStatus.OK);
+        ///String query = "SELECT COUNT(*) FROM tutorials";
+        //Integer count = jdbcTemplate.queryForObject(query, Integer.class);
+
+		Long count2=tutorialRepository.count();
+        return new ResponseEntity<>("Total tutorials: " + count2, HttpStatus.OK);
     }	
 
 	@GetMapping("/tutorials/{id}")

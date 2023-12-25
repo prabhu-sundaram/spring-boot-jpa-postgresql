@@ -1,4 +1,4 @@
-package com.prabhu.springbootjpapostgresql.model;
+package com.dm.springbootjpapostgresql.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

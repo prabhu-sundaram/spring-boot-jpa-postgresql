@@ -1,4 +1,4 @@
-package com.prabhu.springbootjpapostgresql.model;
+package com.dm.springbootjpapostgresql.model;
 
 //import javax.persistence.*; // for Spring Boot 2
 import jakarta.persistence.*; // for Spring Boot 3

@@ -1,14 +1,16 @@
-package com.prabhu.springbootjpapostgresql.controller;
+package com.dm.springbootjpapostgresql.controller;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prabhu.springbootjpapostgresql.model.Greeting;
+import com.dm.springbootjpapostgresql.model.Greeting;
 
 @RestController
+@RequestMapping("/api")
 public class GreetingController {
 
 	private static final String template = "Hello, %s!";

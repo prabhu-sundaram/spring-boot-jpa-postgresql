@@ -1,4 +1,4 @@
-package com.prabhu.springbootjpapostgresql.model;
+package com.dm.springbootjpapostgresql.model;
 
 public record Greeting(long id, String content) {
     
