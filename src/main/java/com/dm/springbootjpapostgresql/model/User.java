@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+//import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
+
 import com.dm.springbootjpapostgresql.model.Administration.Nationality;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user",uniqueConstraints = {
+@Table(name = "users",uniqueConstraints = {
         @UniqueConstraint(columnNames = "user_id")
 })
 public class User {
@@ -44,12 +49,18 @@ public class User {
     private Date idExpiryDate;
     @Column(name = "gender")
     private Gender  gender;
-    @Column(name = "nationality")
-    private Nationality nationality; // Reference to Nationality class
+    //@Column(name = "nationality")
+    //private Nationality nationality; // Reference to Nationality class
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @ManyToOne(targetEntity=Nationality.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "nationality_id")
+    private Nationality nationality;
+
     @Column(name = "dob")
     private Date dob;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,targetEntity= Address.class,mappedBy = "user",fetch = FetchType.LAZY)
     //private List<Address> addresses;
     private List<Address> addresses = new ArrayList<>();
 
@@ -234,6 +245,7 @@ enum Gender {
 }
 
 enum IdType {
+    EMIRATESID,
     PASSPORT,
     VISA,
     OTHER

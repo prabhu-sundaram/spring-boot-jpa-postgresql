@@ -1,5 +1,12 @@
 package com.dm.springbootjpapostgresql.model.Administration;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.dm.springbootjpapostgresql.model.User;
+
+//import org.hibernate.annotations.JdbcTypeCode;
+//import org.hibernate.type.SqlTypes;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,23 +23,14 @@ public class Nationality {
     @Column(name = "name_ar")
     private String nationalityNameAr;
 
-    public String getNationalityNameAr() {
-        return nationalityNameAr;
-    }
-
-    public void setNationalityNameAr(String nationalityNameAr) {
-        this.nationalityNameAr = nationalityNameAr;
-    }
-
-    public String getNationalityNameEn() {
-        return nationalityNameEn;
-    }
-
-    public void setNationalityNameEn(String nationalityNameEn) {
-        this.nationalityNameEn = nationalityNameEn;
-    }
+    @OneToMany(cascade = CascadeType.ALL,targetEntity= User.class,mappedBy = "nationality",fetch = FetchType.LAZY)
+    private List<User> users = new ArrayList<>();
 
     // Constructor
+	public Nationality() {
+
+	}
+
     public Nationality(Long nationalityId, String nationalityNameEn, String nationalityNameAr) {
         this.nationalityId = nationalityId;
         this.nationalityNameEn = nationalityNameEn;
@@ -48,7 +46,21 @@ public class Nationality {
         this.nationalityId = nationalityId;
     }
 
+    public String getNationalityNameAr() {
+        return nationalityNameAr;
+    }
 
+    public void setNationalityNameAr(String nationalityNameAr) {
+        this.nationalityNameAr = nationalityNameAr;
+    }
+
+    public String getNationalityNameEn() {
+        return nationalityNameEn;
+    }
+
+    public void setNationalityNameEn(String nationalityNameEn) {
+        this.nationalityNameEn = nationalityNameEn;
+    }
 
     // toString method to represent object as string
     @Override
