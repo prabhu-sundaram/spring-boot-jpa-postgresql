@@ -1,5 +1,6 @@
 package com.dm.springbootjpapostgresql.model;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,6 +71,12 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL,targetEntity= Address.class,mappedBy = "user",fetch = FetchType.LAZY)
     //private List<Address> addresses;
     private List<Address> addresses = new ArrayList<>();
+
+    @Column(name = "created_date")
+    private Instant createdDate;
+
+    @Column(name = "changed_date")
+    private Instant changeddate;    
 
     /* 
     // Constructor

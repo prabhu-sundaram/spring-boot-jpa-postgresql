@@ -47,14 +47,19 @@ public class Student {
     private String guardianMobile;
 
 
-    /* 
+    public Student(String firstName, String lastName) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Student(String firstName, String lastName, String email) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
- 
+     /* 
     public String getFirstName() {
         return firstName;
     }

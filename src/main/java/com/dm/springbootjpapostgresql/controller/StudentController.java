@@ -18,17 +18,17 @@ public class StudentController {
 
 	@GetMapping("/student")
 	public Student getStudent() {
-		return new Student("Ramesh", "Fadatare");
+		return new Student("Ramesh", "Fadatare","test@gmail.com");
 	}
 
 	@GetMapping("/students")
 	public List<Student> getStudents(){		
 		List<Student> students = new ArrayList<>();
-		students.add(new Student("Ramesh", "Fadatare"));
-		students.add(new Student("Tony", "Cena"));
-		students.add(new Student("Sanjay", "Jadhav"));
-		students.add(new Student("Ram", "Jadhav"));
-		students.add(new Student("Umesh", "Fadatare"));
+		students.add(new Student("Ramesh", "Fadatare","test1@gmail.com"));
+		students.add(new Student("Tony", "Cena","test2@gmail.com"));
+		students.add(new Student("Sanjay", "Jadhav","test3@gmail.com"));
+		students.add(new Student("Ram", "Jadhav","test4@gmail.com"));
+		students.add(new Student("Umesh", "Fadatare","test5@gmail.com"));
 		return students;
 	}
 
