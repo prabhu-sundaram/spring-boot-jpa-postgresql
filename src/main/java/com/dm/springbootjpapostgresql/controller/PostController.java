@@ -1,7 +1,5 @@
 package com.dm.springbootjpapostgresql.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import jakarta.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+//import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.http.HttpStatus;
@@ -27,10 +25,8 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.dm.springbootjpapostgresql.model.Post;
 import com.dm.springbootjpapostgresql.dto.PostDto;
 import com.dm.springbootjpapostgresql.dto.PostResponse;
-import com.dm.springbootjpapostgresql.repository.PostRepository;
 import com.dm.springbootjpapostgresql.service.PostService;
 import com.dm.springbootjpapostgresql.utils.AppConstants;
 

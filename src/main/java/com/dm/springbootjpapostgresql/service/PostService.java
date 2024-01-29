@@ -1,7 +1,5 @@
 package com.dm.springbootjpapostgresql.service;
 
-import java.util.List;
-
 import com.dm.springbootjpapostgresql.dto.PostDto;
 import com.dm.springbootjpapostgresql.dto.PostResponse;
 

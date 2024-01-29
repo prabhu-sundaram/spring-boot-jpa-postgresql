@@ -12,6 +12,13 @@ import org.hibernate.type.SqlTypes;
 import com.dm.springbootjpapostgresql.model.Administration.Nationality;
 import jakarta.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users",uniqueConstraints = {
         @UniqueConstraint(columnNames = "user_id")
@@ -64,6 +71,7 @@ public class User {
     //private List<Address> addresses;
     private List<Address> addresses = new ArrayList<>();
 
+    /* 
     // Constructor
     public User(Long userId, String userName, String userType, String firstName, String firstNameAr, String lastName, String lastNameAr, String emailId,
                       String mobileNo, Boolean active, IdType idType, String idNumber, Date idExpiryDate, Gender gender,
@@ -234,7 +242,7 @@ public class User {
                 ", nationality='" + nationality + '\'' +
                 ", dob=" + dob +
                 '}';
-    }
+    }*/
 }
 
 // Enum for Gender

@@ -12,12 +12,26 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "student")
+@Table(
+    name = "student",
+    uniqueConstraints = @UniqueConstraint(
+        name="emailid_unique",
+        columnNames = "email_address"
+    )
+
+    )
 
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @SequenceGenerator(
+        name = "student_sequence",
+        sequenceName = "student_sequence",
+        allocationSize = 1
+    )
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "student_sequence")
+    private Long studentId;
 
     @Column(nullable = false)    
 	private String firstName;
@@ -25,17 +39,22 @@ public class Student {
     @Column(nullable = false)
 	private String lastName;
 	
-    @Column(nullable = false, unique = true)
+    @Column(name = "email_address",nullable = false, unique = true)
     private String email;
 
-   
-    public Student(String firstName, String lastName) {
+    private String guardianName;
+    private String guardianEmail;
+    private String guardianMobile;
+
+
+    /* 
+    public Student(String firstName, String lastName, String email) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
-        //this.email = email;
+        this.email = email;
     }
- /* 
+ 
     public String getFirstName() {
         return firstName;
     }

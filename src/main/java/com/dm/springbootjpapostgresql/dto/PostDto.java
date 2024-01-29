@@ -38,10 +38,11 @@ public class PostDto {
     // post content should not be null or empty
     @NotEmpty
     private String content;
-    //private Set<CommentDto> comments;
-/* 
+    
+    private Set<CommentDto> comments;
+
     @Schema(
             description = "Blog Post Category"
     )
-    private Long categoryId;*/
+    private Long categoryId;
 }
