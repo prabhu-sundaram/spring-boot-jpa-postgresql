@@ -3,12 +3,10 @@ package com.dm.springbootjpapostgresql.model;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -53,13 +51,14 @@ public class Student {
         this.lastName = lastName;
     }
 
+    /*
     public Student(String firstName, String lastName, String email) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
-     /* 
+     
     public String getFirstName() {
         return firstName;
     }

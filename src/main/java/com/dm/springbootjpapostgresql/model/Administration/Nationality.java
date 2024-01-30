@@ -8,7 +8,13 @@ import com.dm.springbootjpapostgresql.model.User;
 //import org.hibernate.annotations.JdbcTypeCode;
 //import org.hibernate.type.SqlTypes;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "nationality")
 public class Nationality {
@@ -26,6 +32,7 @@ public class Nationality {
     @OneToMany(cascade = CascadeType.ALL,targetEntity= User.class,mappedBy = "nationality",fetch = FetchType.LAZY)
     private List<User> users = new ArrayList<>();
 
+    /* 
     // Constructor
 	public Nationality() {
 
@@ -70,6 +77,6 @@ public class Nationality {
                 ", nationalityNameEn='" + nationalityNameEn + '\'' +
                 ", nationalityNameAr='" + nationalityNameAr + '\'' +
                 '}';
-    }
+    }*/
 }
 

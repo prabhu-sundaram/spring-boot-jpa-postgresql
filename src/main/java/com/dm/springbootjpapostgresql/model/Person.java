@@ -1,7 +1,13 @@
 package com.dm.springbootjpapostgresql.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "person")
 public class Person {
@@ -15,10 +21,10 @@ public class Person {
   @Column(name = "last_name")
   private String lastName;
 
+  /* 
   public Person(String firstName, String lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
-
 }
 
   public String getFirstName() {
@@ -35,5 +41,5 @@ public class Person {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
-  }
+  }*/
 }

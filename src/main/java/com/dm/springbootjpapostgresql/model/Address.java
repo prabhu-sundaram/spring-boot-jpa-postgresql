@@ -4,7 +4,13 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "address")
 public class Address {
@@ -54,6 +60,7 @@ public class Address {
     @JoinColumn(name = "user_id")
     private User user;
 
+    /* 
     // Constructor
     public Address(Long addressId, AddressType addressType, String flat, String floor, String building,
                    String street, String community, String emirate, String country,
@@ -197,7 +204,7 @@ public class Address {
                 ", fax='" + fax + '\'' +
                 ", active='" + active + '\'' +
                 '}';
-    }
+    }*/
 }
 
 enum AddressType {

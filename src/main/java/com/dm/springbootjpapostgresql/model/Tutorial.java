@@ -1,8 +1,13 @@
 package com.dm.springbootjpapostgresql.model;
 
-//import javax.persistence.*; // for Spring Boot 2
-import jakarta.persistence.*; // for Spring Boot 3
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tutorials")
 public class Tutorial {
@@ -20,6 +25,7 @@ public class Tutorial {
 	@Column(name = "published")
 	private boolean published;
 
+	/* 
 	public Tutorial() {
 
 	}
@@ -61,5 +67,5 @@ public class Tutorial {
 	@Override
 	public String toString() {
 		return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
-	}
+	}*/
 }
