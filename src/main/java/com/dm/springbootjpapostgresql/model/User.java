@@ -11,6 +11,9 @@ import org.hibernate.type.SqlTypes;
 //import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 
 import com.dm.springbootjpapostgresql.model.Administration.Nationality;
+import com.dm.springbootjpapostgresql.model.enumeration.Gender;
+import com.dm.springbootjpapostgresql.model.enumeration.IdType;
+
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -72,12 +75,24 @@ public class User {
     //private List<Address> addresses;
     private List<Address> addresses = new ArrayList<>();
 
-    @Column(name = "created_date")
+    @Column(name = "created_date", nullable = false)
     private Instant createdDate;
 
-    @Column(name = "changed_date")
-    private Instant changeddate;    
+    @Column(name = "changed_date", nullable = false)
+    private Instant changedDate;    
 
+    @PrePersist
+    protected void onCreate() {
+        Instant now = Instant.now();
+
+        createdDate = now;
+        changedDate = now;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        changedDate = Instant.now();
+    }
     /* 
     // Constructor
     public User(Long userId, String userName, String userType, String firstName, String firstNameAr, String lastName, String lastNameAr, String emailId,
@@ -252,6 +267,7 @@ public class User {
     }*/
 }
 
+/* 
 // Enum for Gender
 enum Gender {
     MALE,
@@ -265,3 +281,4 @@ enum IdType {
     VISA,
     OTHER
 }
+*/
