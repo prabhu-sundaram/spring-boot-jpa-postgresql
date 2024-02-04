@@ -1,19 +1,25 @@
 package com.dm.springbootjpapostgresql.mapper;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.dm.springbootjpapostgresql.dto.CommentDto;
 import com.dm.springbootjpapostgresql.model.Comment;
 
+@Component
 public class CommentMapper {
-    private ModelMapper mapper;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    /* 
     // Private constructor to prevent instantiation
     private CommentMapper() {
         // private constructor to hide the implicit public one
-    }
+    }*/
 
     public CommentDto mapToDTO(Comment comment){
-        CommentDto commentDto = mapper.map(comment, CommentDto.class);
+        CommentDto commentDto = modelMapper.map(comment, CommentDto.class);
 
 //        CommentDto commentDto = new CommentDto();
 //        commentDto.setId(comment.getId());
@@ -24,7 +30,7 @@ public class CommentMapper {
     }
 
     public Comment mapToEntity(CommentDto commentDto){
-        Comment comment = mapper.map(commentDto, Comment.class);
+        Comment comment = modelMapper.map(commentDto, Comment.class);
 //        Comment comment = new Comment();
 //        comment.setId(commentDto.getId());
 //        comment.setName(commentDto.getName());

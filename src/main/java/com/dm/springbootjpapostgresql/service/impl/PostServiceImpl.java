@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import com.dm.springbootjpapostgresql.mapper.PostMapper;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,15 +25,20 @@ import com.dm.springbootjpapostgresql.service.PostService;
 @Service
 public class PostServiceImpl implements PostService{
 
-	private final PostRepository postRepository;
-    private ModelMapper mapper;
+    //private ModelMapper mapper;
+
+    @Autowired
     private PostMapper postMapper;
-	
+
+    @Autowired
+	private PostRepository postRepository;
+
+    /* 
 	public PostServiceImpl(PostRepository postRepository,ModelMapper mapper) {
 		super();
 		this.postRepository = postRepository;
         this.mapper = mapper;
-	}
+	}*/
 
     @Override
     public PostResponse getAllPosts(int pageNo, int pageSize, String sortBy, String sortDir) {

@@ -9,7 +9,8 @@ import com.dm.springbootjpapostgresql.mapper.CommentMapper;
 import com.dm.springbootjpapostgresql.repository.CommentRepository;
 import com.dm.springbootjpapostgresql.repository.PostRepository;
 import com.dm.springbootjpapostgresql.service.CommentService;
-import org.modelmapper.ModelMapper;
+//import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +19,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-
+    @Autowired
     private CommentRepository commentRepository;
+    @Autowired
     private PostRepository postRepository;
-    private ModelMapper mapper;
+    //private ModelMapper mapper;
+    @Autowired
     private CommentMapper commentMapper;
 
+    /* 
     public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, ModelMapper mapper) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
         this.mapper = mapper;
-    }
+    }*/
 
     @Override
     public CommentDto createComment(long postId, CommentDto commentDto) {

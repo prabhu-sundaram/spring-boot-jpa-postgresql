@@ -6,6 +6,7 @@ import com.dm.springbootjpapostgresql.dto.CategoryDto;
 import com.dm.springbootjpapostgresql.repository.CategoryRepository;
 import com.dm.springbootjpapostgresql.service.CategoryService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +15,16 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+    @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
+    /* 
     public CategoryServiceImpl(CategoryRepository categoryRepository, ModelMapper modelMapper) {
         this.categoryRepository = categoryRepository;
         this.modelMapper = modelMapper;
-    }
+    }*/
 
     @Override
     public CategoryDto addCategory(CategoryDto categoryDto) {
