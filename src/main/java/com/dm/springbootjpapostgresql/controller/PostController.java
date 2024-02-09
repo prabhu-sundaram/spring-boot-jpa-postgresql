@@ -2,6 +2,8 @@ package com.dm.springbootjpapostgresql.controller;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -132,9 +134,9 @@ public class PostController {
 
     // Build Get Posts by Category REST API
     // http://localhost:8080/api/posts/category/3
-    /*@GetMapping("/category/{id}")
+    @GetMapping("/category/{id}")
     public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable("id") Long categoryId){
         List<PostDto> postDtos = postService.getPostsByCategory(categoryId);
         return ResponseEntity.ok(postDtos);
-    }*/
+    }
 }

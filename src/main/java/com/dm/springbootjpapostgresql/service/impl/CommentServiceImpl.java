@@ -37,12 +37,13 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto createComment(long postId, CommentDto commentDto) {
 
-        Comment comment = commentMapper.mapToEntity(commentDto);
+        
 
         // retrieve post entity by id
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new ResourceNotFoundException("Post", "id", postId));
 
+        Comment comment = commentMapper.mapToEntity(commentDto);
         // set post to comment entity
         comment.setPost(post);
 

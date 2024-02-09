@@ -2,6 +2,7 @@ package com.dm.springbootjpapostgresql.service.impl;
 
 import com.dm.springbootjpapostgresql.model.Category;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
+import com.dm.springbootjpapostgresql.mapper.CategoryMapper;
 import com.dm.springbootjpapostgresql.dto.CategoryDto;
 import com.dm.springbootjpapostgresql.repository.CategoryRepository;
 import com.dm.springbootjpapostgresql.service.CategoryService;
@@ -18,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private ModelMapper modelMapper;
+    private CategoryMapper categoryMapper;
 
     /* 
     public CategoryServiceImpl(CategoryRepository categoryRepository, ModelMapper modelMapper) {
@@ -28,9 +29,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto addCategory(CategoryDto categoryDto) {
-        Category category = modelMapper.map(categoryDto, Category.class);
+        Category category = categoryMapper.mapToEntity(categoryDto);
         Category savedCategory = categoryRepository.save(category);
-        return modelMapper.map(savedCategory, CategoryDto.class);
+        return categoryMapper.mapToDTO(savedCategory);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
 
-        return modelMapper.map(category, CategoryDto.class);
+        return categoryMapper.mapToDTO(category);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         List<Category> categories = categoryRepository.findAll();
 
-        return categories.stream().map((category) -> modelMapper.map(category, CategoryDto.class))
+        return categories.stream().map((category) -> categoryMapper.mapToDTO(category))
                 .collect(Collectors.toList());
     }
 
@@ -63,7 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         Category updatedCategory = categoryRepository.save(category);
 
-        return modelMapper.map(updatedCategory, CategoryDto.class);
+        return categoryMapper.mapToDTO(updatedCategory);
     }
 
     @Override

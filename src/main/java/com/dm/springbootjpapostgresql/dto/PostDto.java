@@ -5,6 +5,8 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -39,7 +41,7 @@ public class PostDto {
     @NotEmpty
     private String content;
     
-    private Set<CommentDto> comments;
+    private List<CommentDto> comments;
 
     @Schema(
             description = "Blog Post Category"
