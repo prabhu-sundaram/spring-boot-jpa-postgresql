@@ -9,7 +9,6 @@ import com.dm.springbootjpapostgresql.mapper.PostMapper;
 
 
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -148,4 +147,3 @@ public class PostServiceImpl implements PostService{
     }
 
 }
-

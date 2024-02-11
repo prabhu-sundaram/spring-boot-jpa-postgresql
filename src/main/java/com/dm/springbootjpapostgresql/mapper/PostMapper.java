@@ -1,9 +1,9 @@
 package com.dm.springbootjpapostgresql.mapper;
 
-import java.util.List;
+//import java.util.List;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +17,8 @@ import com.dm.springbootjpapostgresql.repository.CategoryRepository;
 @Component
 public class PostMapper {
  
-    @Autowired
-    private ModelMapper modelMapper;
+    //@Autowired
+    //private ModelMapper modelMapper;
 
     @Autowired
     private CategoryRepository categoryRepository;

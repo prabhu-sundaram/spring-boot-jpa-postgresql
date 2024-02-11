@@ -3,6 +3,7 @@ package com.dm.springbootjpapostgresql.model;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,8 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(
-    name = "student",
+    name = "tbl_student",
     uniqueConstraints = @UniqueConstraint(
         name="emailid_unique",
         columnNames = "email_address"
@@ -40,10 +42,8 @@ public class Student {
     @Column(name = "email_address",nullable = false, unique = true)
     private String email;
 
-    private String guardianName;
-    private String guardianEmail;
-    private String guardianMobile;
-
+    @Embedded
+    private Guardian guardian;
 
     public Student(String firstName, String lastName) {
         super();
