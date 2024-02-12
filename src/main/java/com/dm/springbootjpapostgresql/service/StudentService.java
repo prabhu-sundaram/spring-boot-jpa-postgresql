@@ -12,10 +12,10 @@ public interface StudentService {
     public List<StudentDTO> getAllStudentsByFirstNameContaining(String firstName);
     public List<StudentDTO> getAllStudentsByLastNameNotNull(String lastName);
 
-    public List<StudentDTO> getAllStudentsByGuardianName(String name);
+    //public List<StudentDTO> getAllStudentsByGuardianName(String name);
 
 
-    public StudentDTO getStudentbyId(long id);
+    public StudentDTO getStudentById(long id);
 
     public StudentDTO createStudent(StudentDTO studentDTO);
 

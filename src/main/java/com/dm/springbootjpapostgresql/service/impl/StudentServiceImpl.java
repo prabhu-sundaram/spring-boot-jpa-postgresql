@@ -106,7 +106,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public StudentDTO getStudentbyId(long id)
+    public StudentDTO getStudentById(long id)
     {
         Student student = studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("student","id",id));
         return  studentMapper.toDTO(student);

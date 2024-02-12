@@ -44,7 +44,7 @@ public class StudentController {
 	@GetMapping("/{id}")
 	public ResponseEntity<StudentDTO> getStudent(@PathVariable(name="id") long id) {
 
-		return ResponseEntity.ok(studentService.getStudentbyId(id)); 
+		return ResponseEntity.ok(studentService.getStudentById(id));
 	}
 
 	// @GetMapping("/students")
