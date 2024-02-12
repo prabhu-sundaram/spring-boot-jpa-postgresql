@@ -20,7 +20,7 @@ import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
 import com.dm.springbootjpapostgresql.mapper.StudentMapper;
 import com.dm.springbootjpapostgresql.model.Guardian;
 import com.dm.springbootjpapostgresql.model.Student;
-import com.dm.springbootjpapostgresql.repository.GuardianRepository;
+//import com.dm.springbootjpapostgresql.repository.GuardianRepository;
 import com.dm.springbootjpapostgresql.repository.StudentRepository;
 import com.dm.springbootjpapostgresql.service.StudentService;
 
@@ -29,13 +29,15 @@ public class StudentServiceImpl implements StudentService{
 
     private StudentRepository studentRepository;
     private StudentMapper studentMapper;
-    private GuardianRepository guardianRepository;
+    //private GuardianRepository guardianRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository,StudentMapper studentMapper,GuardianRepository guardianRepository)
+    public StudentServiceImpl(StudentRepository studentRepository,StudentMapper studentMapper
+    //,GuardianRepository guardianRepository
+    )
     {
         this.studentRepository=studentRepository;
         this.studentMapper=studentMapper;
-        this.guardianRepository=guardianRepository;
+        //this.guardianRepository=guardianRepository;
     }
 
     @Override
@@ -68,13 +70,13 @@ public class StudentServiceImpl implements StudentService{
         return studentsDTO;
     } 
 
-    @Override
-    public List<StudentDTO> getAllStudentsByGuardianName(String name)
-    {
-        List<Student> students=studentRepository.findByGuardianName(name);
-        List<StudentDTO> studentsDTO=students.stream().map(student->studentMapper.toDTO(student)).collect(Collectors.toList());
-        return studentsDTO;
-    }     
+    // @Override
+    // public List<StudentDTO> getAllStudentsByGuardianName(String name)
+    // {
+    //     List<Student> students=studentRepository.findByGuardianName(name);
+    //     List<StudentDTO> studentsDTO=students.stream().map(student->studentMapper.toDTO(student)).collect(Collectors.toList());
+    //     return studentsDTO;
+    // }     
 
     @Override
     public StudentResponse getAllStudentsPaged(int pageNo, int pageSize, String sortBy, String sortDir)

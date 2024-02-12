@@ -42,8 +42,8 @@ public class Student {
     @Column(name = "email_address",nullable = false, unique = true)
     private String email;
 
-    @Embedded
-    private Guardian guardian;
+    // @Embedded
+    // private Guardian guardian;
 
     public Student(String firstName, String lastName) {
         super();

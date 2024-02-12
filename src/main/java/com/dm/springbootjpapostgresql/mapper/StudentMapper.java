@@ -21,7 +21,7 @@ public Student toEntity(StudentDTO studentDTO)
     .firstName(studentDTO.getFirstName())
     .lastName(studentDTO.getLastName())
     .email(studentDTO.getEmail())
-    .guardian(studentDTO.getGuardian())
+    //.guardian(studentDTO.getGuardian())
     .build();
 
     return student;
@@ -34,7 +34,7 @@ public StudentDTO toDTO(Student student)
     .firstName(student.getFirstName())
     .lastName(student.getLastName())
     .email(student.getEmail())
-    .guardian(student.getGuardian())
+    //.guardian(student.getGuardian())
     .build();
 
     return studentDTO;
