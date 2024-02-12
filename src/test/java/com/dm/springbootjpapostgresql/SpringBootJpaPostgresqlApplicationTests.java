@@ -1,4 +1,4 @@
-package com.prabhu.springbootjpapostgresql;
+package com.dm.springbootjpapostgresql;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
