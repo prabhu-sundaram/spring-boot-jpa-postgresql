@@ -17,6 +17,8 @@ public class SpringBootJpaPostgresqlApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootJpaPostgresqlApplication.class, args);
-	}
-        //Stream.iterate(1, i -> i + 1).limit(10).forEach(System.out::println);
+
+		Stream.iterate(1, i -> i + 1).limit(10).forEach(System.out::println);
 }
+	}
+        
