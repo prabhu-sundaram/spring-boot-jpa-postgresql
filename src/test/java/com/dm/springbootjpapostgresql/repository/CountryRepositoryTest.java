@@ -16,26 +16,31 @@ class CountryRepositoryTest {
     @Test
     public void saveCountry()
     {
-        Country countryUSA = Country.builder()
-        .name("United States Of America")
-        .build();
+        // Country countryUSA = Country.builder()
+        // .name("United States Of America")
+        // .build();
 
-        countryRepository.save(countryUSA);
+        // countryRepository.save(countryUSA);
 
-        Country countryIN = Country.builder()
-        .name("India")
-        .status(Status.Active)
-        .build();
+        // Country countryIN = Country.builder()
+        // .name("India")
+        // .status(Status.Active)
+        // .build();
 
-        countryRepository.save(countryIN);        
+        // countryRepository.save(countryIN);        
+
+        // Country country = Country.builder()
+        // .name("UAE")
+        // .status(Status.Inactive)
+        // .build();
+
+        // countryRepository.save(country);          
 
         Country country = Country.builder()
-        .name("UAE")
-        .status(Status.Inactive)
+        .name("Pakistan")
         .build();
 
-        countryRepository.save(country);          
-        
+        countryRepository.save(country);        
     }
     
 }

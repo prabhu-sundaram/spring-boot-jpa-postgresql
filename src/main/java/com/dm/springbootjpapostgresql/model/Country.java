@@ -31,8 +31,9 @@ public class Country {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private Status status = Status.Active;
+    @Column(name = "status",columnDefinition = "varchar(255) default 'Active'")
+    //private Status status = Status.Active;
+    private Status status;
    
     public Country(BigDecimal id, String name, Status status) {
         this.id = id;
