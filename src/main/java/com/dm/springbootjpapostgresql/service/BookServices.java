@@ -18,8 +18,8 @@ public class BookServices {
 	    return book;
 	}
 	//GetAll Customers
-	public List getBooks(){
-		List book = new ArrayList<>();
+	public List<Book> getBooks(){
+		List<Book> book = new ArrayList<>();
 		bookRepository.findAll().forEach(books -> book.add(books));
 		return book;
 	}

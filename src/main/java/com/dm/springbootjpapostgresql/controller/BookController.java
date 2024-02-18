@@ -36,7 +36,7 @@ public class BookController {
 	}
 //	@GetMapping("/getBooks")
 	@QueryMapping("allBooks")
-	public List getBooks(){
+	public List<Book> getBooks(){
 		return bookServices.getBooks();
 	}
 //	@GetMapping("/getBook/{id}")
