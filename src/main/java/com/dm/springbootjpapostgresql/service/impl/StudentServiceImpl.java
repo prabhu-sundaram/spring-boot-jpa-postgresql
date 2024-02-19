@@ -24,12 +24,17 @@ import com.dm.springbootjpapostgresql.model.Student;
 import com.dm.springbootjpapostgresql.repository.StudentRepository;
 import com.dm.springbootjpapostgresql.service.StudentService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class StudentServiceImpl implements StudentService{
 
     private StudentRepository studentRepository;
     private StudentMapper studentMapper;
     //private GuardianRepository guardianRepository;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StudentServiceImpl.class);
 
     public StudentServiceImpl(StudentRepository studentRepository,StudentMapper studentMapper
     //,GuardianRepository guardianRepository
@@ -43,8 +48,11 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public List<StudentDTO> getAllStudents()
     {
+        LOGGER.info("Getting all students");
         List<Student> students=studentRepository.findAll();
         List<StudentDTO> studentsDTO=students.stream().map(student->studentMapper.toDTO(student)).collect(Collectors.toList());
+        LOGGER.info("All students:"+studentsDTO);
+
         return studentsDTO;
     }
 

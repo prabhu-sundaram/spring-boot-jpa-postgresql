@@ -1,4 +1,3 @@
-// schema.graphqls //
 type Mutation{
 	createBook(book:BookInput):Book
 }
