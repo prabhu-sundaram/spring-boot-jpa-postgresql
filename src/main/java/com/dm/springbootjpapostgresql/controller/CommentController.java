@@ -2,6 +2,8 @@ package com.dm.springbootjpapostgresql.controller;
 
 import com.dm.springbootjpapostgresql.dto.CommentDto;
 import com.dm.springbootjpapostgresql.service.CommentService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class CommentController {
 
+    @Autowired
     private CommentService commentService;
 
-    public CommentController(CommentService commentService) {
-        this.commentService = commentService;
-    }
+    // public CommentController(CommentService commentService) {
+    //     this.commentService = commentService;
+    // }
 
     @PostMapping("/posts/{postId}/comments")
     public ResponseEntity<CommentDto> createComment(@PathVariable(value = "postId") long postId,

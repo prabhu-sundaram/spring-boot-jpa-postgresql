@@ -2,6 +2,8 @@ package com.dm.springbootjpapostgresql.controller;
 
 import com.dm.springbootjpapostgresql.dto.CategoryDto;
 import com.dm.springbootjpapostgresql.service.CategoryService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,11 +15,12 @@ import java.util.List;
 @RequestMapping("/api/categories")
 public class CategoryController {
 
+    @Autowired
     private CategoryService categoryService;
 
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
+    // public CategoryController(CategoryService categoryService) {
+    //     this.categoryService = categoryService;
+    // }
 
     // Build Add Category REST API
     @PostMapping

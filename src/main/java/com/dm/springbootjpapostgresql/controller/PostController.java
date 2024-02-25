@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.modelmapper.ModelMapper;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,12 +33,12 @@ import com.dm.springbootjpapostgresql.utils.AppConstants;
 )
 public class PostController {
 
-       
+    @Autowired   
     private PostService postService;
 
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
+//     public PostController(PostService postService) {
+//         this.postService = postService;
+//     }
 
     @Operation(
             summary = "Create Post REST API",
