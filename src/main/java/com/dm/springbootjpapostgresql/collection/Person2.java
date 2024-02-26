@@ -10,9 +10,9 @@ import java.util.List;
 
 @Data
 @Builder
-@Document(collection = "person")
+@Document(collection = "person2")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Person {
+public class Person2 {
 
     @Id
     private String personId;
@@ -20,5 +20,5 @@ public class Person {
     private String lastName;
     private Integer age;
     private List<String> hobbies;
-    private List<Address> addresses;
+    private List<Address3> addresses;
 }

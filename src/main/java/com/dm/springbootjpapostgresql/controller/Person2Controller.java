@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.controller;
 
-import com.dm.springbootjpapostgresql.collection.Person;
+import com.dm.springbootjpapostgresql.collection.Person2;
 import com.dm.springbootjpapostgresql.service.PersonService;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
-public class PersonController {
+@RequestMapping("/api/person2")
+public class Person2Controller {
 
     @Autowired
     private PersonService personService;
 
     @PostMapping
-    public String save(@RequestBody Person person) {
+    public String save(@RequestBody Person2 person) {
         return personService.save(person);
     }
 
     @GetMapping
-    public List<Person> getPersonStartWith(@RequestParam("name") String name) {
+    public List<Person2> getPersonStartWith(@RequestParam("name") String name) {
         return personService.getPersonStartWith(name);
     }
 
@@ -34,13 +34,13 @@ public class PersonController {
     }
 
     @GetMapping("/age")
-    public List<Person> getByPersonAge(@RequestParam Integer minAge,
+    public List<Person2> getByPersonAge(@RequestParam Integer minAge,
                                        @RequestParam Integer maxAge) {
         return personService.getByPersonAge(minAge,maxAge);
     }
 
     @GetMapping("/search")
-    public Page<Person> searchPerson(
+    public Page<Person2> searchPerson(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer minAge,
             @RequestParam(required = false) Integer maxAge,

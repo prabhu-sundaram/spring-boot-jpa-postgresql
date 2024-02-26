@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
-import com.dm.springbootjpapostgresql.collection.Person;
+import com.dm.springbootjpapostgresql.collection.Person2;
 import com.dm.springbootjpapostgresql.repository.Person2Repository;
 import com.dm.springbootjpapostgresql.service.PersonService;
 
@@ -29,12 +29,12 @@ public class PersonServiceImpl implements PersonService{
     @Autowired
     private MongoTemplate mongoTemplate;
     @Override
-    public String save(Person person) {
+    public String save(Person2 person) {
         return personRepository.save(person).getPersonId();
     }
 
     @Override
-    public List<Person> getPersonStartWith(String name) {
+    public List<Person2> getPersonStartWith(String name) {
         return personRepository.findByFirstNameStartsWith(name);
     }
 
@@ -44,12 +44,12 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public List<Person> getByPersonAge(Integer minAge, Integer maxAge) {
+    public List<Person2> getByPersonAge(Integer minAge, Integer maxAge) {
         return personRepository.findPersonByAgeBetween(minAge,maxAge);
     }
 
     @Override
-    public Page<Person> search(String name, Integer minAge, Integer maxAge, String city, Pageable pageable) {
+    public Page<Person2> search(String name, Integer minAge, Integer maxAge, String city, Pageable pageable) {
 
         Query query = new Query().with(pageable);
         List<Criteria> criteria = new ArrayList<>();
@@ -71,9 +71,9 @@ public class PersonServiceImpl implements PersonService{
                     .andOperator(criteria.toArray(new Criteria[0])));
         }
 
-        Page<Person> people = PageableExecutionUtils.getPage(
-                mongoTemplate.find(query, Person.class
-                ), pageable, () -> mongoTemplate.count(query.skip(0).limit(0),Person.class));
+        Page<Person2> people = PageableExecutionUtils.getPage(
+                mongoTemplate.find(query, Person2.class
+                ), pageable, () -> mongoTemplate.count(query.skip(0).limit(0),Person2.class));
         return people;
     }
 
@@ -92,7 +92,7 @@ public class PersonServiceImpl implements PersonService{
                 = Aggregation.newAggregation(unwindOperation,sortOperation,groupOperation);
 
         List<Document> person
-                = mongoTemplate.aggregate(aggregation, Person.class,Document.class).getMappedResults();
+                = mongoTemplate.aggregate(aggregation, Person2.class,Document.class).getMappedResults();
         return person;
     }
 
@@ -118,7 +118,7 @@ public class PersonServiceImpl implements PersonService{
 
         List<Document> documents
                 = mongoTemplate.aggregate(aggregation,
-                Person.class,
+                Person2.class,
                 Document.class).getMappedResults();
         return  documents;
     }
