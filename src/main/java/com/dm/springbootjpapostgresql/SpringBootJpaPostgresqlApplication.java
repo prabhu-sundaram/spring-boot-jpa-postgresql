@@ -60,66 +60,66 @@ public class SpringBootJpaPostgresqlApplication {
     @Autowired
     private UnifiedJedis jedis;
 
-    @Value("classpath:data.json")
-    Resource resourceFile;
+    // @Value("classpath:data.json")
+    // Resource resourceFile;
 
-    @Bean
-    CommandLineRunner loadData() {
-        return args -> {
-            postRepository.deleteAll();
+    // @Bean
+    // CommandLineRunner loadData() {
+    //     return args -> {
+    //         postRepository.deleteAll();
 
-            try {
-                jedis.ftDropIndex("post-idx");
-            } catch (Exception e) {
-                System.out.println("Index is not available");
-            }
+    //         try {
+    //             jedis.ftDropIndex("post-idx");
+    //         } catch (Exception e) {
+    //             System.out.println("Index is not available");
+    //         }
 
-            String data = new String(resourceFile
-                    .getInputStream()
-                    .readAllBytes());
+    //         String data = new String(resourceFile
+    //                 .getInputStream()
+    //                 .readAllBytes());
 
-            ObjectMapper objectMapper
-                    = new ObjectMapper()
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    //         ObjectMapper objectMapper
+    //                 = new ObjectMapper()
+    //                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-            Post2[] posts =
-                    objectMapper.readValue(data, Post2[].class);
-            Arrays.stream(posts).forEach(postRepository::save);
+    //         Post2[] posts =
+    //                 objectMapper.readValue(data, Post2[].class);
+    //         Arrays.stream(posts).forEach(postRepository::save);
 
-            Schema schema = new Schema()
-                    .addField(new Schema.Field(FieldName.of("$.content").as("content"), Schema.FieldType.TEXT,true,false))
-                    .addField(new Schema.TextField(FieldName.of("$.title").as("title")))
-                    .addField(new Schema.Field(FieldName.of("$.tags[*]").as("tags"), Schema.FieldType.TAG))
-                    .addField(new Schema.Field(FieldName.of("$.views").as("views"), Schema.FieldType.NUMERIC,false,true));
+    //         Schema schema = new Schema()
+    //                 .addField(new Schema.Field(FieldName.of("$.content").as("content"), Schema.FieldType.TEXT,true,false))
+    //                 .addField(new Schema.TextField(FieldName.of("$.title").as("title")))
+    //                 .addField(new Schema.Field(FieldName.of("$.tags[*]").as("tags"), Schema.FieldType.TAG))
+    //                 .addField(new Schema.Field(FieldName.of("$.views").as("views"), Schema.FieldType.NUMERIC,false,true));
 
-            IndexDefinition indexDefinition
-                    = new IndexDefinition(IndexDefinition.Type.JSON)
-                    .setPrefixes(new String[] {"post:"});
+    //         IndexDefinition indexDefinition
+    //                 = new IndexDefinition(IndexDefinition.Type.JSON)
+    //                 .setPrefixes(new String[] {"post:"});
 
-            jedis.ftCreate("post-idx",
-                    IndexOptions.defaultOptions().setDefinition(indexDefinition),
-                    schema);
-        };
-    }
+    //         jedis.ftCreate("post-idx",
+    //                 IndexOptions.defaultOptions().setDefinition(indexDefinition),
+    //                 schema);
+    //     };
+    // }
 
-	@Bean
-    CommandLineRunner testRedis() {
-        return args -> {		
-            // Store & Retrieve a simple string
-            jedis.set("foo", "bar");
-            System.out.println(jedis.get("foo")); // prints bar
+	// @Bean
+    // CommandLineRunner testRedis() {
+    //     return args -> {		
+    //         // Store & Retrieve a simple string
+    //         jedis.set("foo", "bar");
+    //         System.out.println(jedis.get("foo")); // prints bar
             
-            // Store & Retrieve a HashMap
-            Map<String, String> hash = new HashMap<>();;
-            hash.put("name", "John");
-            hash.put("surname", "Smith");
-            hash.put("company", "Redis");
-            hash.put("age", "29");
-            jedis.hset("user-session:123", hash);
-            System.out.println(jedis.hgetAll("user-session:123"));
-            // Prints: {name=John, surname=Smith, company=Redis, age=29}
-		};
-	}
+    //         // Store & Retrieve a HashMap
+    //         Map<String, String> hash = new HashMap<>();;
+    //         hash.put("name", "John");
+    //         hash.put("surname", "Smith");
+    //         hash.put("company", "Redis");
+    //         hash.put("age", "29");
+    //         jedis.hset("user-session:123", hash);
+    //         System.out.println(jedis.hgetAll("user-session:123"));
+    //         // Prints: {name=John, surname=Smith, company=Redis, age=29}
+	// 	};
+	// }
 	public static void main(String[] args) {
 		
 		//SpringApplication.run(SpringBootJpaPostgresqlApplication.class, args);
@@ -134,13 +134,13 @@ public class SpringBootJpaPostgresqlApplication {
 		// ProfileManager profileManager = new ProfileManager(environment);
 		// profileManager.getActiveProfiles();		
 
-		Stream.iterate(1, i -> i + 1).limit(10).forEach(System.out::println);
+		// Stream.iterate(1, i -> i + 1).limit(10).forEach(System.out::println);
 		
-		logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");
+		// logger.trace("A TRACE Message");
+        // logger.debug("A DEBUG Message");
+        // logger.info("An INFO Message");
+        // logger.warn("A WARN Message");
+        // logger.error("An ERROR Message");
 	}	
 	}
         
