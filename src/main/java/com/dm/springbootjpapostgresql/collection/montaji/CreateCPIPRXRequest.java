@@ -1,10 +1,10 @@
 package com.dm.springbootjpapostgresql.collection.montaji;
 
-import com.dm.springbootjpapostgresql.dto.montaji.CompanyDetails;
-import com.dm.springbootjpapostgresql.dto.montaji.ConsignmentDetails;
-import com.dm.springbootjpapostgresql.dto.montaji.Container;
-import com.dm.springbootjpapostgresql.dto.montaji.PreApproval;
-import com.dm.springbootjpapostgresql.dto.montaji.RequestDetails;
+import com.dm.springbootjpapostgresql.dto.montaji.CompanyDetailsDTO;
+import com.dm.springbootjpapostgresql.dto.montaji.ConsignmentDetailsDTO;
+import com.dm.springbootjpapostgresql.dto.montaji.ContainerDTO;
+import com.dm.springbootjpapostgresql.dto.montaji.PreApprovalDTO;
+import com.dm.springbootjpapostgresql.dto.montaji.RequestDetailsDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -27,10 +27,10 @@ import java.util.ArrayList;
 @Document(collection = "CreateCPIPRXRequest")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreateCPIPRXRequest {
-    public RequestDetails requestDetails;
-    public CompanyDetails companyDetails;
-    public ConsignmentDetails consignmentDetails;
-    public ArrayList<Container> containers;
+    public RequestDetailsDTO requestDetails;
+    public CompanyDetailsDTO companyDetails;
+    public ConsignmentDetailsDTO consignmentDetails;
+    public ArrayList<ContainerDTO> containers;
     public ArrayList<Object> attachments;
-    public PreApproval preApproval;    
+    public PreApprovalDTO preApproval;    
 }

@@ -4,7 +4,7 @@ public class CreateCPIPRXResponseDTO {
     public String isSuccess;
     public String errorCode;
     public String errorDescription;
-    public DataObj data;
-    public Response response;
+    public DataObjDTO data;
+    public ResponseDTO response;
 }
 

@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.model.montaji;
 
 import java.util.ArrayList;
 
@@ -15,5 +15,5 @@ public class Product{
     public int productTotalQuantity;
     public double productUnitWeight;
     public double productTotalWeight;
-    public ArrayList<Batch> batches;
+    public ArrayList<ProductBatch> batches;
 }

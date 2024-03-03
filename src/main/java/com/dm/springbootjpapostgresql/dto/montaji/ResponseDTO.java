@@ -2,10 +2,10 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 
 import java.util.ArrayList;
 
-public class Response{
+public class ResponseDTO{
     public String requestNumber;
     public String dtReferenceNo;
     public String requestType;
     public String status;
-    public ArrayList<Payment> payment;
+    public ArrayList<PaymentDTO> payment;
 }

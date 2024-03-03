@@ -1,7 +1,7 @@
 package com.dm.springbootjpapostgresql.collection.montaji;
 
-import com.dm.springbootjpapostgresql.dto.montaji.DataObj;
-import com.dm.springbootjpapostgresql.dto.montaji.Response;
+import com.dm.springbootjpapostgresql.dto.montaji.DataObjDTO;
+import com.dm.springbootjpapostgresql.dto.montaji.ResponseDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +25,6 @@ public class CreateCPIPRXResponse {
     public String isSuccess;
     public String errorCode;
     public String errorDescription;
-    public DataObj data;
-    public Response response;
+    public DataObjDTO data;
+    public ResponseDTO response;
 }

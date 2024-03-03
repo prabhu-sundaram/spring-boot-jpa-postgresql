@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.model.montaji;
 
 public class PreApproval{
     public String dip;
@@ -6,5 +6,5 @@ public class PreApproval{
     public String releaseWithDetention;
     public long releaseWithDetentionWarehouseId;
     public String sampleDetention;
-    public Object sampleDetentionWarehouseId;
+    public long sampleDetentionWarehouseId;
 }

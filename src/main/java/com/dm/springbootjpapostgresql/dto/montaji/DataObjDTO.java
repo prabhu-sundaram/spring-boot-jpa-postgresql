@@ -2,6 +2,6 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 
 import java.util.ArrayList;
 
-public class DataObj{
+public class DataObjDTO{
     public ArrayList<Object> dataItems;
 }

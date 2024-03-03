@@ -1,6 +1,6 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.model.montaji;
 
-public class PortDetails{
+public class ReqPortDetails{
     public String portTypeId;
     public String portOfEntryId;
     public String portOfEntryDesc;
@@ -12,7 +12,6 @@ public class PortDetails{
     public long customsDeclarationNumber;
     public String customsDeclarationDate;
     public String packageTypeId;
-    public String packageTypeDesc;
     public int numberOfPackages;
     public String transportNumber;
     public String vesselName;

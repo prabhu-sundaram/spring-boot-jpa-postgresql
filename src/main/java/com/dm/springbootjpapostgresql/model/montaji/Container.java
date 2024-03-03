@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.model.montaji;
 
 import java.util.ArrayList;
 

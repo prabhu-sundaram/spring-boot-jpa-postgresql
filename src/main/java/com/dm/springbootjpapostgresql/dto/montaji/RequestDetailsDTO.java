@@ -2,7 +2,7 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 
 import java.util.Date;
 
-public class RequestDetails{
+public class RequestDetailsDTO{
     public String dtReferenceNo;
     public String requestNumber;
     public String requestSource;

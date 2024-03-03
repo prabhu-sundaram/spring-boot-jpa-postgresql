@@ -1,6 +1,6 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.model.montaji;
 
-public class Batch{
+public class ProductBatch{
     public int serialNo;
     public double itemsUnitWeight;
     public int itemsQuantity;
