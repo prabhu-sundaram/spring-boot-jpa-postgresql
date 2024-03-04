@@ -105,6 +105,7 @@ public class PostServiceImpl implements PostService{
         PostDto postResponse = postMapper.mapToDTO(newPost);
         return postResponse;
     }
+
 	@Override
 	public PostDto updatePost(PostDto postDto, long id) {
         // get post by id from the database
@@ -119,7 +120,7 @@ public class PostServiceImpl implements PostService{
         post.setCategory(category);
         Post updatedPost = postRepository.save(post);
         return postMapper.mapToDTO(updatedPost);
-	}
+	}    
 
     @Override
     public void deletePostById(long id) {
@@ -133,7 +134,7 @@ public class PostServiceImpl implements PostService{
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
         return postMapper.mapToDTO(post);
     }        
-    
+
     @Override
     public List<PostDto> getPostsByCategory(Long categoryId) {
 
@@ -146,4 +147,5 @@ public class PostServiceImpl implements PostService{
                 .collect(Collectors.toList());
     }
 
+  
 }

@@ -14,6 +14,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import com.dm.springbootjpapostgresql.dto.PostRecord;
+import com.dm.springbootjpapostgresql.dto.CommentRecord;
+
 //@Data
 @Getter
 @Setter
@@ -69,4 +72,20 @@ public class Post {
         this.category = category;
     }    
     
+    public PostRecord toRecord() {
+        return new PostRecord(
+            id,
+            title,
+            description,
+            content,
+            comments.stream().map(comment ->
+                new CommentRecord(
+                    comment.getId(),
+                    comment.getName(),
+                    comment.getEmail(),
+                    comment.getBody()
+                )
+            ).toList()
+        );
+    }    
 }
