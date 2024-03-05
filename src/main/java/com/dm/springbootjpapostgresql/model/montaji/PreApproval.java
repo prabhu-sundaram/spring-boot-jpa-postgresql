@@ -1,10 +1,23 @@
 package com.dm.springbootjpapostgresql.model.montaji;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "req_preapproval")
 public class PreApproval{
-    public String dip;
-    public long dipWarehouseId;
-    public String releaseWithDetention;
-    public long releaseWithDetentionWarehouseId;
-    public String sampleDetention;
-    public long sampleDetentionWarehouseId;
+	@Id  
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;    
+    private String dip;
+    private long dipWarehouseId;
+    private String releaseWithDetention;
+    private long releaseWithDetentionWarehouseId;
+    private String sampleDetention;
+    private long sampleDetentionWarehouseId;
 }
