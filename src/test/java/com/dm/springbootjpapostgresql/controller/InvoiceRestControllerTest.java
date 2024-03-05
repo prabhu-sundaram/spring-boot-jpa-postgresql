@@ -26,7 +26,7 @@ public class InvoiceRestControllerTest {
 	RestTemplate restTemplate;
         
     @Test
-	private void saveInv() {
+	public void saveInv() {
 		System.out.println("test");
 		// 1. Producer application URL
 		String url = "http://localhost:8080/api/invoices";
@@ -50,7 +50,7 @@ public class InvoiceRestControllerTest {
 	}
 	
     @Test
-	private void getAllInvoices() {
+	public void getAllInvoices() {
 		System.out.println("test");
 		String url = "http://localhost:8080/api/invoices";
 	    ResponseEntity<Invoice[]> response = restTemplate.getForEntity(url,Invoice[].class);
@@ -66,7 +66,7 @@ public class InvoiceRestControllerTest {
 	}
 
     @Test
-	private void getOneInvoice() {
+	public void getOneInvoice() {
 		String url = "http://localhost:8080/api/invoices/{id}";
 	//	ResponseEntity<String> response= restTemplate.getForEntity(url, String.class, 9);
 		ResponseEntity<String> response= restTemplate.exchange(url, HttpMethod.GET, null, String.class, 7);
@@ -77,7 +77,7 @@ public class InvoiceRestControllerTest {
 	}
 	
     @Test
-	private void updateInvoice() {
+	public void updateInvoice() {
 		String url = "http://localhost:8080/api/invoices/{id}";
 		String body = "{\"name\":\"INV13\",\"amount\":888}";
 		// Request Header
@@ -95,7 +95,7 @@ public class InvoiceRestControllerTest {
 	}
 	
     @Test
-	private void deleteInvoice() {
+	public void deleteInvoice() {
 		String url = "http://localhost:8080/api/invoices/{id}";
 	//	restTemplate.delete(url, 6);
 		ResponseEntity<String> response= restTemplate.exchange(url, HttpMethod.DELETE, null, String.class,5);

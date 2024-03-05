@@ -8,11 +8,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.core.io.Resource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.dm.springbootjpapostgresql.model.Post2;
 import com.dm.springbootjpapostgresql.profiles.ProfileManager;
@@ -20,6 +24,7 @@ import com.dm.springbootjpapostgresql.repository.Post2Repository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.hypersistence.utils.spring.repository.BaseJpaRepositoryImpl;
 import redis.clients.jedis.UnifiedJedis;
 import redis.clients.jedis.search.FieldName;
 import redis.clients.jedis.search.IndexDefinition;
@@ -32,6 +37,23 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @SpringBootApplication
+// @ComponentScan(basePackages = {
+//     "com.dm.springbootjpapostgresql.config",
+//     "com.dm.springbootjpapostgresql.model",
+//     "com.dm.springbootjpapostgresql.collection",       
+//     "com.dm.springbootjpapostgresql.repository",
+//     "com.dm.springbootjpapostgresql.repository2",    
+//     "com.dm.springbootjpapostgresql.service",
+//     "com.dm.springbootjpapostgresql.controller",
+//     "com.dm.springbootjpapostgresql.interceptor",
+//     "com.dm.springbootjpapostgresql.mapper"
+// },
+// excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {Post2Repository.class})
+// )
+// @EnableJpaRepositories(
+//     value = "com.dm.springbootjpapostgresql",
+//     repositoryBaseClass = BaseJpaRepositoryImpl.class
+// )
 public class SpringBootJpaPostgresqlApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(SpringBootJpaPostgresqlApplication.class);

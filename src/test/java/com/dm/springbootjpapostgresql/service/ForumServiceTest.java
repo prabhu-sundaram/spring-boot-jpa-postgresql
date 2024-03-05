@@ -24,11 +24,12 @@ ForumService forumService;
 private static final Logger logger = LoggerFactory.getLogger(SpringBootJpaPostgresqlApplication.class);
 
 @Test
-private void insertPost() {
+public void insertPost() {
     forumService.insertPostRecord(
     new PostRecord(
-        1L,
-        "High-Performance Java Persistence",
+        //1L,
+        null,
+        "High-Performance Java Persistence2",
         "High-Performance Java Persistence-description",
         "High-Performance Java Persistence-content",
         LongStream.rangeClosed(1, 5)
@@ -47,7 +48,7 @@ private void insertPost() {
 }
 
 @Test
-private void findPostById() {
+public void findPostById() {
     PostRecord postRecord = forumService.findPostRecordById(1L);
     logger.info("PostRecord to JSON: {}", JacksonUtil.toString(postRecord));
 }
@@ -78,5 +79,32 @@ private void findPostById() {
 //     )
 // );
 // }
+
+@Test
+public void updatePostRecord() {
+String upatedPostRecordJSONSTring = """
+    {
+      "id": 1,
+      "title": "High-Performance Java Persistence, 2nd edition",
+      "comments": [
+        {
+          "id": 1,
+          "review": "Best book on JPA and Hibernate!"
+        },
+        {
+          "id": 2,
+          "review": "A must-read for every Java developer!"
+        }
+      ]
+    }
+    """;
+  
+forumService.updatePostRecord(
+    JacksonUtil.fromString(
+        upatedPostRecordJSONSTring,
+        PostRecord.class
+    )
+);
+}
 
 }

@@ -18,7 +18,7 @@ public record CommentRecord(
         //     .setBody(body);
 
         Comment comment = new Comment();
-        comment.setId(id);
+        //comment.setId(id);
         comment.setName(name);
         comment.setEmail(email);
         comment.setBody(body);
