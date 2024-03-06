@@ -1,18 +1,20 @@
 package com.dm.springbootjpapostgresql.model.montaji;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.dm.springbootjpapostgresql.model.Post;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+//@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "company_details"
     ,uniqueConstraints = {
@@ -20,6 +22,7 @@ import lombok.NoArgsConstructor;
                     })
 public class CompanyDetails {
     @Id
+    @Column(name = "license_number", nullable = false)
     private String licenseNumber;
     private String companyName;
     private String importerCode;
@@ -31,7 +34,7 @@ public class CompanyDetails {
     private String contactEmail;
     private String contactPhone;
 
-    @OneToMany(mappedBy = "license_number", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "companyDetails", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> requests;
 
 

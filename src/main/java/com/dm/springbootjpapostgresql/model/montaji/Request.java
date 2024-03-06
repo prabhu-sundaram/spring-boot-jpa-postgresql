@@ -4,12 +4,17 @@ import java.util.Date;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+//@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "request"
     ,uniqueConstraints = {
@@ -17,7 +22,7 @@ import lombok.NoArgsConstructor;
                     })
 public class Request {
     @Id  
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "request_number", nullable = false)
     private String requestNumber;
     private String requestSource;
     private String requestType;

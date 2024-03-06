@@ -4,18 +4,24 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+//@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "container_product")
 public class ContainerProduct{
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
 	private Long id;
 
     private String barcode;
@@ -30,10 +36,10 @@ public class ContainerProduct{
     private double productUnitWeight;
     private double productTotalWeight;
 
-    @OneToMany(mappedBy = "container_product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "containerProduct", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductBatch> batches;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "container_id", nullable = false)
     private Container container;       
 }

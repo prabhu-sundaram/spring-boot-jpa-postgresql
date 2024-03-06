@@ -7,21 +7,15 @@ import org.springframework.stereotype.Component;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
 import com.dm.springbootjpapostgresql.dto.montaji.CreateCPIPRXRequestDTO;
 
-import com.dm.springbootjpapostgresql.repository.CreateCPIPRXRequestRepository;
-
 @Component
 public class CreateCPIPRXRequestMapper {
  
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-    private CreateCPIPRXRequestRepository createCPIPRXRequestRepository;
-
     // convert Entity into DTO
     public CreateCPIPRXRequestDTO mapToDTO(CreateCPIPRXRequest createCPIPRXRequest){
         CreateCPIPRXRequestDTO createCPIPRXRequestDTO = modelMapper.map(createCPIPRXRequest, CreateCPIPRXRequestDTO.class);
-
         return createCPIPRXRequestDTO;
     }
 

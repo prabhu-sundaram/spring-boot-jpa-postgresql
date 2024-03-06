@@ -1,21 +1,26 @@
 package com.dm.springbootjpapostgresql.model.montaji;
 
-import com.dm.springbootjpapostgresql.model.Post;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+//@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "req_port_details")
 public class ReqPortDetails{
 	@Id  
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;    
+
     private String portTypeId;
     private String portOfEntryId;
     private String portOfEntryDesc;
@@ -34,6 +39,6 @@ public class ReqPortDetails{
     private String remarks;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "request_id", nullable = false)
-    private Request request;    
+    @JoinColumn(name = "cpip_id", nullable = false)
+    private RequestCPIP requestCPIP;  
 }    
