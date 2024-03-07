@@ -16,6 +16,8 @@ import com.dm.springbootjpapostgresql.repository.CreateCPIPRXResponseRepository;
 
 import com.dm.springbootjpapostgresql.service.MontajiService;
 
+import jakarta.transaction.Transactional;
+
 import com.dm.springbootjpapostgresql.model.montaji.*;
 import com.dm.springbootjpapostgresql.repository.montaji.*;
 import com.dm.springbootjpapostgresql.dto.montaji.*;
@@ -51,6 +53,7 @@ ProductBatchRepository productBatchRepository;
 PreApprovalRepository preApprovalRepository;
 
     @Override
+    @Transactional
     public CreateCPIPRXResponseDTO createCPIPRX(CreateCPIPRXRequestDTO createCPIPRXRequestDTO) {
         CreateCPIPRXRequest createCPIPRXRequest = createCPIPRXRequestMapper.mapToEntity(createCPIPRXRequestDTO);
         createCPIPRXRequestRepository.save(createCPIPRXRequest);
@@ -61,23 +64,57 @@ PreApprovalRepository preApprovalRepository;
 
         RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.requestDetails;
 
-        Request request=Request.builder()
-                                .requestNumber(requestDetailsDTO.requestNumber)
-                                .dtReferenceNo(requestDetailsDTO.dtReferenceNo)
-                                .requestSource(requestDetailsDTO.requestSource)
-                                .requestDate(requestDetailsDTO.requestDate)
-                                .requestStatus("Created")
-                                .companyDetails(companyDetails)
-                                .build();
+        // Request request=Request.builder()
+        //                         .requestNumber(requestDetailsDTO.requestNumber)
+        //                         .dtReferenceNo(requestDetailsDTO.dtReferenceNo)
+        //                         .requestSource(requestDetailsDTO.requestSource)
+        //                         .requestDate(requestDetailsDTO.requestDate)
+        //                         .requestStatus("Created")
+        //                         .companyDetails(companyDetails)
+        //                         .build();
 
         ConsignmentDetailsDTO consignmentDetailsDTO=createCPIPRXRequestDTO.consignmentDetails;
         ConsignmentRequestDetailsDTO consignmentRequestDetailsDTO = consignmentDetailsDTO.requestdetails;
 
-        RequestCPIP requestCPIP=RequestCPIP.builder()
-                                        .consignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId)
-                                        .request(request)
-                                        .build();
+        // RequestCPIP requestCPIP=RequestCPIP.builder()
+        //                                 .consignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId)
+        //                                 .request(request)
+        //                                 .build();
 
+        // RequestCPIP requestCPIP=RequestCPIP.builder()
+        //                                 .requestNumber(requestDetailsDTO.requestNumber)
+        //                                 .dtReferenceNo(requestDetailsDTO.dtReferenceNo)
+        //                                 .requestSource(requestDetailsDTO.requestSource)
+        //                                 .requestDate(requestDetailsDTO.requestDate)
+        //                                 .requestStatus("Created")
+        //                                 .companyDetails(companyDetails)        
+        //                                 .consignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId)
+        //                                 .build();
+
+        // RequestCPIPBuilder builder = new RequestCPIPBuilder()
+        //                                 .setRequestNumber(requestDetailsDTO.requestNumber)
+        //                                 .setRequestSource(requestDetailsDTO.requestSource)
+        //                                 .setRequestType(requestDetailsDTO.requestType)
+        //                                 .setRequestDate(requestDetailsDTO.requestDate)
+        //                                 .setRequestStatus("Created")
+        //                                 .setDtReferenceNo(requestDetailsDTO.dtReferenceNo)
+        //                                 .setCompanyDetails(companyDetails);
+
+
+        // RequestCPIP requestCPIP = builder.build();
+
+        RequestCPIP requestCPIP = new RequestCPIPBuilder()
+                                            .setRequestNumber(requestDetailsDTO.requestNumber)
+                                            .setRequestSource(requestDetailsDTO.requestSource)
+                                            .setRequestType(requestDetailsDTO.requestType)
+                                            .setRequestDate(requestDetailsDTO.requestDate)
+                                            .setRequestStatus("Created")
+                                            .setDtReferenceNo(requestDetailsDTO.dtReferenceNo)
+                                            .setCompanyDetails(companyDetails)
+                                            //.setConsignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId)
+                                            .build();
+
+        requestCPIP.setConsignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId);
 
         PortDetailsDTO portDetailsDTO=consignmentDetailsDTO.portDetails;
         ReqPortDetails reqPortDetails = ReqPortDetails.builder()
@@ -150,12 +187,12 @@ PreApprovalRepository preApprovalRepository;
                             productBatchList.add(productBatch);
                         }                        
                     
-                        productBatchRepository.saveAll(productBatchList);
+                        //productBatchRepository.saveAll(productBatchList);
                         containerProduct.setBatches(productBatchList);
                     containerProductList.add(containerProduct);
                 }
 
-                containerProductRepository.saveAll(containerProductList);
+                //containerProductRepository.saveAll(containerProductList);
                 container.setProducts(containerProductList);
 
             containerList.add(container);
@@ -163,7 +200,7 @@ PreApprovalRepository preApprovalRepository;
       
         
         
-        containerRepository.saveAll(containerList);
+        //containerRepository.saveAll(containerList);
         requestCPIP.setContainers(containerList);
 
         
@@ -181,10 +218,10 @@ PreApprovalRepository preApprovalRepository;
                                             .build();
         requestCPIP.setPreApproval(preApproval);
 
-        preApprovalRepository.save(preApproval);
+        //preApprovalRepository.save(preApproval);
 
         requestCPIPRepository.save(requestCPIP);
-        requestRepository.save(request);
+        //requestRepository.save(request);
      
 
 
