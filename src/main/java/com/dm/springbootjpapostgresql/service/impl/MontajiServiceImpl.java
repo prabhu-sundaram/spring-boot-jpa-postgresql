@@ -64,44 +64,25 @@ PreApprovalRepository preApprovalRepository;
 
         RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.requestDetails;
 
-        // Request request=Request.builder()
-        //                         .requestNumber(requestDetailsDTO.requestNumber)
-        //                         .dtReferenceNo(requestDetailsDTO.dtReferenceNo)
-        //                         .requestSource(requestDetailsDTO.requestSource)
-        //                         .requestDate(requestDetailsDTO.requestDate)
-        //                         .requestStatus("Created")
-        //                         .companyDetails(companyDetails)
-        //                         .build();
-
         ConsignmentDetailsDTO consignmentDetailsDTO=createCPIPRXRequestDTO.consignmentDetails;
         ConsignmentRequestDetailsDTO consignmentRequestDetailsDTO = consignmentDetailsDTO.requestdetails;
 
-        // RequestCPIP requestCPIP=RequestCPIP.builder()
-        //                                 .consignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId)
-        //                                 .request(request)
-        //                                 .build();
-
-        // RequestCPIP requestCPIP=RequestCPIP.builder()
-        //                                 .requestNumber(requestDetailsDTO.requestNumber)
-        //                                 .dtReferenceNo(requestDetailsDTO.dtReferenceNo)
-        //                                 .requestSource(requestDetailsDTO.requestSource)
-        //                                 .requestDate(requestDetailsDTO.requestDate)
-        //                                 .requestStatus("Created")
-        //                                 .companyDetails(companyDetails)        
-        //                                 .consignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId)
-        //                                 .build();
-
-        // RequestCPIPBuilder builder = new RequestCPIPBuilder()
-        //                                 .setRequestNumber(requestDetailsDTO.requestNumber)
-        //                                 .setRequestSource(requestDetailsDTO.requestSource)
-        //                                 .setRequestType(requestDetailsDTO.requestType)
-        //                                 .setRequestDate(requestDetailsDTO.requestDate)
-        //                                 .setRequestStatus("Created")
-        //                                 .setDtReferenceNo(requestDetailsDTO.dtReferenceNo)
-        //                                 .setCompanyDetails(companyDetails);
+        // Request request = Request.requestBuilder()
+        //                 .requestNumber(requestDetailsDTO.requestNumber)
+        //                 .requestSource(requestDetailsDTO.requestSource)
+        //                 .requestType(requestDetailsDTO.requestType)
+        //                 .requestDate(requestDetailsDTO.requestDate)
+        //                 .requestStatus("Created")
+        //                 .dtReferenceNo(requestDetailsDTO.dtReferenceNo)
+        //                 .companyDetails(companyDetails)
+        //                 .build();
+        // request=requestRepository.save(request);
 
 
-        // RequestCPIP requestCPIP = builder.build();
+        // RequestCPIP requestCPIP = RequestCPIP.requestCPIPBuilder()
+        //                         .consignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId)
+        //                         .request(request)
+        //                         .build();
 
         RequestCPIP requestCPIP = new RequestCPIPBuilder()
                                             .setRequestNumber(requestDetailsDTO.requestNumber)
@@ -115,7 +96,7 @@ PreApprovalRepository preApprovalRepository;
                                             .build();
 
         requestCPIP.setConsignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId);
-
+        
         PortDetailsDTO portDetailsDTO=consignmentDetailsDTO.portDetails;
         ReqPortDetails reqPortDetails = ReqPortDetails.builder()
                                                         .portTypeId(portDetailsDTO.portTypeId)
@@ -221,11 +202,7 @@ PreApprovalRepository preApprovalRepository;
         //preApprovalRepository.save(preApproval);
 
         requestCPIPRepository.save(requestCPIP);
-        //requestRepository.save(request);
      
-
-
-
         CreateCPIPRXResponse createCPIPRXResponse = new CreateCPIPRXResponse();
         createCPIPRXResponse.isSuccess="true";
         createCPIPRXResponse.errorCode="000";

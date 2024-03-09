@@ -28,6 +28,6 @@ public class PreApproval{
     private long sampleDetentionWarehouseId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cpip_id", nullable = false)
+    @JoinColumn(name = "request_number", nullable = false)
     private RequestCPIP requestCPIP;        
 }

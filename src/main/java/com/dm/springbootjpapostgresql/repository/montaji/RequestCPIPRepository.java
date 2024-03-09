@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.dm.springbootjpapostgresql.model.montaji.RequestCPIP;
 
 @Repository
-public interface RequestCPIPRepository extends JpaRepository<RequestCPIP, Long> {
+public interface RequestCPIPRepository extends JpaRepository<RequestCPIP, String> {
     
 }

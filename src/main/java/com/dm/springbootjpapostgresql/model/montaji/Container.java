@@ -34,6 +34,6 @@ public class Container{
     private List<ContainerProduct> products;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cpip_id", nullable = false)
+    @JoinColumn(name = "request_number", nullable = false)
     private RequestCPIP requestCPIP;    
 }

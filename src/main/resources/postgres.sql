@@ -1,5 +1,40 @@
 select version();
 
+
+
+select * from company_details;
+
+select * from request;
+select * from req_cpip;
+select * from req_port_details;
+select * from req_container;
+select * from req_preapproval;
+select * from container_product;
+select * from product_batch;
+
+
+drop table request cascade;
+drop table req_cpip cascade;
+drop table req_container cascade;
+drop table req_port_details cascade;
+drop table req_preapproval;
+
+
+
+select * from animal;
+select * from pet;
+
+select * from my_employee;
+
+select * from my_product;
+
+select * from vehicle;
+select * from car;
+
+select * from laptop;
+select * from bag;
+
+
 SELECT * FROM tutorials;
 
 
