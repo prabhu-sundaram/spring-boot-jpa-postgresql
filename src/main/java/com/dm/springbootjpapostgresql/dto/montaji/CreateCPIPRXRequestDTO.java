@@ -2,6 +2,9 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 
 import java.util.ArrayList;
 
+import lombok.Getter;
+
+@Getter
 public class CreateCPIPRXRequestDTO {
     public RequestDetailsDTO requestDetails;
     public CompanyDetailsDTO companyDetails;

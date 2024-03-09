@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
-import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper;
+//import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper;
+import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper2;
 import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXResponseMapper;
 import com.dm.springbootjpapostgresql.repository.CreateCPIPRXRequestRepository;
 import com.dm.springbootjpapostgresql.repository.CreateCPIPRXResponseRepository;
@@ -25,8 +26,10 @@ import com.dm.springbootjpapostgresql.dto.montaji.*;
 @Service
 public class MontajiServiceImpl implements MontajiService{
 
+// @Autowired
+// private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
 @Autowired
-private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
+private CreateCPIPRXRequestMapper2 createCPIPRXRequestMapper;
 @Autowired
 private CreateCPIPRXResponseMapper createCPIPRXResponseMapper;
 
@@ -59,12 +62,11 @@ PreApprovalRepository preApprovalRepository;
         createCPIPRXRequestRepository.save(createCPIPRXRequest);
 
         //Optional<CompanyDetails> companyDetails=companyDetailsRepository.findById(createCPIPRXRequestDTO.companyDetails.licensenumber);
-        CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.companyDetails;
+        CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.getCompanyDetails();
         CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.licensenumber).get();
 
-        RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.requestDetails;
-
-        ConsignmentDetailsDTO consignmentDetailsDTO=createCPIPRXRequestDTO.consignmentDetails;
+        RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.getRequestDetails();
+        ConsignmentDetailsDTO consignmentDetailsDTO = createCPIPRXRequestDTO.getConsignmentDetails();
         ConsignmentRequestDetailsDTO consignmentRequestDetailsDTO = consignmentDetailsDTO.requestdetails;
 
         // Request request = Request.requestBuilder()
@@ -85,85 +87,84 @@ PreApprovalRepository preApprovalRepository;
         //                         .build();
 
         RequestCPIP requestCPIP = new RequestCPIPBuilder()
-                                            .setRequestNumber(requestDetailsDTO.requestNumber)
-                                            .setRequestSource(requestDetailsDTO.requestSource)
-                                            .setRequestType(requestDetailsDTO.requestType)
-                                            .setRequestDate(requestDetailsDTO.requestDate)
+                                            .setRequestNumber(requestDetailsDTO.getRequestNumber())
+                                            .setRequestSource(requestDetailsDTO.getRequestSource())
+                                            .setRequestType(requestDetailsDTO.getRequestType())
+                                            .setRequestDate(requestDetailsDTO.getRequestDate())
                                             .setRequestStatus("Created")
-                                            .setDtReferenceNo(requestDetailsDTO.dtReferenceNo)
+                                            .setDtReferenceNo(requestDetailsDTO.getDtReferenceNo())
                                             .setCompanyDetails(companyDetails)
-                                            //.setConsignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId)
+                                            //.setConsignmentPurposeId(consignmentRequestDetailsDTO.getConsignmentPurposeId)
                                             .build();
 
-        requestCPIP.setConsignmentPurposeId(consignmentRequestDetailsDTO.consignmentPurposeId);
-        
-        PortDetailsDTO portDetailsDTO=consignmentDetailsDTO.portDetails;
+        requestCPIP.setConsignmentPurposeId(consignmentRequestDetailsDTO.getConsignmentPurposeId());
+
+        PortDetailsDTO portDetailsDTO = consignmentDetailsDTO.getPortDetails();
+
         ReqPortDetails reqPortDetails = ReqPortDetails.builder()
-                                                        .portTypeId(portDetailsDTO.portTypeId)
-                                                        .portOfEntryId(portDetailsDTO.portOfEntryId)
-                                                        //.portOfEntryDesc(portDetailsDTO.portOfEntryDesc)
-                                                        .countryOfOriginId(0)
-                                                        .billNumber(portDetailsDTO.billNumber)
-                                                        .billDate(portDetailsDTO.billDate)
-                                                        .arrivalDate(portDetailsDTO.arrivalDate)
-                                                        .customsDeclarationNumber(portDetailsDTO.customsDeclarationNumber)
-                                                        .customsDeclarationDate(portDetailsDTO.customsDeclarationDate)
-                                                        .packageTypeId(portDetailsDTO.packageTypeId)
-                                                        .numberOfPackages(portDetailsDTO.numberOfPackages)
-                                                        .transportNumber(portDetailsDTO.transportNumber)
-                                                        .vesselName(portDetailsDTO.vesselName)
-                                                        .grossWeight(portDetailsDTO.grossWeight)
-                                                        .remarks(portDetailsDTO.remarks)
+                                                        .portTypeId(portDetailsDTO.getPortTypeId())
+                                                        .portOfEntryId(portDetailsDTO.getPortOfEntryId())
+                                                        .billNumber(portDetailsDTO.getBillNumber())
+                                                        .billDate(portDetailsDTO.getBillDate())
+                                                        .arrivalDate(portDetailsDTO.getArrivalDate())
+                                                        .customsDeclarationNumber(portDetailsDTO.getCustomsDeclarationNumber())
+                                                        .customsDeclarationDate(portDetailsDTO.getCustomsDeclarationDate())
+                                                        .packageTypeId(portDetailsDTO.getPackageTypeId())
+                                                        .numberOfPackages(portDetailsDTO.getNumberOfPackages())
+                                                        .transportNumber(portDetailsDTO.getTransportNumber())
+                                                        .vesselName(portDetailsDTO.getVesselName())
+                                                        .grossWeight(portDetailsDTO.getGrossWeight())
+                                                        .remarks(portDetailsDTO.getRemarks())
                                                         .requestCPIP(requestCPIP)
                                                         .build();
         requestCPIP.setReqPortDetails(reqPortDetails);
         
-        List<ContainerDTO> containerDTOList = createCPIPRXRequestDTO.containers;
+        List<ContainerDTO> containerDTOList = createCPIPRXRequestDTO.getContainers();
 
         List<Container> containerList = new ArrayList<>();
         
         for (ContainerDTO containerDTO : containerDTOList) {
             Container container = Container.builder()
-                .serialNo(containerDTO.serialNo)
-                .containerTypeId(containerDTO.containerTypeId)
-                .containerNumber(containerDTO.containerNumber)
-                .storageTemperatureId(containerDTO.storageTemperatureId)
-                .containerTotalQuantity(containerDTO.containerTotalQuantity)
-                .productsCount(containerDTO.productsCount)
-                .containerTotalWeight(containerDTO.containerTotalWeight)
-                .requestCPIP(requestCPIP)
-                .build();
+                                            .serialNo(containerDTO.getSerialNo())
+                                            .containerTypeId(containerDTO.getContainerTypeId())
+                                            .containerNumber(containerDTO.getContainerNumber())
+                                            .storageTemperatureId(containerDTO.getStorageTemperatureId())
+                                            .containerTotalQuantity(containerDTO.getContainerTotalQuantity())
+                                            .productsCount(containerDTO.getProductsCount())
+                                            .containerTotalWeight(containerDTO.getContainerTotalWeight())
+                                            .requestCPIP(requestCPIP)
+                                            .build();
             
-                List<ProductDTO> productDTOList=containerDTO.products;
+                List<ProductDTO> productDTOList=containerDTO.getProducts();
                 List<ContainerProduct> containerProductList = new ArrayList<>();
         
                 for (ProductDTO productDTO : productDTOList) {
                     ContainerProduct containerProduct = ContainerProduct.builder()
-                        .barcode(productDTO.barcode)
-                        .productId(productDTO.productId)
-                        .groupId(productDTO.groupId)
-                        .categoryId(productDTO.categoryId)
-                        .subCategoryId(productDTO.subCategoryId)
-                        .countryId(productDTO.countryId)
-                        .brandId(productDTO.brandId)
-                        .noOfBatches(productDTO.noOfBatches)
-                        .productTotalQuantity(productDTO.productTotalQuantity)
-                        .productUnitWeight(productDTO.productUnitWeight)
-                        .productTotalWeight(productDTO.productTotalWeight)
-                        .container(container)
-                        .build();
+                                                                        .barcode(productDTO.getBarcode())
+                                                                        .productId(productDTO.getProductId())
+                                                                        .groupId(productDTO.getGroupId())
+                                                                        .categoryId(productDTO.getCategoryId())
+                                                                        .subCategoryId(productDTO.getSubCategoryId())
+                                                                        .countryId(productDTO.getCountryId())
+                                                                        .brandId(productDTO.getBrandId())
+                                                                        .noOfBatches(productDTO.getNoOfBatches())
+                                                                        .productTotalQuantity(productDTO.getProductTotalQuantity())
+                                                                        .productUnitWeight(productDTO.getProductUnitWeight())
+                                                                        .productTotalWeight(productDTO.getProductTotalWeight())
+                                                                        .container(container)
+                                                                        .build();
 
-                        List<BatchDTO> batchDTOList=productDTO.batches;
+                        List<BatchDTO> batchDTOList=productDTO.getBatches();
                         List<ProductBatch> productBatchList=new ArrayList<>();
 
                         for (BatchDTO batchDTO : batchDTOList) {
                             ProductBatch productBatch = ProductBatch.builder()
-                                .serialNo(batchDTO.serialNo)
-                                .itemsUnitWeight(batchDTO.itemsUnitWeight)
-                                .itemsQuantity(batchDTO.itemsQuantity)
-                                .itemsTotalWeight(batchDTO.itemsTotalWeight)
-                                .containerProduct(containerProduct)
-                                .build();
+                                                                    .serialNo(batchDTO.getSerialNo())
+                                                                    .itemsUnitWeight(batchDTO.getItemsUnitWeight())
+                                                                    .itemsQuantity(batchDTO.getItemsQuantity())
+                                                                    .itemsTotalWeight(batchDTO.getItemsTotalWeight())
+                                                                    .containerProduct(containerProduct)
+                                                                    .build();
                             
                             productBatchList.add(productBatch);
                         }                        
@@ -185,16 +186,16 @@ PreApprovalRepository preApprovalRepository;
         requestCPIP.setContainers(containerList);
 
         
-        List<AttachmentContainerDTO> attachmentContainerDTOs=createCPIPRXRequestDTO.attachments;
+        List<AttachmentContainerDTO> attachmentContainerDTOs=createCPIPRXRequestDTO.getAttachments();
         
-        PreApprovalDTO preApprovalDTO=createCPIPRXRequestDTO.preApproval;
+        PreApprovalDTO preApprovalDTO=createCPIPRXRequestDTO.getPreApproval();
         PreApproval preApproval=PreApproval.builder()
-                                            .dip(preApprovalDTO.dip)
-                                            .dipWarehouseId(preApprovalDTO.dipWarehouseId)
-                                            .releaseWithDetention(preApprovalDTO.releaseWithDetention)
-                                            .releaseWithDetentionWarehouseId(preApprovalDTO.releaseWithDetentionWarehouseId)
-                                            .sampleDetention(preApprovalDTO.sampleDetention)
-                                            .sampleDetentionWarehouseId(preApprovalDTO.sampleDetentionWarehouseId)
+                                            .dip(preApprovalDTO.getDip())
+                                            .dipWarehouseId(preApprovalDTO.getDipWarehouseId())
+                                            .releaseWithDetention(preApprovalDTO.getReleaseWithDetention())
+                                            .releaseWithDetentionWarehouseId(preApprovalDTO.getReleaseWithDetentionWarehouseId())
+                                            .sampleDetention(preApprovalDTO.getSampleDetention())
+                                            .sampleDetentionWarehouseId(preApprovalDTO.getSampleDetentionWarehouseId())
                                             .requestCPIP(requestCPIP)
                                             .build();
         requestCPIP.setPreApproval(preApproval);
@@ -204,13 +205,13 @@ PreApprovalRepository preApprovalRepository;
         requestCPIPRepository.save(requestCPIP);
      
         CreateCPIPRXResponse createCPIPRXResponse = new CreateCPIPRXResponse();
-        createCPIPRXResponse.isSuccess="true";
-        createCPIPRXResponse.errorCode="000";
-        createCPIPRXResponse.errorDescription="No Error";
-        createCPIPRXResponse.data=null;
+        createCPIPRXResponse.setIsSuccess("true");
+        createCPIPRXResponse.setErrorCode("000");
+        createCPIPRXResponse.setErrorDescription("No Error");
+        createCPIPRXResponse.setData(null);
         ResponseDTO response = new ResponseDTO();
-        response.requestNumber="CPIP-221221-009434";
-        response.dtReferenceNo="DTREF005690351";
+        response.setRequestNumber("CPIP-221221-009434");
+        response.setDtReferenceNo("DTREF005690351");
         createCPIPRXResponse.setResponse(response);
         
         createCPIPRXResponseRepository.save(createCPIPRXResponse);        

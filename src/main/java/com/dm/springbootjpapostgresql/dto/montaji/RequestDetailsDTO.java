@@ -2,6 +2,9 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 
 import java.util.Date;
 
+import lombok.Getter;
+
+@Getter
 public class RequestDetailsDTO{
     public String dtReferenceNo;
     public String requestNumber;

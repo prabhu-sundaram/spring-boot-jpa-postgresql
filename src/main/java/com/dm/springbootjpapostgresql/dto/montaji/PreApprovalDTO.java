@@ -1,5 +1,8 @@
 package com.dm.springbootjpapostgresql.dto.montaji;
 
+import lombok.Getter;
+
+@Getter
 public class PreApprovalDTO{
     public String dip;
     public long dipWarehouseId;

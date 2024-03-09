@@ -1,5 +1,8 @@
 package com.dm.springbootjpapostgresql.dto.montaji;
 
+import lombok.Getter;
+
+@Getter
 public class PortDetailsDTO{
     public String portTypeId;
     public String portOfEntryId;

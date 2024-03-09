@@ -2,6 +2,9 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 
 import java.util.ArrayList;
 
+import lombok.Getter;
+
+@Getter
 public class ContainerDTO{
     public String serialNo;
     public String containerTypeId;

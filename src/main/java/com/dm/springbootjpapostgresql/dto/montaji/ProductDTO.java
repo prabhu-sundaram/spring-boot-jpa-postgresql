@@ -2,6 +2,9 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 
 import java.util.ArrayList;
 
+import lombok.Getter;
+
+@Getter
 public class ProductDTO{
     public long _id;
     public String barcode;

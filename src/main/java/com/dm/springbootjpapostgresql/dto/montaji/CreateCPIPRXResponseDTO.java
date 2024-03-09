@@ -1,5 +1,8 @@
 package com.dm.springbootjpapostgresql.dto.montaji;
 
+import lombok.Setter;
+
+@Setter
 public class CreateCPIPRXResponseDTO {
     public String isSuccess;
     public String errorCode;
