@@ -4,17 +4,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class Person {
+public class Person3 {
 
     @Id
     private long personId;
 
     private String name;
 
-    public Person() {
+    public Person3() {
     }
 
-    public Person(long personId, String name) {
+    public Person3(long personId, String name) {
         this.personId = personId;
         this.name = name;
     }

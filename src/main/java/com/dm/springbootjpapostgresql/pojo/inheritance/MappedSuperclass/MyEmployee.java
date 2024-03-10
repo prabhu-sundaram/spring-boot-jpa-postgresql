@@ -3,7 +3,7 @@ package com.dm.springbootjpapostgresql.pojo.inheritance.MappedSuperclass;
 import jakarta.persistence.Entity;
 
 @Entity
-public class MyEmployee extends Person {
+public class MyEmployee extends Person3 {
     private String company;
 
     public MyEmployee() {
