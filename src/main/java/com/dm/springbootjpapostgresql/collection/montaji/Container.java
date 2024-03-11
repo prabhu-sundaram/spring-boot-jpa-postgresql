@@ -1,11 +1,11 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.collection.montaji;
 
 import java.util.ArrayList;
 
-import lombok.Getter;
+import lombok.Setter;
 
-@Getter
-public class ContainerDTO{
+@Setter
+public class Container{
     private String serialNo;
     private String containerTypeId;
     private String containerNumber;
@@ -13,5 +13,5 @@ public class ContainerDTO{
     private int containerTotalQuantity;
     private int productsCount;
     private double containerTotalWeight;
-    private ArrayList<ProductDTO> products;
+    private ArrayList<Product> products;
 }

@@ -1,10 +1,10 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.collection.montaji;
 
 import java.util.ArrayList;
 
 import lombok.Setter;
 
 @Setter
-public class DataObjDTO{
+public class DataObj{
     private ArrayList<Object> dataItems;
 }

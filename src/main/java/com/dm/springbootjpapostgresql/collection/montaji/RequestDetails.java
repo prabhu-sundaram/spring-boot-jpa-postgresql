@@ -1,11 +1,11 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.collection.montaji;
 
 import java.util.Date;
 
-import lombok.Getter;
+import lombok.Setter;
 
-@Getter
-public class RequestDetailsDTO{
+@Setter
+public class RequestDetails{
     private String dtReferenceNo;
     private String requestNumber;
     private String requestSource;

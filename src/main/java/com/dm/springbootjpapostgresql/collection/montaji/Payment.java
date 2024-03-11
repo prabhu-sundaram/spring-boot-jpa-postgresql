@@ -1,9 +1,9 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.collection.montaji;
 
 import lombok.Setter;
 
 @Setter
-public class PaymentDTO{
+public class Payment{
     private String vouchernumber;
     private String voucherStatus;
 }

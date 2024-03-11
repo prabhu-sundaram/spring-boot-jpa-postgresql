@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
+import com.dm.springbootjpapostgresql.collection.montaji.Response;
 //import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper;
 import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper2;
 import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXResponseMapper;
@@ -63,11 +64,11 @@ PreApprovalRepository preApprovalRepository;
 
         //Optional<CompanyDetails> companyDetails=companyDetailsRepository.findById(createCPIPRXRequestDTO.companyDetails.licensenumber);
         CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.getCompanyDetails();
-        CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.licensenumber).get();
+        CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber()).get();
 
         RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.getRequestDetails();
         ConsignmentDetailsDTO consignmentDetailsDTO = createCPIPRXRequestDTO.getConsignmentDetails();
-        ConsignmentRequestDetailsDTO consignmentRequestDetailsDTO = consignmentDetailsDTO.requestdetails;
+        ConsignmentRequestDetailsDTO consignmentRequestDetailsDTO = consignmentDetailsDTO.getRequestdetails();
 
         // Request request = Request.requestBuilder()
         //                 .requestNumber(requestDetailsDTO.requestNumber)
@@ -209,13 +210,13 @@ PreApprovalRepository preApprovalRepository;
         createCPIPRXResponse.setErrorCode("000");
         createCPIPRXResponse.setErrorDescription("No Error");
         createCPIPRXResponse.setData(null);
-        ResponseDTO response = new ResponseDTO();
+        Response response = new Response();
         response.setRequestNumber("CPIP-221221-009434");
         response.setDtReferenceNo("DTREF005690351");
         createCPIPRXResponse.setResponse(response);
         
         createCPIPRXResponseRepository.save(createCPIPRXResponse);        
-
+System.out.println("End of MontajiServiceImpl");
         return createCPIPRXResponseMapper.mapToDTO(createCPIPRXResponse);        
     }
     

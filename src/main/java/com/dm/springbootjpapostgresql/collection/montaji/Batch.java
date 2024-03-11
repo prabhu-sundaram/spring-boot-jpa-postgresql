@@ -1,9 +1,9 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.collection.montaji;
 
-import lombok.Getter;
+import lombok.Setter;
 
-@Getter
-public class BatchDTO{
+@Setter
+public class Batch{
     private int serialNo;
     private double itemsUnitWeight;
     private int itemsQuantity;

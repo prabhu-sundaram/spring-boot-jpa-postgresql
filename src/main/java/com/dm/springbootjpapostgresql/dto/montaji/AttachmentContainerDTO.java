@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class AttachmentContainerDTO {
-    public String attachmentType;
-    public ArrayList<AttachmentDTO> attachments;
+    private String attachmentType;
+    private ArrayList<AttachmentDTO> attachments;
 
 }

@@ -67,7 +67,7 @@ public class TutorialController {
         }
 	}
 
-	@Autowired
+	//@Autowired
     //private JdbcTemplate jdbcTemplate;
 
 	@GetMapping("/tutorialsCount")

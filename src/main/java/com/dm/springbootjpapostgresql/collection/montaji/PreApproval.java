@@ -1,9 +1,9 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.collection.montaji;
 
-import lombok.Getter;
+import lombok.Setter;
 
-@Getter
-public class PreApprovalDTO{
+@Setter
+public class PreApproval{
     private String dip;
     private long dipWarehouseId;
     private String releaseWithDetention;

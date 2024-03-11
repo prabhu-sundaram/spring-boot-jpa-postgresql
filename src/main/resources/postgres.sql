@@ -12,6 +12,21 @@ select * from req_preapproval;
 select * from container_product;
 select * from product_batch;
 
+select req.* 
+from request req
+where req.request_number in
+(
+select cpip.request_number 
+	from req_cpip cpip
+	inner join req_port_details port on port.request_number = cpip.request_number
+	inner join req_container con on con.request_number = cpip.request_number
+	inner join req_preapproval pre on pre.request_number = cpip.request_number
+	where cpip.request_number=req.request_number
+	--and port.bill_number=1
+	--and con.container_number=1
+	--and pre.dip=1
+)
+
 
 drop table request cascade;
 drop table req_cpip cascade;

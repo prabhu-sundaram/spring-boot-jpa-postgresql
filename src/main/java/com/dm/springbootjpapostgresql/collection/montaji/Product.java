@@ -1,11 +1,11 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.collection.montaji;
 
 import java.util.ArrayList;
 
-import lombok.Getter;
+import lombok.Setter;
 
-@Getter
-public class ProductDTO{
+@Setter
+public class Product{
     private long _id;
     private String barcode;
     private String productId;
@@ -18,5 +18,5 @@ public class ProductDTO{
     private int productTotalQuantity;
     private double productUnitWeight;
     private double productTotalWeight;
-    private ArrayList<BatchDTO> batches;
+    private ArrayList<Batch> batches;
 }

@@ -6,10 +6,10 @@ import lombok.Getter;
 
 @Getter
 public class CreateCPIPRXRequestDTO {
-    public RequestDetailsDTO requestDetails;
-    public CompanyDetailsDTO companyDetails;
-    public ConsignmentDetailsDTO consignmentDetails;
-    public ArrayList<ContainerDTO> containers;
-    public ArrayList<AttachmentContainerDTO> attachments;
-    public PreApprovalDTO preApproval;
+    private RequestDetailsDTO requestDetails;
+    private CompanyDetailsDTO companyDetails;
+    private ConsignmentDetailsDTO consignmentDetails;
+    private ArrayList<ContainerDTO> containers;
+    private ArrayList<AttachmentContainerDTO> attachments;
+    private PreApprovalDTO preApproval;
 }

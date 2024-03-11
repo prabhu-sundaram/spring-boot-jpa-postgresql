@@ -4,10 +4,10 @@ import lombok.Setter;
 
 @Setter
 public class CreateCPIPRXResponseDTO {
-    public String isSuccess;
-    public String errorCode;
-    public String errorDescription;
-    public DataObjDTO data;
-    public ResponseDTO response;
+    private String isSuccess;
+    private String errorCode;
+    private String errorDescription;
+    private DataObjDTO data;
+    private ResponseDTO response;
 }
 

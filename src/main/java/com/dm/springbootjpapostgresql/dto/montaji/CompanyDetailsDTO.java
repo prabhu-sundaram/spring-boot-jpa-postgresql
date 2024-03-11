@@ -1,9 +1,10 @@
 package com.dm.springbootjpapostgresql.dto.montaji;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class CompanyDetailsDTO{
-    public String importerCode;
-    public String licensenumber;
+    private String importerCode;
+    private String licensenumber;
 }

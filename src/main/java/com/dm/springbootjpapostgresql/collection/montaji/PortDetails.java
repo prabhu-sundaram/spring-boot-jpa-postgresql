@@ -1,9 +1,9 @@
-package com.dm.springbootjpapostgresql.dto.montaji;
+package com.dm.springbootjpapostgresql.collection.montaji;
 
-import lombok.Getter;
+import lombok.Setter;
 
-@Getter
-public class PortDetailsDTO{
+@Setter
+public class PortDetails{
     private String portTypeId;
     private String portOfEntryId;
     private String portOfEntryDesc;

@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class ConsignmentDetailsDTO{
-    public ConsignmentRequestDetailsDTO requestdetails;
-    public PortDetailsDTO portDetails;
+    private ConsignmentRequestDetailsDTO requestdetails;
+    private PortDetailsDTO portDetails;
 }

@@ -14,7 +14,7 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 //@Data
-@Getter
+//@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +25,6 @@ public class CreateCPIPRXResponse {
     public String isSuccess;
     public String errorCode;
     public String errorDescription;
-    public DataObjDTO data;
-    public ResponseDTO response;
+    public DataObj data;
+    public Response response;
 }

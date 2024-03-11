@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class ConsignmentRequestDetailsDTO{
-    public String consignmentPurposeId;
+    private String consignmentPurposeId;
 }
