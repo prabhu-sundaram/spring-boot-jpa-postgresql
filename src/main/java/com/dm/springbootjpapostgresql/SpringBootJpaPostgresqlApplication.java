@@ -36,6 +36,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import com.dm.springbootjpapostgresql.service.HttpClient.*;
+
 @SpringBootApplication
 // @ComponentScan(basePackages = {
 //     "com.dm.springbootjpapostgresql.config",
@@ -81,6 +83,16 @@ public class SpringBootJpaPostgresqlApplication {
 
     @Autowired
     private UnifiedJedis jedis;
+
+	@Autowired
+	HttpClientService       httpClientService;
+    @Autowired
+    ApacheHttpClientService     apacheHttpClientService;
+    @Autowired
+    OkHttpClientService     okHttpClientService;
+    @Autowired
+    WebClientService    webClientService;
+
 
     // @Value("classpath:data.json")
     // Resource resourceFile;
@@ -142,6 +154,29 @@ public class SpringBootJpaPostgresqlApplication {
     //         // Prints: {name=John, surname=Smith, company=Redis, age=29}
 	// 	};
 	// }
+
+	// @Bean
+    // CommandLineRunner testHttpClient() {
+    //     return args -> {	
+    //         //httpClientService.invoke();
+    //         //httpClientService.invokePost();
+
+    //         //apacheHttpClientService.invoke();
+    //         //apacheHttpClientService.invokePost();
+            
+    //         //okHttpClientService.invoke();
+    //         //okHttpClientService.invokePost();
+            
+    //         //webClientService.invoke();
+    //         //webClientService.invokePost();   
+            
+    //         OkHttpClientService2 okHttpClientService2 = new OkHttpClientService2();
+    //         okHttpClientService2.RestTest1();
+    //         //okHttpClientService2.RestTest2();
+            
+	// 	};
+	// }        
+        
 	public static void main(String[] args) {
 		
 		//SpringApplication.run(SpringBootJpaPostgresqlApplication.class, args);
@@ -163,6 +198,8 @@ public class SpringBootJpaPostgresqlApplication {
         // logger.info("An INFO Message");
         // logger.warn("A WARN Message");
         // logger.error("An ERROR Message");
+
+
 	}	
 	}
         
