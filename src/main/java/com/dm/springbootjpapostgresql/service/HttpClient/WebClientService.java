@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class WebClientService {
 	
-	public void invoke() {
+	public void invokeGetAsync() {
 		WebClient client = WebClient.create();
 		client
 		.get()
@@ -27,7 +27,7 @@ public class WebClientService {
         .subscribe(result->System.out.println(result));
 	}
 	
-	public void invokePost() {
+	public void invokePostJSON() {
 		WebClient client = WebClient.create();
 		
 		String result = client

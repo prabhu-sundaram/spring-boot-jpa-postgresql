@@ -19,7 +19,7 @@ public class HttpClientServiceTest {
 
 	@Test
 	public void RestTest1() throws URISyntaxException{	
-		httpClientService.invoke();
+		httpClientService.invokeGetAsync();
 
 	}
 

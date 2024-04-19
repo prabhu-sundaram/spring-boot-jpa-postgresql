@@ -22,7 +22,7 @@ import okhttp3.Response;
 @Service
 public class OkHttpClientService {
 	
-	public void invoke() throws URISyntaxException, IOException {
+	public void invokeGetAsync() throws URISyntaxException, IOException {
 	    OkHttpClient client = new OkHttpClient.Builder()
 			    .readTimeout(1000, TimeUnit.MILLISECONDS)
 			    .writeTimeout(1000, TimeUnit.MILLISECONDS)
@@ -48,7 +48,7 @@ public class OkHttpClientService {
 		
 	}
 	
-	public void invokePost() throws URISyntaxException, IOException {
+	public void invokePostJSON() throws URISyntaxException, IOException {
 	    OkHttpClient client = new OkHttpClient.Builder()
 			    .readTimeout(1000, TimeUnit.MILLISECONDS)
 			    .writeTimeout(1000, TimeUnit.MILLISECONDS)

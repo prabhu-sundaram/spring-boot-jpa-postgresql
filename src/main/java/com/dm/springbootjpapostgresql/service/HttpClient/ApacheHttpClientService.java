@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ApacheHttpClientService {
 
 	
-    public void invoke() {
+    public void invokeGetAsync() {
         
             try(
             		CloseableHttpAsyncClient client = HttpAsyncClients.createDefault();) {
@@ -76,7 +76,7 @@ public class ApacheHttpClientService {
 			} 
     }
     
-    public void invokePost() {
+    public void invokePostJSON() {
     	
     	StringEntity stringEntity = new StringEntity(prepareRequest());
     	HttpPost httpPost = new HttpPost("https://reqbin.com/echo/post/json");

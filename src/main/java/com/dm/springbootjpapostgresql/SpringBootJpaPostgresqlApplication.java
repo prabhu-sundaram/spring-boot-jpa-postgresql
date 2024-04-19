@@ -78,20 +78,20 @@ public class SpringBootJpaPostgresqlApplication {
 		return builder.build();
 	}
 
-    @Autowired
-    private Post2Repository postRepository;
+    // @Autowired
+    // private Post2Repository postRepository;
 
-    @Autowired
-    private UnifiedJedis jedis;
+    // @Autowired
+    // private UnifiedJedis jedis;
 
-	@Autowired
-	HttpClientService       httpClientService;
-    @Autowired
-    ApacheHttpClientService     apacheHttpClientService;
-    @Autowired
-    OkHttpClientService     okHttpClientService;
-    @Autowired
-    WebClientService    webClientService;
+	// @Autowired
+	// HttpClientService       httpClientService;
+    // @Autowired
+    // ApacheHttpClientService     apacheHttpClientService;
+    // @Autowired
+    // OkHttpClientService     okHttpClientService;
+    // @Autowired
+    // WebClientService    webClientService;
 
 
     // @Value("classpath:data.json")
@@ -158,21 +158,29 @@ public class SpringBootJpaPostgresqlApplication {
 	// @Bean
     // CommandLineRunner testHttpClient() {
     //     return args -> {	
-    //         //httpClientService.invoke();
-    //         //httpClientService.invokePost();
+    //         //httpClientService.invokeGetAsync();
+    //         //httpClientService.invokePostJSON();
 
-    //         //apacheHttpClientService.invoke();
-    //         //apacheHttpClientService.invokePost();
+    //         //apacheHttpClientService.invokeGetAsync();
+    //         //apacheHttpClientService.invokePostJSON();
             
-    //         //okHttpClientService.invoke();
-    //         //okHttpClientService.invokePost();
+    //         //okHttpClientService.invokeGetAsync();
+    //         //okHttpClientService.invokePostJSON();
             
-    //         //webClientService.invoke();
-    //         //webClientService.invokePost();   
+    //         //webClientService.invokeGetAsync();
+    //         //webClientService.invokePostJSON();   
             
-    //         OkHttpClientService2 okHttpClientService2 = new OkHttpClientService2();
-    //         okHttpClientService2.RestTest1();
+    //         //OkHttpClientService2 okHttpClientService2 = new OkHttpClientService2();
+    //         //okHttpClientService2.RestTest1();
     //         //okHttpClientService2.RestTest2();
+
+    //         // HttpClientService2 httpClientService2 = new HttpClientService2();
+    //         // httpClientService2.testGetSync();
+    //         //httpClientService2.testGetAsync();
+    //         //httpClientService2.testGetConcurrent();
+    //         //httpClientService2.testPostForm();
+    //         //httpClientService2.testPostJSON();
+            
             
 	// 	};
 	// }        

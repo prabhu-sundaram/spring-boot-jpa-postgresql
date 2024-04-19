@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class HttpClientService {
 
-	public void invoke() throws URISyntaxException {
+	public void invokeGetAsync() throws URISyntaxException {
 
 		HttpClient client = HttpClient.newBuilder().version(Version.HTTP_2).followRedirects(Redirect.NORMAL).build();
 
@@ -34,7 +34,7 @@ public class HttpClientService {
 	  
 	}
 
-	public void invokePost() {
+	public void invokePostJSON() {
 		
 		try {
 			String requestBody = prepareRequest();
