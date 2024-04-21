@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><ProcessPVAcquisitionResponse xmlns="http://online.pc.icm.epay.bct.com/"><RegisterPaymentVoucherResponse>
+  <GenericResponse>
+    <ReplyTimeStamp>09/08/2020 11:21:38</ReplyTimeStamp>
+    <ResponseCode>000</ResponseCode>
+    <ResponseDesc_EN>Approved</ResponseDesc_EN>
+    <ResponseDesc_AR>تمت الموافقة</ResponseDesc_AR>
+    <GenericRequestHeader>
+      <MsgId>2020125968556004036</MsgId>
+      <TerminalID/>
+      <MessageType>ACQ</MessageType>
+      <CommitType>M</CommitType>
+      <ReqTimeStamp>09/08/2020 11:21:37</ReqTimeStamp>
+      <Reserved1/>
+      <Reserved2/>
+      <Reserved3/>
+      <Reserved4/>
+      <Reserved5/>
+      <Reserved6/>
+      <Reserved7/>
+      <Reserved8/>
+      <Reserved9/>
+      <Reserved10/>
+      <Reserved11/>
+      <Reserved12/>
+      <Reserved13/>
+      <Reserved14/>
+      <Reserved15/>
+    </GenericRequestHeader>
+    <ErrorResponses/>
+  </GenericResponse>
+  <VoucherResponseDetails>
+    <VoucherResponse>
+      <SourceSystemAppRefNo>PR-3356-13093000</SourceSystemAppRefNo>
+      <SourceSysVoucherNo>EREF0000981</SourceSysVoucherNo>
+      <EPayVoucherRefNo>RSCCSA202000624926</EPayVoucherRefNo>
+    </VoucherResponse>
+  </VoucherResponseDetails>
+</RegisterPaymentVoucherResponse></ProcessPVAcquisitionResponse></soapenv:Body></soapenv:Envelope>
