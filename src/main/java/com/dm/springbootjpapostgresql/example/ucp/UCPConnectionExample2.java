@@ -29,7 +29,7 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 import oracle.ucp.jdbc.PoolDataSource;
 
 public class UCPConnectionExample2 {
-	final static String DB_URL=   "jdbc:oracle:thin:@localhost:1521:ORCL";
+	final static String DB_URL=   "jdbc:oracle:thin:@localhost:1521:XE";
 	final static String DB_USER                 = "spring";
 	final static String DB_PASSWORD             = "spring123";
 	

@@ -12,13 +12,13 @@ public class OracleDBConn {
 try {
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	
-	String jdbcURL = "jdbc:oracle:thin:@localhost:1521:ORCL";
+	String jdbcURL = "jdbc:oracle:thin:@localhost:1521:XE";
 	String username = "spring";
 	String password = "spring123";
 	
 	Connection con = DriverManager.getConnection(jdbcURL, username, password);
 	Statement st = con.createStatement();
-	ResultSet rs = st.executeQuery("select * from emp");
+	ResultSet rs = st.executeQuery("select * from employee3");
 	//ResultSet rs = st.executeQuery("select 1 from dual");
 	
 	while(rs.next())

@@ -19,7 +19,7 @@ public class TableCreate {
     public static void main(String[] args) {
 
         try (Connection conn = DriverManager.getConnection(
-        		"jdbc:oracle:thin:@localhost:1521:ORCL", "spring", "spring123");
+        		"jdbc:oracle:thin:@localhost:1521:XE", "spring", "spring123");
              Statement statement = conn.createStatement()) {
 
             // if DDL failed, it will raise an SQLException

@@ -17,7 +17,7 @@ public class UCPConnectionExample {
          //set the connection properties on the data source.
          
          pds.setConnectionFactoryClassName("oracle.jdbc.pool.OracleDataSource");
-         pds.setURL("jdbc:oracle:thin:@localhost:1521:ORCL");
+         pds.setURL("jdbc:oracle:thin:@localhost:1521:XE");
          pds.setUser("spring");
          pds.setPassword("spring123");     
          

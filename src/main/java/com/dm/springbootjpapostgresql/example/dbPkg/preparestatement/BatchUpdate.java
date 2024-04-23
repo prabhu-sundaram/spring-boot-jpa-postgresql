@@ -10,7 +10,7 @@ public class BatchUpdate {
     public static void main(String[] args) {
 
         try (Connection conn = DriverManager.getConnection(
-        		"jdbc:oracle:thin:@localhost:1521:ORCL", "spring", "spring123");
+        		"jdbc:oracle:thin:@localhost:1521:XE", "spring", "spring123");
              Statement stat = conn.createStatement();
              PreparedStatement psInsert = conn.prepareStatement(SQL_INSERT);
              PreparedStatement psUpdate = conn.prepareStatement(SQL_UPDATE)) {

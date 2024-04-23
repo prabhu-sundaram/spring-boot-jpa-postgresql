@@ -1,12 +1,16 @@
 package com.dm.springbootjpapostgresql.example.dbPkg;
 
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.dm.springbootjpapostgresql.config.DatabaseProperties;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JDBCExample {
 
-	public static void main(String[] args) {
+	public void testDBConn(DatabaseProperties databaseProperties) {
         // https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html#package.description
         // auto java.sql.Driver discovery -- no longer need to load a java.sql.Driver class via Class.forName
 
@@ -20,9 +24,13 @@ public class JDBCExample {
         //https://stackoverflow.com/questions/18192521/ora-12505-tnslistener-does-not-currently-know-of-sid-given-in-connect-descript
         //jdbc:oracle:thin:@myserver:1521/XE
 
+        String jdbcUrl = databaseProperties.getUrl();
+        String username = databaseProperties.getUsername();
+        String password = databaseProperties.getPassword();
+
         // auto close connection
         try (Connection conn = DriverManager.getConnection(
-        	"jdbc:oracle:thin:@localhost:1521:ORCL", "spring", "spring123")) {
+        	jdbcUrl, username, password)) {
 
             if (conn != null) {
                 System.out.println("Connected to the database!");

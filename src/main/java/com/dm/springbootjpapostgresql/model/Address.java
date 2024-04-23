@@ -52,8 +52,9 @@ public class Address {
     @Column(name = "fax")
     private String fax;
 
-    @Column(name = "active",columnDefinition = "boolean default true")
-    private Boolean active;
+    //@Column(name = "active",columnDefinition = "boolean default true")
+    @Column(name = "active")
+    private boolean active;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @ManyToOne(targetEntity=User.class, fetch = FetchType.LAZY)

@@ -22,7 +22,7 @@ public class MD5HashGen {
     static String hash = "35454B055CC325EA1AF2126E27707052";
     static String password = "ILoveJava";
 
-    static String filename = "src/test/resources/test_md5.txt";
+    static String filename = "src/main/resources/example/test_md5.txt";
     static String checksum = "5EB63BBBE01EEED093CB22BB8F5ACDC3";
     
     //@Test

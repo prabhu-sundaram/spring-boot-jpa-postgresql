@@ -50,7 +50,8 @@ public class User {
     private String emailId;
     @Column(name = "mobile_no")
     private String mobileNo;
-    @Column(name = "active",columnDefinition = "boolean default true")
+    //@Column(name = "active",columnDefinition = "boolean default true")
+    @Column(name = "active")
     private Boolean active;
     @Column(name = "id_type")
     private IdType idType;

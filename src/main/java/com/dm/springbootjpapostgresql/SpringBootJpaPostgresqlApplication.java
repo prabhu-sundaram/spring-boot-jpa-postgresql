@@ -37,6 +37,8 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import com.dm.springbootjpapostgresql.service.HttpClient.*;
+import com.dm.springbootjpapostgresql.config.DatabaseProperties;
+import com.dm.springbootjpapostgresql.example.dbPkg.*;
 
 @SpringBootApplication
 // @ComponentScan(basePackages = {
@@ -77,6 +79,12 @@ public class SpringBootJpaPostgresqlApplication {
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}
+
+    @Autowired
+    private DatabaseProperties databaseProperties;
+
+    @Autowired
+    JDBCExample2 example2;
 
     // @Autowired
     // private Post2Repository postRepository;
@@ -185,6 +193,17 @@ public class SpringBootJpaPostgresqlApplication {
 	// 	};
 	// }        
         
+	@Bean
+    CommandLineRunner testDB() {
+        return args -> {	
+            // JDBCExample example = new JDBCExample();
+            // example.testDBConn(databaseProperties);       
+            
+            example2.testDBConn();   
+
+		};
+	}           
+
 	public static void main(String[] args) {
 		
 		//SpringApplication.run(SpringBootJpaPostgresqlApplication.class, args);
@@ -205,8 +224,7 @@ public class SpringBootJpaPostgresqlApplication {
         // logger.debug("A DEBUG Message");
         // logger.info("An INFO Message");
         // logger.warn("A WARN Message");
-        // logger.error("An ERROR Message");
-
+        // logger.error("An ERROR Message");        
 
 	}	
 	}

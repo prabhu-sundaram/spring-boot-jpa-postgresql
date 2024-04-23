@@ -12,7 +12,7 @@ public class RowSelect {
     public static void main(String[] args) {
 
         try (Connection conn = DriverManager.getConnection(
-        		"jdbc:oracle:thin:@localhost:1521:ORCL", "spring", "spring123");
+        		"jdbc:oracle:thin:@localhost:1521:XE", "spring", "spring123");
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();

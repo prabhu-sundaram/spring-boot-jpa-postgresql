@@ -1,5 +1,8 @@
 package com.dm.springbootjpapostgresql.example.dbPkg;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,9 +10,18 @@ import java.util.List;
 
 import com.dm.springbootjpapostgresql.example.beans.Employee2;
 
+@Component
 public class JDBCExample2 {
+    @Value("${spring.datasource.url}")
+    private String jdbcUrl;
 
-    public static void main(String[] args) {
+    @Value("${spring.datasource.username}")
+    private String username;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    public void testDBConn() {
 
         System.out.println("Oracle JDBC Connection Testing ~");
 
@@ -19,7 +31,7 @@ public class JDBCExample2 {
 
         // auto close connection and preparedStatement
         try (Connection conn = DriverManager.getConnection(
-        		"jdbc:oracle:thin:@localhost:1521:ORCL", "user1", "user1");
+            jdbcUrl, username, password);
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();

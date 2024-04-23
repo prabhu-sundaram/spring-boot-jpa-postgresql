@@ -18,6 +18,7 @@ public class Invoice {
 	private String name;
 	private Double amount;
 	private Double finalAmount;
+	@Column(name = "invoice_number")
 	private String number;
 	private String receivedDate;
 	private String type;

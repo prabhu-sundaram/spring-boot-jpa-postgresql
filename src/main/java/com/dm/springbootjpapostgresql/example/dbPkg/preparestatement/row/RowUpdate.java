@@ -13,7 +13,7 @@ public class RowUpdate {
     public static void main(String[] args) {
 
         try (Connection conn = DriverManager.getConnection(
-        		"jdbc:oracle:thin:@localhost:1521:ORCL", "spring", "spring123");
+        		"jdbc:oracle:thin:@localhost:1521:XE", "spring", "spring123");
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_UPDATE)) {
 
             preparedStatement.setBigDecimal(1, new BigDecimal(999.99));

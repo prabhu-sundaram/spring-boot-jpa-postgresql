@@ -2,6 +2,7 @@ package com.dm.springbootjpapostgresql.example.beans;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import lombok.Data;
 import lombok.Getter;
@@ -9,9 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "user3")
 //@Getter @Setter @NoArgsConstructor
 @Data
-public class User {
+public class User3 {
     private @Id Long id; // will be set when persisting
     //private @Id @Setter(AccessLevel.PROTECTED) Long id;
 	//private @Id @Setter Long id;
