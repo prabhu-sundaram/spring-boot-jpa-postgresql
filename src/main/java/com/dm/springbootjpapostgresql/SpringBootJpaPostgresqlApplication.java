@@ -193,16 +193,16 @@ public class SpringBootJpaPostgresqlApplication {
 	// 	};
 	// }        
         
-	@Bean
-    CommandLineRunner testDB() {
-        return args -> {	
-            // JDBCExample example = new JDBCExample();
-            // example.testDBConn(databaseProperties);       
+	// @Bean
+    // CommandLineRunner testDB() {
+    //     return args -> {	
+    //         // JDBCExample example = new JDBCExample();
+    //         // example.testDBConn(databaseProperties);       
             
-            example2.testDBConn();   
+    //         example2.testDBConn();   
 
-		};
-	}           
+	// 	};
+	// }           
 
 	public static void main(String[] args) {
 		

@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dm.springbootjpapostgresql.SpringBootJpaPostgresqlApplication;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
 import com.dm.springbootjpapostgresql.collection.montaji.Response;
@@ -18,14 +21,18 @@ import com.dm.springbootjpapostgresql.repository.CreateCPIPRXResponseRepository;
 
 import com.dm.springbootjpapostgresql.service.MontajiService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 
 import com.dm.springbootjpapostgresql.model.montaji.*;
 import com.dm.springbootjpapostgresql.repository.montaji.*;
 import com.dm.springbootjpapostgresql.dto.montaji.*;
+import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
 
 @Service
 public class MontajiServiceImpl implements MontajiService{
+
+private static final Logger logger = LoggerFactory.getLogger(SpringBootJpaPostgresqlApplication.class);
 
 // @Autowired
 // private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
@@ -55,16 +62,27 @@ ContainerProductRepository containerProductRepository;
 ProductBatchRepository productBatchRepository;
 @Autowired
 PreApprovalRepository preApprovalRepository;
+@Autowired
+private HttpServletRequest request;    
 
     @Override
     @Transactional
     public CreateCPIPRXResponseDTO createCPIPRX(CreateCPIPRXRequestDTO createCPIPRXRequestDTO) {
-        CreateCPIPRXRequest createCPIPRXRequest = createCPIPRXRequestMapper.mapToEntity(createCPIPRXRequestDTO);
-        createCPIPRXRequestRepository.save(createCPIPRXRequest);
+        // Access the request headers
+        String contentType = request.getHeader("Content-Type");
+        String accept = request.getHeader("Accept");
+        String method = request.getMethod();
+
+        // Log the headers and potentially the body using a logger
+        logger.info("Request received: Content-Type={}, Accept={},method={}", contentType, accept,method);
+
+        //CreateCPIPRXRequest createCPIPRXRequest = createCPIPRXRequestMapper.mapToEntity(createCPIPRXRequestDTO);
+        //createCPIPRXRequestRepository.save(createCPIPRXRequest);
 
         //Optional<CompanyDetails> companyDetails=companyDetailsRepository.findById(createCPIPRXRequestDTO.companyDetails.licensenumber);
         CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.getCompanyDetails();
-        CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber()).get();
+        CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber())
+        .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "licenseNumber", companyDetailsDTO.getLicensenumber()));
 
         RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.getRequestDetails();
         ConsignmentDetailsDTO consignmentDetailsDTO = createCPIPRXRequestDTO.getConsignmentDetails();
@@ -215,7 +233,7 @@ PreApprovalRepository preApprovalRepository;
         response.setDtReferenceNo("DTREF005690351");
         createCPIPRXResponse.setResponse(response);
         
-        createCPIPRXResponseRepository.save(createCPIPRXResponse);        
+        //createCPIPRXResponseRepository.save(createCPIPRXResponse);        
 System.out.println("End of MontajiServiceImpl");
         return createCPIPRXResponseMapper.mapToDTO(createCPIPRXResponse);        
     }

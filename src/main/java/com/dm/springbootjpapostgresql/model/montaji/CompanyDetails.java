@@ -36,6 +36,7 @@ public class CompanyDetails {
 
     @OneToMany(mappedBy = "companyDetails", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> requests;
-
+    @OneToMany(mappedBy = "companyDetails", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<User> users;
 
 }

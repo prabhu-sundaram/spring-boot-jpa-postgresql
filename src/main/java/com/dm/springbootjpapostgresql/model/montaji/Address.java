@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.model;
+package com.dm.springbootjpapostgresql.model.montaji;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;

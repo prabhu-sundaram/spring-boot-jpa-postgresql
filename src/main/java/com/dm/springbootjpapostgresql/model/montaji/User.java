@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.model;
+package com.dm.springbootjpapostgresql.model.montaji;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -8,21 +8,24 @@ import java.util.List;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-//import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
-
-import com.dm.springbootjpapostgresql.model.Administration.Nationality;
-import com.dm.springbootjpapostgresql.model.enumeration.Gender;
-import com.dm.springbootjpapostgresql.model.enumeration.IdType;
+import com.dm.springbootjpapostgresql.model.montaji.enumeration.Gender;
+import com.dm.springbootjpapostgresql.model.montaji.enumeration.IdType;
 
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+//import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+//@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "users",uniqueConstraints = {
         @UniqueConstraint(columnNames = "user_id")
@@ -34,7 +37,7 @@ public class User {
     @Column(name = "user_id")
 	private Long userId;
     
-    @Column(name = "user_name",length=20,nullable=false)
+    @Column(name = "user_name",length=20,nullable=false, unique = true)
     private String userName;
     @Column(name = "user_type")
     private String userType;
@@ -81,6 +84,13 @@ public class User {
 
     @Column(name = "changed_date", nullable = false)
     private Instant changedDate;    
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "license_number", nullable = false)
+    private CompanyDetails companyDetails;    
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
+    private List<Request> requests = new ArrayList<>(); 
 
     @PrePersist
     protected void onCreate() {

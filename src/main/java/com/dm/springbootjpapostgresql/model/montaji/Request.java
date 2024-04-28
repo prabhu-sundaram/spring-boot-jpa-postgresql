@@ -35,6 +35,10 @@ public class Request {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "license_number", nullable = false)
-    private CompanyDetails companyDetails;        
+    private CompanyDetails companyDetails;    
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by", nullable = false)
+    private User user;            
  
 }

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dm.springbootjpapostgresql.model.Administration.Nationality;
-import com.dm.springbootjpapostgresql.repository.NationalityRepository;
+import com.dm.springbootjpapostgresql.model.montaji.Nationality;
+import com.dm.springbootjpapostgresql.repository.montaji.NationalityRepository;
 
 @RestController
 @RequestMapping("/api/nationality")

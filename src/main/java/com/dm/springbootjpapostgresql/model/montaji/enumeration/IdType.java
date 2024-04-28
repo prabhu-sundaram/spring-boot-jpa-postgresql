@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.model.enumeration;
+package com.dm.springbootjpapostgresql.model.montaji.enumeration;
 
 public enum IdType {
 

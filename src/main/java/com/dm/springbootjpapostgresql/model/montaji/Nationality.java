@@ -1,9 +1,7 @@
-package com.dm.springbootjpapostgresql.model.Administration;
+package com.dm.springbootjpapostgresql.model.montaji;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.dm.springbootjpapostgresql.model.User;
 
 //import org.hibernate.annotations.JdbcTypeCode;
 //import org.hibernate.type.SqlTypes;

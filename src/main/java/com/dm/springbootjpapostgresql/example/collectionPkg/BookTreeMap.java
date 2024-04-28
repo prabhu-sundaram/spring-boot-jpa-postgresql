@@ -2,6 +2,7 @@ package com.dm.springbootjpapostgresql.example.collectionPkg;
 
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.SortedMap;
 
 import com.dm.springbootjpapostgresql.example.beans.Book;
 

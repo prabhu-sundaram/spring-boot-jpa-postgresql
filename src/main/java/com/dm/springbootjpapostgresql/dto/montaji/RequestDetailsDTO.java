@@ -14,4 +14,5 @@ public class RequestDetailsDTO{
     private Date requestDate;
     private Date creationDate;
     private String requestStatus;
+    private String createdBy;
 }
