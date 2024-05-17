@@ -35,5 +35,6 @@ public class UserCreateRequestDto {
     private Long nationalityId;    
     private Date dob;
     private List<Address> addresses = new ArrayList<>();
+    private String licenseNumber;
 
 }

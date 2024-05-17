@@ -38,7 +38,7 @@ import java.util.stream.Stream;
 
 import com.dm.springbootjpapostgresql.service.HttpClient.*;
 import com.dm.springbootjpapostgresql.config.DatabaseProperties;
-import com.dm.springbootjpapostgresql.example.dbPkg.*;
+//import com.dm.springbootjpapostgresql.example.dbPkg.*;
 
 @SpringBootApplication
 // @ComponentScan(basePackages = {
@@ -83,8 +83,8 @@ public class SpringBootJpaPostgresqlApplication {
     @Autowired
     private DatabaseProperties databaseProperties;
 
-    @Autowired
-    JDBCExample2 example2;
+    //@Autowired
+    //JDBCExample2 example2;
 
     // @Autowired
     // private Post2Repository postRepository;

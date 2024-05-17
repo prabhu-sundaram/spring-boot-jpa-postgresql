@@ -1,6 +1,7 @@
 package com.dm.springbootjpapostgresql.model.montaji;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,12 +34,16 @@ public class Request {
     private String requestStatus;    
     private String dtReferenceNo;
 
+    @OneToMany(mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Attachment> attachments;  
+        
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "license_number", nullable = false)
     private CompanyDetails companyDetails;    
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by", nullable = false)
+    @JoinColumn(name = "created_by", nullable = false, referencedColumnName = "user_name")
     private User user;            
  
+    
 }

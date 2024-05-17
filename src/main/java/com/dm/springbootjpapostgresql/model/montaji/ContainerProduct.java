@@ -40,6 +40,6 @@ public class ContainerProduct{
     private List<ProductBatch> batches;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "container_id", nullable = false)
+    @JoinColumn(name = "container_id", nullable = false, referencedColumnName = "id")
     private Container container;       
 }

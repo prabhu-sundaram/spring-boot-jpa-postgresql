@@ -1,18 +1,24 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Clob;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.dm.springbootjpapostgresql.SpringBootJpaPostgresqlApplication;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
-import com.dm.springbootjpapostgresql.collection.montaji.Response;
+import com.dm.springbootjpapostgresql.collection.montaji.ResponseObj;
 //import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper;
 import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper2;
 import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXResponseMapper;
@@ -20,6 +26,7 @@ import com.dm.springbootjpapostgresql.repository.CreateCPIPRXRequestRepository;
 import com.dm.springbootjpapostgresql.repository.CreateCPIPRXResponseRepository;
 
 import com.dm.springbootjpapostgresql.service.MontajiService;
+import com.dm.springbootjpapostgresql.utils.StringToClobConverter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -27,12 +34,17 @@ import jakarta.transaction.Transactional;
 import com.dm.springbootjpapostgresql.model.montaji.*;
 import com.dm.springbootjpapostgresql.repository.montaji.*;
 import com.dm.springbootjpapostgresql.dto.montaji.*;
+import com.dm.springbootjpapostgresql.exception.AttachmentValidationException;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
+
+import com.dm.springbootjpapostgresql.utils.StringToClobConverter;
 
 @Service
 public class MontajiServiceImpl implements MontajiService{
 
 private static final Logger logger = LoggerFactory.getLogger(SpringBootJpaPostgresqlApplication.class);
+
+private final String uploadPath = "src/main/resources/attachments";
 
 // @Autowired
 // private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
@@ -49,6 +61,8 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
 @Autowired
 CompanyDetailsRepository companyDetailsRepository;
 @Autowired
+UserRepository userRepository;
+@Autowired
 RequestRepository requestRepository;
 @Autowired
 RequestCPIPRepository requestCPIPRepository;
@@ -64,10 +78,12 @@ ProductBatchRepository productBatchRepository;
 PreApprovalRepository preApprovalRepository;
 @Autowired
 private HttpServletRequest request;    
+@Autowired
+StringToClobConverter stringToClobConverter;
 
     @Override
     @Transactional
-    public CreateCPIPRXResponseDTO createCPIPRX(CreateCPIPRXRequestDTO createCPIPRXRequestDTO) {
+    public CreateCPIPRXResponseDTO createCPIPRX(CreateCPIPRXRequestDTO createCPIPRXRequestDTO) throws AttachmentValidationException, IOException {
         // Access the request headers
         String contentType = request.getHeader("Content-Type");
         String accept = request.getHeader("Accept");
@@ -81,10 +97,16 @@ private HttpServletRequest request;
 
         //Optional<CompanyDetails> companyDetails=companyDetailsRepository.findById(createCPIPRXRequestDTO.companyDetails.licensenumber);
         CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.getCompanyDetails();
-        CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber())
-        .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "licenseNumber", companyDetailsDTO.getLicensenumber()));
+        // CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber())
+        // .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "licenseNumber", companyDetailsDTO.getLicensenumber()));
+        CompanyDetails companyDetails=companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode())
+        .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "importerCode", companyDetailsDTO.getImporterCode()));        
 
         RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.getRequestDetails();
+        
+        User user = userRepository.findByUserName(requestDetailsDTO.getCreatedBy()).orElse(null);
+        //User user2 = UserRepository.findSingleUserByUserName(requestDetailsDTO.getCreatedBy()).orElse(null);
+
         ConsignmentDetailsDTO consignmentDetailsDTO = createCPIPRXRequestDTO.getConsignmentDetails();
         ConsignmentRequestDetailsDTO consignmentRequestDetailsDTO = consignmentDetailsDTO.getRequestdetails();
 
@@ -114,6 +136,7 @@ private HttpServletRequest request;
                                             .setDtReferenceNo(requestDetailsDTO.getDtReferenceNo())
                                             .setCompanyDetails(companyDetails)
                                             //.setConsignmentPurposeId(consignmentRequestDetailsDTO.getConsignmentPurposeId)
+                                            .setUser(user)
                                             .build();
 
         requestCPIP.setConsignmentPurposeId(consignmentRequestDetailsDTO.getConsignmentPurposeId());
@@ -204,8 +227,52 @@ private HttpServletRequest request;
         //containerRepository.saveAll(containerList);
         requestCPIP.setContainers(containerList);
 
-        
+        List<Attachment> attachmentList = new ArrayList<>();
         List<AttachmentContainerDTO> attachmentContainerDTOs=createCPIPRXRequestDTO.getAttachments();
+
+        for(AttachmentContainerDTO attachmentContainerDTO : attachmentContainerDTOs)
+        {
+            List<AttachmentDTO> attachmentDTOs = attachmentContainerDTO.getAttachments();
+            for(AttachmentDTO attachmentDTO : attachmentDTOs)
+            { 
+            
+            if (attachmentDTO.getFileName() == null || attachmentDTO.getFileType() == null /*|| attachmentDTO.getFileContent() == null*/) {
+                throw new AttachmentValidationException("Missing required fields: fileName, fileType, fileContent");
+            }
+        
+            // Validate file type (optional)
+            if (!isValidFileType(attachmentDTO.getFileType())) {
+                throw new AttachmentValidationException("Unsupported file type: " + attachmentDTO.getFileType());
+            }
+        
+            // Extract base64 content and decode
+            String base64Image = attachmentDTO.getFileContent().split(",")[1]; // Assuming data:application/pdf;base64, base64 content format
+            byte[] decodedBytes = Base64.getDecoder().decode(base64Image);
+        
+            // Create file path with appropriate extension based on fileType
+            String filePath = uploadPath + File.separator + attachmentDTO.getFileName();
+        
+            // Store the image in the server
+            File file = new File(filePath);
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                fos.write(decodedBytes);
+            } catch (IOException e) {
+                throw new IOException("Error saving attachment: " + e.getMessage());
+            }            
+
+                Clob fileContentClob = stringToClobConverter.convertToDatabaseColumn(attachmentDTO.getFileContent());
+                Attachment attachment = Attachment.builder()
+                                                    .attachmentType(attachmentContainerDTO.getAttachmentType())
+                                                    .fileName(attachmentDTO.getFileName())
+                                                    .fileType(attachmentDTO.getFileType())
+                                                    .fileContent(fileContentClob)
+                                                    .request(requestCPIP)
+                                                    .build();
+                attachmentList.add(attachment);
+            }
+        }
+
+        requestCPIP.setAttachments(attachmentList);
         
         PreApprovalDTO preApprovalDTO=createCPIPRXRequestDTO.getPreApproval();
         PreApproval preApproval=PreApproval.builder()
@@ -228,14 +295,16 @@ private HttpServletRequest request;
         createCPIPRXResponse.setErrorCode("000");
         createCPIPRXResponse.setErrorDescription("No Error");
         createCPIPRXResponse.setData(null);
-        Response response = new Response();
+        ResponseObj response = new ResponseObj();
         response.setRequestNumber("CPIP-221221-009434");
         response.setDtReferenceNo("DTREF005690351");
         createCPIPRXResponse.setResponse(response);
         
         //createCPIPRXResponseRepository.save(createCPIPRXResponse);        
-System.out.println("End of MontajiServiceImpl");
+        System.out.println("End of MontajiServiceImpl");
         return createCPIPRXResponseMapper.mapToDTO(createCPIPRXResponse);        
     }
-    
+    private boolean isValidFileType(String fileType) {
+        return fileType.equals("image/png") || fileType.equals("image/jpeg") || fileType.equals("application/jpeg") || fileType.equals("application/pdf"); // Add more supported types as needed
+    }    
 }

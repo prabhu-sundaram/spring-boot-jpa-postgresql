@@ -39,6 +39,7 @@ public class RequestCPIPBuilder extends RequestBuilder<RequestCPIP> {
         requestCPIP.setRequestStatus(requestStatus);
         requestCPIP.setDtReferenceNo(dtReferenceNo);
         requestCPIP.setCompanyDetails(companyDetails);
+        requestCPIP.setUser(user);
         return requestCPIP;
     }
 

@@ -8,6 +8,7 @@ import lombok.Setter;
 public class Attachment {
     private String fileName;
     private String fileType;
-    private Date uploadedTimeStamp;
-    private String attachmentRefNo;    
+    //private Date uploadedTimeStamp;
+    //private String attachmentRefNo;    
+    private String fileContent;
 }

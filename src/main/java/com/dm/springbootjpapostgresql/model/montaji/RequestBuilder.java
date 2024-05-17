@@ -1,6 +1,7 @@
 package com.dm.springbootjpapostgresql.model.montaji;
 
 import java.util.Date;
+import java.util.List;
 
 public abstract class RequestBuilder<T extends Request> {
 
@@ -11,7 +12,10 @@ public abstract class RequestBuilder<T extends Request> {
     protected Date creationDate;
     protected String requestStatus;
     protected String dtReferenceNo;
+    protected List<Attachment> attachments;
     protected CompanyDetails companyDetails;
+    protected User user;
+    public Object setUser;
 
     public abstract T build();
 
@@ -50,10 +54,20 @@ public abstract class RequestBuilder<T extends Request> {
         return this;
     }
 
+    public RequestBuilder<T> setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
+        return this;
+    }    
+
     public RequestBuilder<T> setCompanyDetails(CompanyDetails companyDetails) {
         this.companyDetails = companyDetails;
         return this;
     }
+
+    public RequestBuilder<T> setUser(User user) {
+        this.user = user;
+        return this;
+    }    
 
     public T buildRequest() {
         T request = doBuild();

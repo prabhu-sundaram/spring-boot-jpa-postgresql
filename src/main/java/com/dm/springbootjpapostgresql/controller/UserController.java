@@ -38,9 +38,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private NationalityRepository nationalityRepository;   
-    
-    @Autowired
     UserService userService;
     @Autowired
     private HttpServletRequest request;    

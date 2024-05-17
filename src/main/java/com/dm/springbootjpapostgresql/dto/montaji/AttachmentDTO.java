@@ -8,6 +8,7 @@ import lombok.Getter;
 public class AttachmentDTO {
     private String fileName;
     private String fileType;
-    private Date uploadedTimeStamp;
-    private String attachmentRefNo;    
+    //private Date uploadedTimeStamp;
+    //private String attachmentRefNo;    
+    private String fileContent;
 }

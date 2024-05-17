@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import lombok.Setter;
 
 @Setter
-public class Response{
+public class ResponseObj{
     private String requestNumber;
     private String dtReferenceNo;
     private String requestType;

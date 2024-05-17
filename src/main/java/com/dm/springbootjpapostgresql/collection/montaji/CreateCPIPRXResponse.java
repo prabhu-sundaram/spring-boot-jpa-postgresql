@@ -26,5 +26,5 @@ public class CreateCPIPRXResponse {
     public String errorCode;
     public String errorDescription;
     public DataObj data;
-    public Response response;
+    public ResponseObj response;
 }
