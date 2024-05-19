@@ -210,11 +210,11 @@ public class SpringBootJpaPostgresqlApplication {
 
 
 	@Bean
-    CommandLineRunner testDB() {
+    CommandLineRunner testFileOps() {
         return args -> {	
-            fileWriteService.testFileWrite();
+            //fileWriteService.testFileWrite();
             //fileWriteService.testFileWrite2();
-            //fileWriteService.testFileWrite3();
+            fileWriteService.testFileWrite3();
 
 		};
 	}    

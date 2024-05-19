@@ -38,5 +38,4 @@ build/
 *.gz
 
 #sql
-*.sql
 *.~sql

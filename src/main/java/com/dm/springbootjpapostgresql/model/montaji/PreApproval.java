@@ -23,6 +23,7 @@ public class PreApproval{
     private String dip;
     private long dipWarehouseId;
     private String releaseWithDetention;
+    @Column(name = "release_with_detention_wh_id")
     private long releaseWithDetentionWarehouseId;
     private String sampleDetention;
     private long sampleDetentionWarehouseId;
