@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.example.filePkg;
+package com.dm.springbootjpapostgresql.service.FileOps;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -80,7 +80,7 @@ public class FileStreamExample {
 	{
 		System.out.println("------------------------Reading a File from the Classpath----------------------");
 		
-	    Class clazz = File2.class;
+	    Class clazz = FileReadService.class;
 	    InputStream inputStream = clazz.getResourceAsStream("/fileTest.txt");
 	    String data = readFromInputStream(inputStream);
 	    System.out.println("data:"+data);

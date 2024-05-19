@@ -39,6 +39,7 @@ import java.util.stream.Stream;
 import com.dm.springbootjpapostgresql.service.HttpClient.*;
 import com.dm.springbootjpapostgresql.config.DatabaseProperties;
 //import com.dm.springbootjpapostgresql.example.dbPkg.*;
+import com.dm.springbootjpapostgresql.service.FileOps.*;
 
 @SpringBootApplication
 // @ComponentScan(basePackages = {
@@ -100,6 +101,9 @@ public class SpringBootJpaPostgresqlApplication {
     // OkHttpClientService     okHttpClientService;
     // @Autowired
     // WebClientService    webClientService;
+
+    @Autowired
+    FileWriteService    fileWriteService;
 
 
     // @Value("classpath:data.json")
@@ -203,6 +207,17 @@ public class SpringBootJpaPostgresqlApplication {
 
 	// 	};
 	// }           
+
+
+	@Bean
+    CommandLineRunner testDB() {
+        return args -> {	
+            fileWriteService.testFileWrite();
+            //fileWriteService.testFileWrite2();
+            //fileWriteService.testFileWrite3();
+
+		};
+	}    
 
 	public static void main(String[] args) {
 		

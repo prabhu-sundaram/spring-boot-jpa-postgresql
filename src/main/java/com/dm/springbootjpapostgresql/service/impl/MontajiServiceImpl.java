@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,9 @@ public class MontajiServiceImpl implements MontajiService{
 
 private static final Logger logger = LoggerFactory.getLogger(SpringBootJpaPostgresqlApplication.class);
 
-private final String uploadPath = "src/main/resources/attachments";
+//private final String uploadPath = "src/main/resources/attachments";
+@Value("${attachment.location}")
+private String uploadPath;
 
 // @Autowired
 // private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
@@ -236,7 +239,7 @@ StringToClobConverter stringToClobConverter;
             for(AttachmentDTO attachmentDTO : attachmentDTOs)
             { 
             
-            if (attachmentDTO.getFileName() == null || attachmentDTO.getFileType() == null /*|| attachmentDTO.getFileContent() == null*/) {
+            if (attachmentDTO.getFileName() == null || attachmentDTO.getFileType() == null || attachmentDTO.getFileContent() == null) {
                 throw new AttachmentValidationException("Missing required fields: fileName, fileType, fileContent");
             }
         
@@ -305,6 +308,8 @@ StringToClobConverter stringToClobConverter;
         return createCPIPRXResponseMapper.mapToDTO(createCPIPRXResponse);        
     }
     private boolean isValidFileType(String fileType) {
-        return fileType.equals("image/png") || fileType.equals("image/jpeg") || fileType.equals("application/jpeg") || fileType.equals("application/pdf"); // Add more supported types as needed
+        return fileType.equals("image/png") || fileType.equals("image/jpeg") 
+        || fileType.equals("application/jpeg") || fileType.equals("application/pdf")
+        || fileType.equals("file/plain") || fileType.equals("file/json");
     }    
 }

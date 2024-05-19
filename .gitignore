@@ -36,3 +36,7 @@ build/
 ###log###
 *.log
 *.gz
+
+#sql
+*.sql
+*.~sql
