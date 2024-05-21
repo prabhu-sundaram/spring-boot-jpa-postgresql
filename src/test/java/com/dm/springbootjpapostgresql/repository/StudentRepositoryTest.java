@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +20,7 @@ class StudentRepositoryTest {
     @Test
     public void saveStudent() {
         Student student = Student.builder()
-                .email("prabhu3333445555@gmail.com")
+                .email("prabhu3333343@gmail.com")
                 .firstName("Prabhu")
                 .lastName("Sundaram")
                 //.guardianName("Nikhil")
@@ -27,7 +28,23 @@ class StudentRepositoryTest {
                 //.guardianMobile("9999999999")
                 .build();
 
-        studentRepository.save(student);
+        studentRepository.save(student);                
+
+        Student student2 = Student.builder()
+                .email("prabhu3333@gmail.com")
+                .firstName("aaaaaPrabhuaaa")
+                .lastName("Sundaram")
+                .build();
+                
+        studentRepository.save(student2);
+
+        Student student3 = Student.builder()
+                .email("prabhu33455@gmail.com")
+                .firstName("Prabhubbbb")
+                .lastName("Sundaram")
+                .build();                
+
+        studentRepository.save(student3);
     }
 
 //    @Test
@@ -61,7 +78,7 @@ class StudentRepositoryTest {
     public void printStudentByFirstName() {
 
         List<Student> students =
-                studentRepository.findByFirstName("shivam");
+                studentRepository.findByFirstName("Prabhu");
 
         System.out.println("students = " + students);
     }
@@ -70,10 +87,28 @@ class StudentRepositoryTest {
     public void printStudentByFirstNameContaining() {
 
         List<Student> students =
-                studentRepository.findByFirstNameContaining("sh");
+                studentRepository.findByFirstNameContaining("pr");
 
         System.out.println("students = " + students);
     }
+
+
+    @Test
+    void findByFirstNameIgnoreCase() {
+        List<Student> students =
+                studentRepository.findByFirstNameIgnoreCase("Prabhu");
+
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    void findByFirstNameContainingIgnoreCase() {
+        List<Student> students =
+                studentRepository.findByFirstNameContainingIgnoreCase("pr");
+
+        System.out.println("students = " + students);
+    }
+
 
     @Test
     void findByLastName() {
@@ -107,13 +142,6 @@ class StudentRepositoryTest {
         System.out.println("students = " + students);
     }
 
-    @Test
-    void findByFirstNameIgnoreCase() {
-        List<Student> students =
-                studentRepository.findByFirstNameIgnoreCase("prabhu");
-
-        System.out.println("students = " + students);
-    }
 
     @Test
     void findByFirstNameNot() {
@@ -168,4 +196,10 @@ class StudentRepositoryTest {
                 "shabbir dawoodi",
                 "shabbir@gmail.com");
     }
+
+    @Test
+    public void findByIdTest() {
+        Optional<Student> student = studentRepository.findById(1L);
+        System.out.println("student = " + student);
+    }    
 }

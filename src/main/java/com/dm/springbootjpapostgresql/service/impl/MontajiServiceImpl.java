@@ -39,6 +39,10 @@ import com.dm.springbootjpapostgresql.exception.AttachmentValidationException;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
 
 import com.dm.springbootjpapostgresql.utils.StringToClobConverter;
+import com.dm.springbootjpapostgresql.utils.IdGenerator;
+import com.dm.springbootjpapostgresql.utils.IdGenerator2;
+import com.dm.springbootjpapostgresql.utils.IdGenerator3;
+
 
 @Service
 public class MontajiServiceImpl implements MontajiService{
@@ -83,6 +87,10 @@ PreApprovalRepository preApprovalRepository;
 private HttpServletRequest request;    
 @Autowired
 StringToClobConverter stringToClobConverter;
+@Autowired
+IdGenerator2    idGenerator2;
+@Autowired
+private IdGenerator3 idGenerator3;
 
     @Override
     @Transactional
@@ -130,8 +138,12 @@ StringToClobConverter stringToClobConverter;
         //                         .request(request)
         //                         .build();
 
+        String requestNumber=IdGenerator.generateUniqueId2("CPIP");
+        String requestNumber2=idGenerator2.generateRequestNo("CPIP");
+        String requestNumber3=idGenerator3.generateRequestNo("CPIP");
+
         RequestCPIP requestCPIP = new RequestCPIPBuilder()
-                                            .setRequestNumber(requestDetailsDTO.getRequestNumber())
+                                            .setRequestNumber(requestNumber3)
                                             .setRequestSource(requestDetailsDTO.getRequestSource())
                                             .setRequestType(requestDetailsDTO.getRequestType())
                                             .setRequestDate(requestDetailsDTO.getRequestDate())

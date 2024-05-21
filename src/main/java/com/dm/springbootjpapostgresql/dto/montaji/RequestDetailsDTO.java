@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class RequestDetailsDTO{
     private String dtReferenceNo;
-    private String requestNumber;
+    //private String requestNumber;
     private String requestSource;
     private String applicantDMUserId;
     private String requestType;

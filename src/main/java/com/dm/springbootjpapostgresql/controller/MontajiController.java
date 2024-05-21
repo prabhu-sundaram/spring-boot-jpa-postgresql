@@ -30,28 +30,37 @@ public class MontajiController {
         try {
             CreateCPIPRXResponseDTO createCPIPRXResponseDTO = montajiService.createCPIPRX(createCPIPRXRequestDTO);
             System.out.println("After calling montajiService.createCPIPRX");
-            return new ResponseEntity<>(createCPIPRXResponseDTO, HttpStatus.OK);
+            //return new ResponseEntity<>(createCPIPRXResponseDTO, HttpStatus.OK);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(createCPIPRXResponseDTO);        
             } catch (AttachmentValidationException e) {
                 createCPIPRXErrorResponseDTO.setIsSuccess("false");
                 createCPIPRXErrorResponseDTO.setErrorCode("001");
                 createCPIPRXErrorResponseDTO.setErrorDescription("Validation error: " + e.getMessage());
                 createCPIPRXErrorResponseDTO.setData(null);
                 createCPIPRXErrorResponseDTO.setResponse(null);                
-                return ResponseEntity.badRequest().body(createCPIPRXErrorResponseDTO);
+                return ResponseEntity
+                        .badRequest()
+                        .body(createCPIPRXErrorResponseDTO);
             } catch (IOException e) {
                 createCPIPRXErrorResponseDTO.setIsSuccess("false");
                 createCPIPRXErrorResponseDTO.setErrorCode("002");
                 createCPIPRXErrorResponseDTO.setErrorDescription("IO Exception: " + e.getMessage());
                 createCPIPRXErrorResponseDTO.setData(null);
                 createCPIPRXErrorResponseDTO.setResponse(null);                  
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(createCPIPRXErrorResponseDTO);         
+                return ResponseEntity
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(createCPIPRXErrorResponseDTO);         
             } catch (Exception e) {
                 createCPIPRXErrorResponseDTO.setIsSuccess("false");
                 createCPIPRXErrorResponseDTO.setErrorCode("999");
                 createCPIPRXErrorResponseDTO.setErrorDescription("Error creating CPIPRX: " + e.getMessage());
                 createCPIPRXErrorResponseDTO.setData(null);
                 createCPIPRXErrorResponseDTO.setResponse(null);                  
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(createCPIPRXErrorResponseDTO);  
+                return ResponseEntity
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(createCPIPRXErrorResponseDTO);  
             }
     }   
 }

@@ -23,12 +23,21 @@ select * from req_preapproval
 select * from container_product for update; 
 select * from product_batch
 
-select * from attachment for update; 
+select * from attachment 
 
 truncate table container_product
 truncate table product_batch
 
+alter table request add constraint FKmdra9e0rmvxetjaiq78gyawoi foreign key (created_by) references users (user_name)
+alter table request drop constraint FKmdra9e0rmvxetjaiq78gyawoi;
 alter table request drop constraint FKMDRA9E0RMVXETJAIQ78GYAWOI;
+
+SELECT constraint_name, table_name
+FROM user_constraints
+WHERE table_name = 'REQUEST'
+AND constraint_type = 'R';
+
+alter table req_preapproval drop column RELEASE_WITH_DETENTION_WAREHOUSE_ID;
 
 
 drop table request cascade;
@@ -64,3 +73,19 @@ select cpip.request_number
 	--and con.container_number=1
 	--and pre.dip=1
 )
+
+select * from TBL_STUDENT for update; 
+
+create sequence CPIP_SEQ
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1
+increment by 1
+cache 20;
+
+select * from user_sequences where sequence_name='CPIP_SEQ';
+
+select * from categories;
+select * from posts;
+select * from comments;
+

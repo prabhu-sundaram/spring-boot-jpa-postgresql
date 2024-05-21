@@ -2,6 +2,7 @@ package com.dm.springbootjpapostgresql.service.FileOps;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -58,7 +59,18 @@ public class FileWriteService {
         
         System.out.println("--------------");
 
-        
+        File f3 = new File(outputLocation+File.separator+"file.txt");   
+        if (f3.delete()) {   
+          System.out.println(f3.getName()+ " file is deleted successfully.");  
+        } else {  
+          System.out.println("Unexpected error found in deletion of the file.");  
+        }   
+        System.out.println("--------------");
+
+	}
+
+	public void testFileWrite2() throws IOException {
+
         try {  
             FileWriter fwrite = new FileWriter(outputLocation+File.separator+"FileOperationExample.txt");  
             // writing the content into the FileOperationExample.txt file  
@@ -73,20 +85,6 @@ public class FileWriteService {
             }      
         
         System.out.println("--------------");
-
-
-
-        File f3 = new File(outputLocation+File.separator+"file.txt");   
-        if (f3.delete()) {   
-          System.out.println(f3.getName()+ " file is deleted successfully.");  
-        } else {  
-          System.out.println("Unexpected error found in deletion of the file.");  
-        }   
-        System.out.println("--------------");
-
-	}
-
-	public void testFileWrite2() throws IOException {
 
 		System.out.println("---------Writer-------------");
 		Writer w = new FileWriter(outputLocation+File.separator+"output.txt");
@@ -133,6 +131,10 @@ public class FileWriteService {
 		pw2.close();
 		System.out.println("-----------------------");	
 		
+	}
+
+	public void testFileWrite3() throws FileNotFoundException,IOException {
+
 		System.out.println("---------FileOutputStream-------------");
 		FileOutputStream fos = new FileOutputStream(new File(outputLocation+File.separator+"output5.txt"));
 		fos.write(65);
@@ -141,11 +143,7 @@ public class FileWriteService {
 		fos.write(ba);
 		fos.close();
 		System.out.println("-----------------------");	
-		
 
-	}
-
-	public void testFileWrite3() {
 		String	CorrelationId = "1234567890";
 		String	payload = "<?xml version='1.0' encoding='utf-8'?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Body><ProcessPVAcquisitionResponse xmlns=\"http://online.pc.icm.epay.bct.com/\"><RegisterPaymentVoucherResponse>\r\n" + 
 				"  <GenericResponse>\r\n" + 

@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.hypersistence.utils.spring.repository.BaseJpaRepositoryImpl;
+
 import redis.clients.jedis.UnifiedJedis;
 import redis.clients.jedis.search.FieldName;
 import redis.clients.jedis.search.IndexDefinition;
@@ -34,6 +35,7 @@ import redis.clients.jedis.search.Schema;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.stream.Stream;
 
 import com.dm.springbootjpapostgresql.service.HttpClient.*;
@@ -102,8 +104,12 @@ public class SpringBootJpaPostgresqlApplication {
     // @Autowired
     // WebClientService    webClientService;
 
-    @Autowired
-    FileWriteService    fileWriteService;
+    // @Autowired
+    // FileWriteService    fileWriteService;
+    // @Autowired
+    // FileReadService     fileReadService;
+    // @Autowired
+    // FileStreamExample   fileStreamExample;
 
 
     // @Value("classpath:data.json")
@@ -209,18 +215,39 @@ public class SpringBootJpaPostgresqlApplication {
 	// }           
 
 
-	@Bean
-    CommandLineRunner testFileOps() {
-        return args -> {	
-            //fileWriteService.testFileWrite();
-            //fileWriteService.testFileWrite2();
-            fileWriteService.testFileWrite3();
+	// @Bean
+    // CommandLineRunner testFileOps() {
+    //     return args -> {	
+    //         fileWriteService.testFileWrite();
 
-		};
-	}    
+    //         //Text Files--FileWriter,BufferedWriter,PrintWriter
+    //         fileWriteService.testFileWrite2();
+
+    //         //Binary Files--FileOutputStream,DataOutputStream
+    //         fileWriteService.testFileWrite3();
+    //    System.out.println("--------------");
+
+    //          //fileReadService.testFileRead();
+    //         //fileReadService.readWithFileChannel();
+    //          //fileReadService.readContentFromURL();
+
+    //         //Text Files--FileReader,BufferedReader,Scanner
+    //          //fileReadService.readWithReader();
+    //     System.out.println("--------------");
+
+    //         //Binary Files--FileInputStream,DataInputStream
+    //         //fileStreamExample.testFileReadStream();
+    //         // fileStreamExample.testFileReadStreamClasspath();
+    //         // fileStreamExample.testFileReadStreamFileUtils();
+    //          //fileStreamExample.testFileReadStreamIOUtils();
+    //         //fileStreamExample.testFileReadDataInputStream();
+	// 	};
+	// }    
 
 	public static void main(String[] args) {
 		
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+04:00"));
+
 		//SpringApplication.run(SpringBootJpaPostgresqlApplication.class, args);
 
 		SpringApplication application = new SpringApplication(SpringBootJpaPostgresqlApplication.class);

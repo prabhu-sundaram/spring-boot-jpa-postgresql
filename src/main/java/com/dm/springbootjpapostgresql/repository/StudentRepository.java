@@ -22,12 +22,18 @@ public interface StudentRepository extends JpaRepository<Student,Long>{
     List<Student> findByFirstNameOrLastName(String firstName,String lastName);
     List<Student> findByFirstNameOrderByFirstNameDesc(String firstName);
     List<Student> findByFirstNameIgnoreCase(String firstName);
+    List<Student> findByFirstNameContainingIgnoreCase(String firstName);
+
     List<Student> findByFirstNameNot(String firstName);
     List<Student> findByEmail(String email);
 
     //JPQL
     @Query("select s from Student s where s.email=?1")
     Student findByEmailAddress(String email);
+    
+    //JPQL
+    @Query("SELECT s FROM Student s WHERE UPPER(s.firstName) LIKE UPPER(?1)")
+    List<Student> findByFirstNameContainingIgnoreCase2(String firstName);  
 
     //JPQL
     @Query("select s.firstName from Student s where s.email=?1")
