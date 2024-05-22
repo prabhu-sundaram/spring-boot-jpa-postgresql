@@ -89,11 +89,11 @@
 			<version>3.2.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.5.Final</version>
-		</dependency>	
+		</dependency>	-->
 		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

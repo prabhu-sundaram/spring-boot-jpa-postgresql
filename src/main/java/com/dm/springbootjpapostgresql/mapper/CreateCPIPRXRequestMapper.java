@@ -14,11 +14,16 @@ public class CreateCPIPRXRequestMapper {
     @Autowired
     private ModelMapper modelMapper;
 
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+        modelMapper.getConfiguration().setSkipNullEnabled(true); // Configure after injection
+      }
+      
     // convert Entity into DTO
-    public CreateCPIPRXRequestDTO mapToDTO(CreateCPIPRXRequest createCPIPRXRequest){
-        CreateCPIPRXRequestDTO createCPIPRXRequestDTO = modelMapper.map(createCPIPRXRequest, CreateCPIPRXRequestDTO.class);
-        return createCPIPRXRequestDTO;
-    }
+    // public CreateCPIPRXRequestDTO mapToDTO(CreateCPIPRXRequest createCPIPRXRequest){
+    //     CreateCPIPRXRequestDTO createCPIPRXRequestDTO = modelMapper.map(createCPIPRXRequest, CreateCPIPRXRequestDTO.class);
+    //     return createCPIPRXRequestDTO;
+    // }
 
     // convert DTO to entity
     public CreateCPIPRXRequest mapToEntity(CreateCPIPRXRequestDTO createCPIPRXRequestDTO){

@@ -21,9 +21,9 @@ public class CreateCPIPRXResponseMapper {
     }
 
     // convert DTO to entity
-    public CreateCPIPRXResponse mapToEntity(CreateCPIPRXResponseDTO createCPIPRXResponseDTO){
-        CreateCPIPRXResponse createCPIPRXResponse = modelMapper.map(createCPIPRXResponseDTO, CreateCPIPRXResponse.class);
-        return createCPIPRXResponse;
-    }
+    // public CreateCPIPRXResponse mapToEntity(CreateCPIPRXResponseDTO createCPIPRXResponseDTO){
+    //     CreateCPIPRXResponse createCPIPRXResponse = modelMapper.map(createCPIPRXResponseDTO, CreateCPIPRXResponse.class);
+    //     return createCPIPRXResponse;
+    // }
 
 }

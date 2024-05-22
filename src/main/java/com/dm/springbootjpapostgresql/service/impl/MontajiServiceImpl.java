@@ -20,7 +20,7 @@ import com.dm.springbootjpapostgresql.SpringBootJpaPostgresqlApplication;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
 import com.dm.springbootjpapostgresql.collection.montaji.ResponseObj;
-//import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper;
+import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper;
 import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper2;
 import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXResponseMapper;
 import com.dm.springbootjpapostgresql.repository.CreateCPIPRXRequestRepository;
@@ -53,10 +53,10 @@ private static final Logger logger = LoggerFactory.getLogger(SpringBootJpaPostgr
 @Value("${attachment.location}")
 private String uploadPath;
 
-// @Autowired
-// private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
 @Autowired
-private CreateCPIPRXRequestMapper2 createCPIPRXRequestMapper;
+private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
+//@Autowired
+//private CreateCPIPRXRequestMapper2 createCPIPRXRequestMapper;
 @Autowired
 private CreateCPIPRXResponseMapper createCPIPRXResponseMapper;
 
@@ -103,8 +103,11 @@ private IdGenerator3 idGenerator3;
         // Log the headers and potentially the body using a logger
         logger.info("Request received: Content-Type={}, Accept={},method={}", contentType, accept,method);
 
-        //CreateCPIPRXRequest createCPIPRXRequest = createCPIPRXRequestMapper.mapToEntity(createCPIPRXRequestDTO);
-        //createCPIPRXRequestRepository.save(createCPIPRXRequest);
+        //map request dto to request entity
+        CreateCPIPRXRequest createCPIPRXRequest = createCPIPRXRequestMapper.mapToEntity(createCPIPRXRequestDTO);
+        
+        //store request in mongo db
+        createCPIPRXRequestRepository.save(createCPIPRXRequest);
 
         //Optional<CompanyDetails> companyDetails=companyDetailsRepository.findById(createCPIPRXRequestDTO.companyDetails.licensenumber);
         CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.getCompanyDetails();
@@ -303,6 +306,7 @@ private IdGenerator3 idGenerator3;
 
         //preApprovalRepository.save(preApproval);
 
+        //store in oracle db
         requestCPIPRepository.save(requestCPIP);
      
         CreateCPIPRXResponse createCPIPRXResponse = new CreateCPIPRXResponse();
@@ -311,13 +315,19 @@ private IdGenerator3 idGenerator3;
         createCPIPRXResponse.setErrorDescription("No Error");
         createCPIPRXResponse.setData(null);
         ResponseObj response = new ResponseObj();
-        response.setRequestNumber("CPIP-221221-009434");
-        response.setDtReferenceNo("DTREF005690351");
+        response.setRequestNumber(requestNumber3);
+        response.setDtReferenceNo(requestDetailsDTO.getDtReferenceNo());
         createCPIPRXResponse.setResponse(response);
         
-        //createCPIPRXResponseRepository.save(createCPIPRXResponse);        
+        //store response in mongo db
+        createCPIPRXResponseRepository.save(createCPIPRXResponse);     
+
+        //map response entity to response dto
+      CreateCPIPRXResponseDTO createCPIPRXResponseDTO=createCPIPRXResponseMapper.mapToDTO(createCPIPRXResponse);
+
         System.out.println("End of MontajiServiceImpl");
-        return createCPIPRXResponseMapper.mapToDTO(createCPIPRXResponse);        
+
+        return createCPIPRXResponseDTO;        
     }
     private boolean isValidFileType(String fileType) {
         return fileType.equals("image/png") || fileType.equals("image/jpeg") 
