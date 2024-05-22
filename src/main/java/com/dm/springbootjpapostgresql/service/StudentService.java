@@ -24,4 +24,8 @@ public interface StudentService {
     public void deleteStudentById(long id);
     public void deleteAllStudents();
 
+    public boolean checkStudentExists(long id);
+    
+    
+
 }

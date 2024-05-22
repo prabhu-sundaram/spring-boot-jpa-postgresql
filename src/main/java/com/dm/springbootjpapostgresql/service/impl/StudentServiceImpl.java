@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,8 +11,6 @@ import org.springframework.data.domain.Sort;
 
 import org.springframework.stereotype.Service;
 
-import com.dm.springbootjpapostgresql.dto.PostDto;
-import com.dm.springbootjpapostgresql.dto.PostResponse;
 import com.dm.springbootjpapostgresql.dto.StudentDTO;
 import com.dm.springbootjpapostgresql.dto.StudentResponse;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
@@ -154,4 +151,10 @@ public class StudentServiceImpl implements StudentService{
         studentRepository.deleteAll();
     }
     
+    @Override
+    public boolean checkStudentExists(long id)
+    {
+        return studentRepository.existsById(id);
+    }
+
 }

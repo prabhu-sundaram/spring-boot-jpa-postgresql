@@ -111,4 +111,9 @@ public class StudentController {
 
 	}
 
+	@GetMapping(value="/checkStudentExists/{id}",produces = "text/plain;charset=UTF-8")
+	public ResponseEntity<String> checkStudentExists(@PathVariable(name="id") long id) {
+		return new ResponseEntity<>("Student exists: "+studentService.checkStudentExists(id) , HttpStatus.OK);
+	}	
+
 }
