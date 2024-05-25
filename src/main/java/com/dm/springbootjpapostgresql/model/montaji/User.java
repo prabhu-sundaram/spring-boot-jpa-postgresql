@@ -10,6 +10,8 @@ import org.hibernate.type.SqlTypes;
 
 import com.dm.springbootjpapostgresql.model.montaji.enumeration.Gender;
 import com.dm.springbootjpapostgresql.model.montaji.enumeration.IdType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
@@ -64,19 +66,17 @@ public class User {
     private Date idExpiryDate;
     @Column(name = "gender")
     private Gender  gender;
-    //@Column(name = "nationality")
-    //private Nationality nationality; // Reference to Nationality class
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @ManyToOne(targetEntity=Nationality.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity=Nationality.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "nationality_id")
+    @JsonBackReference
     private Nationality nationality;
 
     @Column(name = "dob")
     private Date dob;
 
     @OneToMany(cascade = CascadeType.ALL,targetEntity= Address.class,mappedBy = "user",fetch = FetchType.LAZY)
-    //private List<Address> addresses;
     private List<Address> addresses = new ArrayList<>();
 
     @Column(name = "created_date", nullable = false)
@@ -90,6 +90,7 @@ public class User {
     private CompanyDetails companyDetails;    
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
+    
     private List<Request> requests = new ArrayList<>(); 
 
     @PrePersist

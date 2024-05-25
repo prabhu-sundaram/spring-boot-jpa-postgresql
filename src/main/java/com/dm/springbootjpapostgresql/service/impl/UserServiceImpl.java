@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import com.dm.springbootjpapostgresql.model.montaji.CompanyDetails;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateRequestDto;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateResponseDto;
+import com.dm.springbootjpapostgresql.dto.montaji.UserFetchAllResponseDto;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
 import com.dm.springbootjpapostgresql.model.montaji.enumeration.IdType;
 import com.dm.springbootjpapostgresql.model.montaji.Nationality;
@@ -32,6 +33,13 @@ public class UserServiceImpl implements UserService{
 	private NationalityRepository nationalityRepository;   
     @Autowired
     CompanyDetailsRepository companyDetailsRepository;    
+
+    @Override
+    public List<UserFetchAllResponseDto> getAllUsers()
+    {
+        userRepository.findAll();
+    }
+
 
     @Override
     public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {

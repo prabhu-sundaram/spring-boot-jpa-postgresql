@@ -1,7 +1,5 @@
 package com.dm.springbootjpapostgresql.collection.montaji;
 
-import com.dm.springbootjpapostgresql.dto.montaji.DataObjDTO;
-import com.dm.springbootjpapostgresql.dto.montaji.ResponseDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +12,7 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 //@Data
-//@Getter
+@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor

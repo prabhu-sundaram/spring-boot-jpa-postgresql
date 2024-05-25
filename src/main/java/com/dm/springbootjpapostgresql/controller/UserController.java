@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dm.springbootjpapostgresql.SpringBootJpaPostgresqlApplication;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateRequestDto;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateResponseDto;
+import com.dm.springbootjpapostgresql.dto.montaji.UserFetchAllResponseDto;
 import com.dm.springbootjpapostgresql.model.montaji.Nationality;
 import com.dm.springbootjpapostgresql.model.montaji.User;
 import com.dm.springbootjpapostgresql.repository.montaji.NationalityRepository;
@@ -42,9 +43,18 @@ public class UserController {
     @Autowired
     private HttpServletRequest request;    
 
+    // @GetMapping
+    // public List<User> getAllUsers() {
+    //     return userRepository.findAll();
+    // }
+
     @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<List<UserFetchAllResponseDto>> getAllUsers()
+    {
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(userService.getAllUsers());
     }
 
     @GetMapping("/{id}")
@@ -56,8 +66,6 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
 
     // public ResponseEntity<User> createUser(@RequestBody User user) {
     //     User createdUser = userRepository.save(user);

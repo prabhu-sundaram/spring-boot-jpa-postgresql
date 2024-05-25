@@ -4,11 +4,14 @@ import java.util.List;
 
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateRequestDto;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateResponseDto;
+import com.dm.springbootjpapostgresql.dto.montaji.UserFetchAllResponseDto;
 
 public interface UserService {
     UserCreateResponseDto createUser(UserCreateRequestDto userDto);
 
     //UserResponse getAllUsers(int pageNo, int pageSize, String sortBy, String sortDir);
+    List<UserFetchAllResponseDto> getAllUsers();
+    
 
     // UserDto getUserById(long id);
     // UserDto getUserByUserName(String userName);

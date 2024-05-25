@@ -8,6 +8,9 @@ import org.hibernate.query.sqm.internal.SqmInterpretationsKey;
 
 import com.dm.springbootjpapostgresql.model.montaji.enumeration.Gender;
 import com.dm.springbootjpapostgresql.model.montaji.enumeration.IdType;
+
+import jakarta.persistence.Column;
+
 import com.dm.springbootjpapostgresql.model.montaji.Address;
 import com.dm.springbootjpapostgresql.model.montaji.Nationality;
 
@@ -16,7 +19,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserCreateRequestDto {
+public class UserFetchAllResponseDto {
+    private Long userId;
 	private String userName;
     private int userType;
     private String firstName;
@@ -32,9 +36,12 @@ public class UserCreateRequestDto {
     private String idNumber;    
     private Date idExpiryDate;
     private String gender;
-    private Long nationalityId;    
+    private Long nationalityId;  
+    private String nationalityNameEn;
+    private String nationalityNameAr;      
     private Date dob;
     private List<Address> addresses = new ArrayList<>();
     private String licenseNumber;
+    private String companyName;
 
 }

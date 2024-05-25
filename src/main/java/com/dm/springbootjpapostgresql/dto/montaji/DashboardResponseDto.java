@@ -2,8 +2,10 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 
 import java.util.Date;
 
+import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 @Setter
 public class DashboardResponseDto {
     private String requestNumber;

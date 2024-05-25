@@ -7,24 +7,14 @@ import java.sql.Clob;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.dm.springbootjpapostgresql.SpringBootJpaPostgresqlApplication;
-import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
-import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
-import com.dm.springbootjpapostgresql.collection.montaji.ResponseObj;
-import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper;
-import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXRequestMapper2;
-import com.dm.springbootjpapostgresql.mapper.CreateCPIPRXResponseMapper;
-import com.dm.springbootjpapostgresql.repository.CreateCPIPRXRequestRepository;
-import com.dm.springbootjpapostgresql.repository.CreateCPIPRXResponseRepository;
 
 import com.dm.springbootjpapostgresql.service.MontajiService;
 import com.dm.springbootjpapostgresql.utils.StringToClobConverter;
@@ -37,12 +27,23 @@ import com.dm.springbootjpapostgresql.repository.montaji.*;
 import com.dm.springbootjpapostgresql.dto.montaji.*;
 import com.dm.springbootjpapostgresql.exception.AttachmentValidationException;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
-
+import com.dm.springbootjpapostgresql.mapper.montaji.CreateCPIPRXRequestMapper;
+import com.dm.springbootjpapostgresql.mapper.montaji.CreateCPIPRXRequestMapper2;
+import com.dm.springbootjpapostgresql.mapper.montaji.CreateCPIPRXResponseMapper;
+import com.dm.springbootjpapostgresql.mapper.montaji.CreateCPIPRXResponseMapper2;
 import com.dm.springbootjpapostgresql.utils.StringToClobConverter;
 import com.dm.springbootjpapostgresql.utils.IdGenerator;
 import com.dm.springbootjpapostgresql.utils.IdGenerator2;
 import com.dm.springbootjpapostgresql.utils.IdGenerator3;
 
+//Mongo starts
+import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
+import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
+import com.dm.springbootjpapostgresql.collection.montaji.ResponseObj;
+import com.dm.springbootjpapostgresql.repository.CreateCPIPRXRequestRepository;
+import com.dm.springbootjpapostgresql.repository.CreateCPIPRXResponseRepository;
+
+//Mongo ends
 
 @Service
 public class MontajiServiceImpl implements MontajiService{
@@ -52,18 +53,6 @@ private static final Logger logger = LoggerFactory.getLogger(SpringBootJpaPostgr
 //private final String uploadPath = "src/main/resources/attachments";
 @Value("${attachment.location}")
 private String uploadPath;
-
-@Autowired
-private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
-//@Autowired
-//private CreateCPIPRXRequestMapper2 createCPIPRXRequestMapper;
-@Autowired
-private CreateCPIPRXResponseMapper createCPIPRXResponseMapper;
-
-@Autowired
-CreateCPIPRXRequestRepository createCPIPRXRequestRepository;
-@Autowired
-CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
 
 @Autowired
 CompanyDetailsRepository companyDetailsRepository;
@@ -92,6 +81,23 @@ IdGenerator2    idGenerator2;
 @Autowired
 private IdGenerator3 idGenerator3;
 
+//Mongo starts
+@Autowired
+private CreateCPIPRXRequestMapper createCPIPRXRequestMapper;
+@Autowired
+private CreateCPIPRXRequestMapper2 createCPIPRXRequestMapper2;
+@Autowired
+private CreateCPIPRXResponseMapper createCPIPRXResponseMapper;
+@Autowired
+private CreateCPIPRXResponseMapper2 createCPIPRXResponseMapper2;
+
+@Autowired
+CreateCPIPRXRequestRepository createCPIPRXRequestRepository;
+@Autowired
+CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
+//Mongo ends
+
+
     @Override
     @Transactional
     public CreateCPIPRXResponseDTO createCPIPRX(CreateCPIPRXRequestDTO createCPIPRXRequestDTO) throws AttachmentValidationException, IOException {
@@ -102,12 +108,6 @@ private IdGenerator3 idGenerator3;
 
         // Log the headers and potentially the body using a logger
         logger.info("Request received: Content-Type={}, Accept={},method={}", contentType, accept,method);
-
-        //map request dto to request entity
-        CreateCPIPRXRequest createCPIPRXRequest = createCPIPRXRequestMapper.mapToEntity(createCPIPRXRequestDTO);
-        
-        //store request in mongo db
-        createCPIPRXRequestRepository.save(createCPIPRXRequest);
 
         //Optional<CompanyDetails> companyDetails=companyDetailsRepository.findById(createCPIPRXRequestDTO.companyDetails.licensenumber);
         CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.getCompanyDetails();
@@ -309,21 +309,19 @@ private IdGenerator3 idGenerator3;
         //store in oracle db
         requestCPIPRepository.save(requestCPIP);
      
-        CreateCPIPRXResponse createCPIPRXResponse = new CreateCPIPRXResponse();
-        createCPIPRXResponse.setIsSuccess("true");
-        createCPIPRXResponse.setErrorCode("000");
-        createCPIPRXResponse.setErrorDescription("No Error");
-        createCPIPRXResponse.setData(null);
-        ResponseObj response = new ResponseObj();
+        CreateCPIPRXResponseDTO createCPIPRXResponseDTO = new CreateCPIPRXResponseDTO();
+        createCPIPRXResponseDTO.setIsSuccess("true");
+        createCPIPRXResponseDTO.setErrorCode("000");
+        createCPIPRXResponseDTO.setErrorDescription("No Error");
+        createCPIPRXResponseDTO.setData(null);
+
+        ResponseObjDTO response = new ResponseObjDTO();
         response.setRequestNumber(requestNumber3);
         response.setDtReferenceNo(requestDetailsDTO.getDtReferenceNo());
-        createCPIPRXResponse.setResponse(response);
-        
-        //store response in mongo db
-        createCPIPRXResponseRepository.save(createCPIPRXResponse);     
-
-        //map response entity to response dto
-      CreateCPIPRXResponseDTO createCPIPRXResponseDTO=createCPIPRXResponseMapper.mapToDTO(createCPIPRXResponse);
+        response.setRequestType("CPIP");
+        response.setStatus("Submitted");
+        response.setPayment(null);
+        createCPIPRXResponseDTO.setResponse(response);        
 
         System.out.println("End of MontajiServiceImpl");
 
@@ -334,4 +332,37 @@ private IdGenerator3 idGenerator3;
         || fileType.equals("application/jpeg") || fileType.equals("application/pdf")
         || fileType.equals("file/plain") || fileType.equals("file/json");
     }    
+
+    @Override
+    @Transactional
+    public CreateCPIPRXResponseDTO createCPIPRXMongo(CreateCPIPRXRequestDTO createCPIPRXRequestDTO)
+    {
+
+        //map request dto to request entity
+        CreateCPIPRXRequest createCPIPRXRequest = createCPIPRXRequestMapper2.mapToEntity(createCPIPRXRequestDTO);
+        
+        //store request in mongo db
+        createCPIPRXRequestRepository.save(createCPIPRXRequest);       
+        
+        CreateCPIPRXResponse createCPIPRXResponse = new CreateCPIPRXResponse();
+        createCPIPRXResponse.setIsSuccess("true");
+        createCPIPRXResponse.setErrorCode("000");
+        createCPIPRXResponse.setErrorDescription("No Error");
+        createCPIPRXResponse.setData(null);
+        ResponseObj response = new ResponseObj();
+        response.setRequestNumber("CPIP-1000");
+        response.setDtReferenceNo("DTREF1000");
+        createCPIPRXResponse.setResponse(response);
+        
+        //store response in mongo db
+        createCPIPRXResponseRepository.save(createCPIPRXResponse);     
+
+        //map response entity to response dto
+        CreateCPIPRXResponseDTO createCPIPRXResponseDTO=createCPIPRXResponseMapper2.mapToDTO(createCPIPRXResponse);
+        //CreateCPIPRXResponseDTO createCPIPRXResponseDTO = CreateCPIPRXResponseMapper2.INSTANCE.mapToDTO(createCPIPRXResponse);
+
+
+        return createCPIPRXResponseDTO;           
+    }
+
 }

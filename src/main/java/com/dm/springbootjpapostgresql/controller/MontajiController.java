@@ -63,4 +63,15 @@ public class MontajiController {
                         .body(createCPIPRXErrorResponseDTO);  
             }
     }   
+
+    @PostMapping("/CreateCPIPRXMongo")
+    public ResponseEntity<Object> createCPIPRXMongo(@RequestBody CreateCPIPRXRequestDTO createCPIPRXRequestDTO) {
+ 
+        CreateCPIPRXResponseDTO createCPIPRXResponseDTO = montajiService.createCPIPRXMongo(createCPIPRXRequestDTO);
+        
+        return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(createCPIPRXResponseDTO);     
+    }
+
 }

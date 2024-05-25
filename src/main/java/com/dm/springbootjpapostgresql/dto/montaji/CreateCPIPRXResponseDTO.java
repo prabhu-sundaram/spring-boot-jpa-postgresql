@@ -7,12 +7,12 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@JsonInclude(JsonInclude.Include.ALWAYS)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CreateCPIPRXResponseDTO {
     private String isSuccess;
     private String errorCode;
     private String errorDescription;
     private DataObjDTO data;
-    private ResponseDTO response;
+    private ResponseObjDTO response;
 }
 
