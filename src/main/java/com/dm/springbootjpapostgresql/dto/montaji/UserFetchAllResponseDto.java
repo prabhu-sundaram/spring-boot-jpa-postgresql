@@ -1,28 +1,21 @@
 package com.dm.springbootjpapostgresql.dto.montaji;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
-import org.hibernate.query.sqm.internal.SqmInterpretationsKey;
-
-import com.dm.springbootjpapostgresql.model.montaji.enumeration.Gender;
-import com.dm.springbootjpapostgresql.model.montaji.enumeration.IdType;
-
-import jakarta.persistence.Column;
-
 import com.dm.springbootjpapostgresql.model.montaji.Address;
-import com.dm.springbootjpapostgresql.model.montaji.Nationality;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class UserFetchAllResponseDto {
     private Long userId;
 	private String userName;
-    private int userType;
+    private String userType;
     private String firstName;
     private String firstNameAr;
     private String lastName;    
@@ -33,14 +26,16 @@ public class UserFetchAllResponseDto {
     private String mobileNo;
     private boolean active;
     private String idType;
+    private String idTypeName;
     private String idNumber;    
-    private Date idExpiryDate;
+    private LocalDate idExpiryDate;
     private String gender;
     private Long nationalityId;  
     private String nationalityNameEn;
     private String nationalityNameAr;      
-    private Date dob;
-    private List<Address> addresses = new ArrayList<>();
+    private LocalDate dob;
+    private int Age;
+    private List<Address> addresses;
     private String licenseNumber;
     private String companyName;
 

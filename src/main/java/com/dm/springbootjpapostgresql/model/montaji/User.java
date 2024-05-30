@@ -2,7 +2,7 @@ package com.dm.springbootjpapostgresql.model.montaji;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.annotations.JdbcTypeCode;
@@ -63,7 +63,7 @@ public class User {
     @Column(name = "id_number")
     private String idNumber;    
     @Column(name = "id_expiry_date")
-    private Date idExpiryDate;
+    private LocalDate idExpiryDate;
     @Column(name = "gender")
     private Gender  gender;
 
@@ -74,10 +74,10 @@ public class User {
     private Nationality nationality;
 
     @Column(name = "dob")
-    private Date dob;
+    private LocalDate dob;
 
     @OneToMany(cascade = CascadeType.ALL,targetEntity= Address.class,mappedBy = "user",fetch = FetchType.LAZY)
-    private List<Address> addresses = new ArrayList<>();
+    private List<Address> addresses;
 
     @Column(name = "created_date", nullable = false)
     private Instant createdDate;
@@ -91,7 +91,7 @@ public class User {
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
     
-    private List<Request> requests = new ArrayList<>(); 
+    private List<Request> requests; 
 
     @PrePersist
     protected void onCreate() {

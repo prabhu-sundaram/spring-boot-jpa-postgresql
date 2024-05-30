@@ -31,7 +31,10 @@ public class ContainerProduct{
     private String subCategoryId;
     private String countryId;
     private String brandId;
+    @Column(nullable=true)
     private int noOfBatches;
+    @Column(nullable=true)
+    private int noOfBatches2;
     private int productTotalQuantity;
     private double productUnitWeight;
     private double productTotalWeight;
@@ -42,4 +45,14 @@ public class ContainerProduct{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "container_id", nullable = false, referencedColumnName = "id")
     private Container container;       
+
+    public void addProductBatch(ProductBatch productBatch)
+    {
+        batches.add(productBatch);
+        updateNoOfBatches2();
+    }
+    private void updateNoOfBatches2()
+    {
+        noOfBatches2 = batches.size();
+    }
 }

@@ -26,6 +26,10 @@ public class Container{
     private String containerTypeId;
     private String containerNumber;
     private String storageTemperatureId;
+    @Column(nullable=true)
+    private int noOfProducts;
+    @Column(nullable=true)
+    private int noOfProducts2;
     private int containerTotalQuantity;
     private int productsCount;
     private double containerTotalWeight;
@@ -35,5 +39,15 @@ public class Container{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_number", nullable = false)
-    private RequestCPIP requestCPIP;    
+    private RequestCPIP requestCPIP;  
+    
+    public void addContainerProduct(ContainerProduct containerProduct)
+    {
+        products.add(containerProduct);
+        updateNoOfProducts2();
+    }
+    private void updateNoOfProducts2()
+    {
+        noOfProducts2 = products.size();
+    }    
 }

@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.model.montaji;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class RequestBuilder<T extends Request> {
@@ -8,8 +8,8 @@ public abstract class RequestBuilder<T extends Request> {
     protected String requestNumber;
     protected String requestSource;
     protected String requestType;
-    protected Date requestDate;
-    protected Date creationDate;
+    protected LocalDateTime requestDate;
+    protected LocalDateTime creationDate;
     protected String requestStatus;
     protected String dtReferenceNo;
     protected List<Attachment> attachments;
@@ -34,12 +34,12 @@ public abstract class RequestBuilder<T extends Request> {
         return this;
     }
 
-    public RequestBuilder<T> setRequestDate(Date requestDate) {
+    public RequestBuilder<T> setRequestDate(LocalDateTime requestDate) {
         this.requestDate = requestDate;
         return this;
     }
 
-    public RequestBuilder<T> setCreationDate(Date creationDate) {
+    public RequestBuilder<T> setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
         return this;
     }

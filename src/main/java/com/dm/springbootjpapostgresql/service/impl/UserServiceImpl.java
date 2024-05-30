@@ -1,5 +1,6 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,41 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserFetchAllResponseDto> getAllUsers()
     {
-        userRepository.findAll();
+        List<UserFetchAllResponseDto> userFetchAllResponseDtoList = new ArrayList<>();
+        List<User> users = userRepository.findAll();
+        for(User user:users)
+        {
+            UserFetchAllResponseDto userFetchAllResponseDto=UserFetchAllResponseDto.builder()
+                                                                                    .userId(user.getUserId())
+                                                                                    .userName(user.getUserName())
+                                                                                    .userType(user.getUserType())
+                                                                                    .firstName(user.getFirstName())
+                                                                                    .firstNameAr(user.getFirstNameAr())
+                                                                                    .lastName(user.getLastName())
+                                                                                    .lastNameAr(user.getLastNameAr())
+                                                                                    .fullName(user.getFirstName()+' '+user.getLastName())
+                                                                                    .fullNameAr(user.getFirstNameAr()+' '+user.getLastNameAr())
+                                                                                    .emailId(user.getEmailId())
+                                                                                    .mobileNo(user.getMobileNo())
+                                                                                    .active(user.getActive())
+                                                                                    .idType(user.getIdType().getSymbol())
+                                                                                    .idTypeName(user.getIdType().getName())
+                                                                                    .idNumber(user.getIdNumber())
+                                                                                    .idExpiryDate(user.getIdExpiryDate())
+                                                                                    .gender(user.getGender().getName())
+                                                                                    .nationalityId(user.getNationality().getNationalityId())
+                                                                                    .nationalityNameEn(user.getNationality().getNationalityNameEn())
+                                                                                    .nationalityNameAr(user.getNationality().getNationalityNameAr())
+                                                                                    .dob(user.getDob())
+                                                                                    //.age()
+                                                                                    .licenseNumber(user.getCompanyDetails().getLicenseNumber())
+                                                                                    .companyName(user.getCompanyDetails().getCompanyName())
+                                                                                    .build();
+
+            userFetchAllResponseDtoList.add(userFetchAllResponseDto);
+
+        }
+        return userFetchAllResponseDtoList;
     }
 
 

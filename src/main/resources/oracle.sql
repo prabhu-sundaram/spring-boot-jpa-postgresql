@@ -28,6 +28,12 @@ select * from attachment
 truncate table container_product
 truncate table product_batch
 
+update req_cpip set NO_OF_CONTAINERS=0;
+alter table req_cpip drop column NO_OF_CONTAINERS;
+alter table req_cpip drop column NO_OF_CONTAINERS2;
+alter table req_cpip drop column PRODUCT_COUNT;
+
+
 alter table request add constraint FKmdra9e0rmvxetjaiq78gyawoi foreign key (created_by) references users (user_name)
 alter table request drop constraint FKmdra9e0rmvxetjaiq78gyawoi;
 alter table request drop constraint FKMDRA9E0RMVXETJAIQ78GYAWOI;
@@ -38,6 +44,7 @@ WHERE table_name = 'REQUEST'
 AND constraint_type = 'R';
 
 alter table req_preapproval drop column RELEASE_WITH_DETENTION_WAREHOUSE_ID;
+
 
 
 drop table request cascade;

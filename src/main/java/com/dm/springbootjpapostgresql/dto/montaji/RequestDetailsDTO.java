@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.dto.montaji;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 
@@ -11,8 +11,8 @@ public class RequestDetailsDTO{
     private String requestSource;
     private String applicantDMUserId;
     private String requestType;
-    private Date requestDate;
-    private Date creationDate;
+    private LocalDateTime requestDate;
+    private LocalDateTime creationDate;
     private String requestStatus;
     private String createdBy;
 }

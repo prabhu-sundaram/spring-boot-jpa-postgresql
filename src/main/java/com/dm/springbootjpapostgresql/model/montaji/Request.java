@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.model.montaji;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -29,8 +29,8 @@ public class Request {
     private String requestNumber;
     private String requestSource;
     private String requestType;
-    private Date requestDate;
-    private Date creationDate;
+    private LocalDateTime requestDate;
+    private LocalDateTime creationDate;
     private String requestStatus;    
     private String dtReferenceNo;
 

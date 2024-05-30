@@ -1,6 +1,5 @@
 package com.dm.springbootjpapostgresql.model.montaji;
 
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -25,7 +24,13 @@ public class RequestCPIP extends Request{
     // @Column(name = "id", nullable = false)
 	// private Long id;    
     
-    private String consignmentPurposeId;   
+    private String consignmentPurposeId; 
+    @Column(nullable=true)  
+    private int noOfContainers;
+    @Column(nullable=true)
+    private int noOfContainers2;
+    @Column(nullable=true)
+    private int productCount;
 
     @OneToOne(mappedBy = "requestCPIP", cascade = CascadeType.ALL, orphanRemoval = true)
     private ReqPortDetails reqPortDetails;
@@ -39,5 +44,15 @@ public class RequestCPIP extends Request{
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_number", nullable = false)
     private Request request;
+
+    public void addContainer(Container container)
+    {
+        containers.add(container);
+        updateNoOfContainers2();
+    }
+    private void updateNoOfContainers2()
+    {
+        noOfContainers2 = containers.size();
+    }       
 }
 

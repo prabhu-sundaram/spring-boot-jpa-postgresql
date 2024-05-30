@@ -7,6 +7,7 @@ import java.sql.Clob;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,18 +110,173 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
         // Log the headers and potentially the body using a logger
         logger.info("Request received: Content-Type={}, Accept={},method={}", contentType, accept,method);
 
+        // CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO = new CreateCPIPRXResponseDTO();
+
         //Optional<CompanyDetails> companyDetails=companyDetailsRepository.findById(createCPIPRXRequestDTO.companyDetails.licensenumber);
         CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.getCompanyDetails();
         // CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber())
         // .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "licenseNumber", companyDetailsDTO.getLicensenumber()));
-        CompanyDetails companyDetails=companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode())
-        .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "importerCode", companyDetailsDTO.getImporterCode()));        
+        // CompanyDetails companyDetails=companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode())
+        // .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "importerCode", companyDetailsDTO.getImporterCode()));        
+        Optional<CompanyDetails> companyDetailsOptional=companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode());
+
+        CompanyDetails companyDetails;
+
+        if(companyDetailsOptional.isPresent())
+        {
+            companyDetails=companyDetailsOptional.get();
+        }
+        else
+        {
+            // createCPIPRXErrorResponseDTO.setIsSuccess("false");
+            // createCPIPRXErrorResponseDTO.setErrorCode("002");
+            // createCPIPRXErrorResponseDTO.setErrorDescription("Please Verify Company Details");
+            // createCPIPRXErrorResponseDTO.setData(null);
+            // createCPIPRXErrorResponseDTO.setResponse(null);      
+            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                        .isSuccess("false")
+                                                                                        .errorCode("002")
+                                                                                        .errorDescription("Please Verify Company Details")
+                                                                                        .data(null)
+                                                                                        .response(null)
+                                                                                        .build();                
+            return createCPIPRXErrorResponseDTO;
+        }
 
         RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.getRequestDetails();
         
-        User user = userRepository.findByUserName(requestDetailsDTO.getCreatedBy()).orElse(null);
-        //User user2 = UserRepository.findSingleUserByUserName(requestDetailsDTO.getCreatedBy()).orElse(null);
+        if(requestDetailsDTO.getRequestSource()==null||requestDetailsDTO.getRequestSource().isEmpty()||!requestDetailsDTO.getRequestSource().equals("DT"))
+        {
+            // createCPIPRXErrorResponseDTO.setIsSuccess("false");
+            // createCPIPRXErrorResponseDTO.setErrorCode("101");
+            // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter Valid RequestSource");
+            // createCPIPRXErrorResponseDTO.setData(null);
+            // createCPIPRXErrorResponseDTO.setResponse(null);    
+            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                        .isSuccess("false")
+                                                                                        .errorCode("101")
+                                                                                        .errorDescription("Please Enter Valid RequestSource")
+                                                                                        .data(null)
+                                                                                        .response(null)
+                                                                                        .build();               
+            return createCPIPRXErrorResponseDTO;
+        }
+        if(requestDetailsDTO.getDtReferenceNo()==null||requestDetailsDTO.getDtReferenceNo().isEmpty())
+        {
+            // createCPIPRXErrorResponseDTO.setIsSuccess("false");
+            // createCPIPRXErrorResponseDTO.setErrorCode("102");
+            // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter Valid dtReferenceNo");
+            // createCPIPRXErrorResponseDTO.setData(null);
+            // createCPIPRXErrorResponseDTO.setResponse(null);
+            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                        .isSuccess("false")
+                                                                                        .errorCode("102")
+                                                                                        .errorDescription("Please Enter Valid dtReferenceNo")
+                                                                                        .data(null)
+                                                                                        .response(null)
+                                                                                        .build();           
+            return createCPIPRXErrorResponseDTO;   
+        }        
 
+        //Optional<Request> request=requestRepository.findByDtReferenceNo(requestDetailsDTO.getDtReferenceNo());
+        List<Request> requests=requestRepository.findByDtReferenceNo(requestDetailsDTO.getDtReferenceNo());
+        if(!requests.isEmpty())
+        {
+            // Request request = requests.get(0);
+            // if(request!=null)
+            // {
+                // createCPIPRXErrorResponseDTO.setIsSuccess("false");
+                // createCPIPRXErrorResponseDTO.setErrorCode("103");
+                // createCPIPRXErrorResponseDTO.setErrorDescription("Request is already created with given dtReferenceNo");
+                // createCPIPRXErrorResponseDTO.setData(null);
+                // createCPIPRXErrorResponseDTO.setResponse(null);
+                CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                            .isSuccess("false")
+                                                                                            .errorCode("103")
+                                                                                            .errorDescription("Request is already created with given dtReferenceNo")
+                                                                                            .data(null)
+                                                                                            .response(null)
+                                                                                            .build();             
+                return createCPIPRXErrorResponseDTO;  
+            // }
+        }
+        //User user = userRepository.findByUserName(requestDetailsDTO.getCreatedBy()).orElse(null);
+        //User user2 = UserRepository.findSingleUserByUserName(requestDetailsDTO.getCreatedBy()).orElse(null);
+        Optional<User> userOptional = userRepository.findByUserName(requestDetailsDTO.getApplicantDMUserId());
+        User user;
+
+        if(userOptional.isPresent())
+        {
+            user=userOptional.get();
+        }
+        else
+        {
+            // createCPIPRXErrorResponseDTO.setIsSuccess("false");
+            // createCPIPRXErrorResponseDTO.setErrorCode("104");
+            // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter applicantDMUserId");
+            // createCPIPRXErrorResponseDTO.setData(null);
+            // createCPIPRXErrorResponseDTO.setResponse(null);
+            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                        .isSuccess("false")
+                                                                                        .errorCode("104")
+                                                                                        .errorDescription("Please Enter valid applicantDMUserId")
+                                                                                        .data(null)
+                                                                                        .response(null)
+                                                                                        .build();            
+            return createCPIPRXErrorResponseDTO; 
+        }
+
+        if (userOptional.isPresent() && companyDetailsOptional.isPresent()) {
+            User user2 = userOptional.get();
+            CompanyDetails companyDetails2 = companyDetailsOptional.get();
+            Boolean isUserSameCompany=user2.getCompanyDetails().equals(companyDetails2);
+            if(!isUserSameCompany)
+            {
+                CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                            .isSuccess("false")
+                                                                                            .errorCode("105")
+                                                                                            .errorDescription("User and Company are not matching")
+                                                                                            .data(null)
+                                                                                            .response(null)
+                                                                                            .build();            
+                return createCPIPRXErrorResponseDTO; 
+            }
+
+        }
+
+        if(requestDetailsDTO.getRequestType()==null||requestDetailsDTO.getRequestType().isEmpty()
+            ||(!requestDetailsDTO.getRequestType().equals("CPIP") && !requestDetailsDTO.getRequestType().equals("CPRX")))
+        {
+            // createCPIPRXErrorResponseDTO.setIsSuccess("false");
+            // createCPIPRXErrorResponseDTO.setErrorCode("105");
+            // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter Valid Request Type");
+            // createCPIPRXErrorResponseDTO.setData(null);
+            // createCPIPRXErrorResponseDTO.setResponse(null);
+            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                        .isSuccess("false")
+                                                                                        .errorCode("105")
+                                                                                        .errorDescription("Please Enter Valid Request Type")
+                                                                                        .data(null)
+                                                                                        .response(null)
+                                                                                        .build();               
+            return createCPIPRXErrorResponseDTO;  
+        }
+        if(requestDetailsDTO.getRequestDate()==null)
+        {
+            // createCPIPRXErrorResponseDTO.setIsSuccess("false");
+            // createCPIPRXErrorResponseDTO.setErrorCode("106");
+            // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter Request Date");
+            // createCPIPRXErrorResponseDTO.setData(null);
+            // createCPIPRXErrorResponseDTO.setResponse(null);
+            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                        .isSuccess("false")
+                                                                                        .errorCode("106")
+                                                                                        .errorDescription("Please Enter Request Date")
+                                                                                        .data(null)
+                                                                                        .response(null)
+                                                                                        .build();               
+            return createCPIPRXErrorResponseDTO;  
+        }        
         ConsignmentDetailsDTO consignmentDetailsDTO = createCPIPRXRequestDTO.getConsignmentDetails();
         ConsignmentRequestDetailsDTO consignmentRequestDetailsDTO = consignmentDetailsDTO.getRequestdetails();
 
@@ -158,6 +314,8 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
                                             .build();
 
         requestCPIP.setConsignmentPurposeId(consignmentRequestDetailsDTO.getConsignmentPurposeId());
+        int noOfContainers=createCPIPRXRequestDTO.getContainers().size();
+        requestCPIP.setNoOfContainers(noOfContainers);
 
         PortDetailsDTO portDetailsDTO = consignmentDetailsDTO.getPortDetails();
 
@@ -190,11 +348,14 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
                                             .containerNumber(containerDTO.getContainerNumber())
                                             .storageTemperatureId(containerDTO.getStorageTemperatureId())
                                             .containerTotalQuantity(containerDTO.getContainerTotalQuantity())
-                                            .productsCount(containerDTO.getProductsCount())
+                                            //.productsCount(containerDTO.getProductsCount())
                                             .containerTotalWeight(containerDTO.getContainerTotalWeight())
                                             .requestCPIP(requestCPIP)
                                             .build();
             
+            int noOfProducts=containerDTO.getProducts().size();
+            container.setNoOfProducts(noOfProducts);
+
                 List<ProductDTO> productDTOList=containerDTO.getProducts();
                 List<ContainerProduct> containerProductList = new ArrayList<>();
         
@@ -207,12 +368,15 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
                                                                         .subCategoryId(productDTO.getSubCategoryId())
                                                                         .countryId(productDTO.getCountryId())
                                                                         .brandId(productDTO.getBrandId())
-                                                                        .noOfBatches(productDTO.getNoOfBatches())
+                                                                        //.noOfBatches(productDTO.getNoOfBatches())
                                                                         .productTotalQuantity(productDTO.getProductTotalQuantity())
                                                                         .productUnitWeight(productDTO.getProductUnitWeight())
                                                                         .productTotalWeight(productDTO.getProductTotalWeight())
                                                                         .container(container)
                                                                         .build();
+
+                    int noOfBatches=productDTO.getBatches().size();
+                    containerProduct.setNoOfBatches(noOfBatches);
 
                         List<BatchDTO> batchDTOList=productDTO.getBatches();
                         List<ProductBatch> productBatchList=new ArrayList<>();
@@ -239,7 +403,9 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
 
             containerList.add(container);
         }        
-      
+
+        // int consignmentProductCount=containerList.;
+        // requestCPIP.setConsignmentProductCount(0);
         
         
         //containerRepository.saveAll(containerList);
@@ -309,19 +475,36 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
         //store in oracle db
         requestCPIPRepository.save(requestCPIP);
      
-        CreateCPIPRXResponseDTO createCPIPRXResponseDTO = new CreateCPIPRXResponseDTO();
-        createCPIPRXResponseDTO.setIsSuccess("true");
-        createCPIPRXResponseDTO.setErrorCode("000");
-        createCPIPRXResponseDTO.setErrorDescription("No Error");
-        createCPIPRXResponseDTO.setData(null);
+        // CreateCPIPRXResponseDTO createCPIPRXResponseDTO = new CreateCPIPRXResponseDTO();
+        // createCPIPRXResponseDTO.setIsSuccess("true");
+        // createCPIPRXResponseDTO.setErrorCode("000");
+        // createCPIPRXResponseDTO.setErrorDescription("No Error");
+        // createCPIPRXResponseDTO.setData(null);
 
-        ResponseObjDTO response = new ResponseObjDTO();
-        response.setRequestNumber(requestNumber3);
-        response.setDtReferenceNo(requestDetailsDTO.getDtReferenceNo());
-        response.setRequestType("CPIP");
-        response.setStatus("Submitted");
-        response.setPayment(null);
-        createCPIPRXResponseDTO.setResponse(response);        
+        // ResponseObjDTO response = new ResponseObjDTO();
+        // response.setRequestNumber(requestNumber3);
+        // response.setDtReferenceNo(requestDetailsDTO.getDtReferenceNo());
+        // response.setRequestType("CPIP");
+        // response.setStatus("Submitted");
+        // response.setPayment(null);
+        // createCPIPRXResponseDTO.setResponse(response);      
+        
+        ResponseObjDTO response=ResponseObjDTO.builder()
+                                            .requestNumber(requestNumber3)
+                                            .dtReferenceNo(requestDetailsDTO.getDtReferenceNo())
+                                            .requestType("CPIP")
+                                            .status("Submitted")
+                                            .payment(null)
+                                            .build();
+        
+
+        CreateCPIPRXResponseDTO createCPIPRXResponseDTO=CreateCPIPRXResponseDTO.builder()
+                                                                                .isSuccess("true")
+                                                                                .errorCode("000")
+                                                                                .errorDescription("No Error")
+                                                                                .data(null)
+                                                                                .response(response)
+                                                                                .build();
 
         System.out.println("End of MontajiServiceImpl");
 
