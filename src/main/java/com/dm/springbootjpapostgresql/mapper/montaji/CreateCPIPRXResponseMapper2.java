@@ -1,7 +1,12 @@
 package com.dm.springbootjpapostgresql.mapper.montaji;
 
 import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
+import com.dm.springbootjpapostgresql.collection.montaji.DataObj;
+import com.dm.springbootjpapostgresql.collection.montaji.ResponseObj;
 import com.dm.springbootjpapostgresql.dto.montaji.CreateCPIPRXResponseDTO;
+import com.dm.springbootjpapostgresql.dto.montaji.DataObjDTO;
+import com.dm.springbootjpapostgresql.dto.montaji.ResponseObjDTO;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -17,4 +22,7 @@ public interface CreateCPIPRXResponseMapper2 {
         @Mapping(source = "response", target = "response")
     })
     CreateCPIPRXResponseDTO mapToDTO(CreateCPIPRXResponse createCPIPRXResponse);
+    
+    DataObjDTO dataObjToDataObjDTO(DataObj dataObj);
+    ResponseObjDTO responseObjToResponseObjDTO(ResponseObj responseObj);    
 }
