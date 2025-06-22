@@ -1,0 +1,105 @@
+plugins {
+    id 'java' // Use 'java' plugin for applications, 'java-library' for libraries
+    id 'org.springframework.boot' version '3.2.5' // Specify the Spring Boot version from your POM
+    id 'io.spring.dependency-management' version '1.1.5' // Corresponding version for Spring Boot 3.2.5
+    id 'maven-publish' // For publishing artifacts
+}
+
+group = 'com.dm'
+version = '0.0.1-SNAPSHOT'
+description = 'spring-boot-jpa-postgresql'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17 // Set Java 17
+    targetCompatibility = JavaVersion.VERSION_17 // Set Java 17
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral() // Use mavenCentral() instead of uri('https://repo.maven.apache.org/maven2/') for brevity
+}
+
+dependencies {
+    // Spring Boot Starters (versions managed by spring-boot-starter-parent via dependency-management plugin)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-graphql'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    // Dependencies with explicit versions in your POM (or not managed by Spring Boot BOM)
+    implementation 'com.graphql-java:graphql-java-tools:5.2.4'
+    implementation 'org.modelmapper:modelmapper:3.2.0'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+    // Remove springfox-swagger-ui as it's not compatible with Spring Boot 3.x
+    // implementation 'io.springfox:springfox-swagger-ui:3.0.0' // COMMENTED OUT: Use Springdoc instead for SB3+
+
+    implementation 'redis.clients:jedis:4.2.3'
+    implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.7.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.2.3' // Explicit version from POM
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
+    implementation 'commons-codec:commons-codec:1.16.1'
+    implementation 'org.apache.poi:poi:5.4.1'
+    implementation 'org.apache.poi:poi-ooxml:5.4.1'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    implementation 'com.oracle.database.jdbc:ucp:23.3.0.23.09'
+    implementation 'com.oracle.database.jdbc:ojdbc10:19.22.0.0'
+    implementation 'it.unimi.dsi:dsiutils:2.7.3'
+    implementation 'com.google.guava:guava:33.0.0-jre'
+    implementation 'org.json:json:20240303'
+
+    // Runtime dependencies
+    runtimeOnly 'org.postgresql:postgresql' // Version managed by Spring Boot parent
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools' // Version managed by Spring Boot parent
+
+    // Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // Version managed by Spring Boot parent
+    testImplementation 'org.springframework.graphql:spring-graphql-test' // Version managed by Spring Boot parent
+
+    // Annotation processors
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok' // Lombok needs to be an annotation processor
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final' // MapStruct processor
+    // If using Lombok with MapStruct, you might need this for better integration:
+    // annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+}
+
+// Configuration for Annotation Processors (equivalent to maven-compiler-plugin)
+// This specifically tells Gradle where to find and run annotation processors
+// The 'java' plugin automatically handles passing annotation processors to the compiler
+// based on the 'annotationProcessor' configuration.
+
+tasks.named('test') {
+    useJUnitPlatform() // Use JUnit 5 platform, common for Spring Boot tests
+}
+
+// For publishing (optional, but good practice for Spring Boot executable jars)
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = project.name
+            version = project.version
+
+            // Publish the Spring Boot executable JAR
+            artifact bootJar
+            // If you were building a WAR, you'd use artifact bootWar
+        }
+    }
+}
+
+// Optional: Explicit encoding for compilation and Javadoc (good practice)
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    // This part is crucial for passing processor options to MapStruct, if needed
+    // For example, if you set component model:
+    // options.compilerArgs << "-Amapstruct.defaultComponentModel=spring"
+}
+
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+}
