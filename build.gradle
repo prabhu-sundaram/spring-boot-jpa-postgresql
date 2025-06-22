@@ -28,6 +28,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-graphql'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    
 
     // Dependencies with explicit versions (or not managed by Spring Boot BOM)
     implementation 'com.graphql-java:graphql-java-tools:5.2.4'
@@ -49,14 +51,18 @@ dependencies {
     implementation 'it.unimi.dsi:dsiutils:2.7.3'
     implementation 'com.google.guava:guava:33.0.0-jre'
     implementation 'org.json:json:20240303'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
 
     // Runtime dependencies
     runtimeOnly 'org.postgresql:postgresql' // Version managed by Spring Boot parent
     runtimeOnly 'org.springframework.boot:spring-boot-devtools' // Version managed by Spring Boot parent
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6' // for JSON serialization
 
     // Test dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // Version managed by Spring Boot parent
     testImplementation 'org.springframework.graphql:spring-graphql-test' // Version managed by Spring Boot parent
+	testImplementation 'org.springframework.security:spring-security-test'
 
     // Annotation processors
     compileOnly 'org.projectlombok:lombok'
