@@ -1,6 +1,6 @@
 plugins {
     id 'java' // Use 'java' plugin for applications, 'java-library' for libraries
-    id 'org.springframework.boot' version '3.2.5' // Specify the Spring Boot version from your POM
+    id 'org.springframework.boot' version '3.2.5' // Specify the Spring Boot version
     id 'io.spring.dependency-management' version '1.1.5' // Corresponding version for Spring Boot 3.2.5
     id 'maven-publish' // For publishing artifacts
 }
@@ -16,7 +16,7 @@ java {
 
 repositories {
     mavenLocal()
-    mavenCentral() // Use mavenCentral() instead of uri('https://repo.maven.apache.org/maven2/') for brevity
+    mavenCentral()
 }
 
 dependencies {
@@ -29,13 +29,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
-    // Dependencies with explicit versions in your POM (or not managed by Spring Boot BOM)
+    // Dependencies with explicit versions (or not managed by Spring Boot BOM)
     implementation 'com.graphql-java:graphql-java-tools:5.2.4'
     implementation 'org.modelmapper:modelmapper:3.2.0'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
-    // Remove springfox-swagger-ui as it's not compatible with Spring Boot 3.x
-    // implementation 'io.springfox:springfox-swagger-ui:3.0.0' // COMMENTED OUT: Use Springdoc instead for SB3+
 
     implementation 'redis.clients:jedis:4.2.3'
     implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.7.3'
@@ -68,7 +66,7 @@ dependencies {
     // annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
-// Configuration for Annotation Processors (equivalent to maven-compiler-plugin)
+// Configuration for Annotation Processors
 // This specifically tells Gradle where to find and run annotation processors
 // The 'java' plugin automatically handles passing annotation processors to the compiler
 // based on the 'annotationProcessor' configuration.
