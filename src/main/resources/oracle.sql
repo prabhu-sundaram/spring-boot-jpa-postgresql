@@ -1,3 +1,21 @@
+select * from dba_users;
+select * from all_users;
+
+create user spring identified by spring123;
+grant all privileges to spring;
+alter user spring account unlock;
+alter user spring identified by spring123;
+
+
+alter user scott identified by oracle;
+
+select * from user_tables
+select * from emp;
+create user user1 identified by user1;
+grant all privileges to user1;
+
+create table tutorials (id number(19,0) not null, description varchar2(255), published boolean, title varchar2(255), primary key (id));
+
 select * from user_tables order by table_name;
 select * from user_objects where object_name='USERS'
 
@@ -71,10 +89,10 @@ from request req
 where req.request_number in
 (
 select cpip.request_number 
-	from req_cpip cpip
-	inner join req_port_details port on port.request_number = cpip.request_number
-	inner join req_container con on con.request_number = cpip.request_number
-	inner join req_preapproval pre on pre.request_number = cpip.request_number
+  from req_cpip cpip
+  inner join req_port_details port on port.request_number = cpip.request_number
+  inner join req_container con on con.request_number = cpip.request_number
+  inner join req_preapproval pre on pre.request_number = cpip.request_number
 	where cpip.request_number=req.request_number
 	--and port.bill_number=1
 	--and con.container_number=1
@@ -95,4 +113,26 @@ select * from user_sequences where sequence_name='CPIP_SEQ';
 select * from categories;
 select * from posts;
 select * from comments;
+
+
+select * from animal;
+select * from pet;
+
+select * from my_employee;
+
+select * from my_product;
+
+select * from vehicle;
+select * from car;
+
+select * from laptop;
+select * from bag;
+
+
+SELECT * FROM tutorials;
+
+select * from user4 order by id;
+select * from USER3
+
+select * from book_details for update; 
 

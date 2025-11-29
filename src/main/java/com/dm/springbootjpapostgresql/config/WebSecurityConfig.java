@@ -57,7 +57,14 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(
                         request -> request
                                 // Our public endpoints
-                                .requestMatchers("/api/User/register", "/api/User/login").permitAll()
+                                .requestMatchers(
+                                    "/swagger-ui/**",
+                                    "/swagger-ui.html",
+                                    "/v3/api-docs/**",
+                                    "/api-docs/**",
+                                    "/api/User/register", 
+                                    "/api/User/login"
+                                ).permitAll()
                                  // Our private endpoints
                                 .anyRequest().authenticated()
                 )// Set permissions on endpoints
