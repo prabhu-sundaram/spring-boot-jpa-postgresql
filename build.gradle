@@ -10,8 +10,8 @@ version = '0.0.1-SNAPSHOT'
 description = 'spring-boot-jpa-postgresql'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17 // Set Java 17
-    targetCompatibility = JavaVersion.VERSION_17 // Set Java 17
+    sourceCompatibility = JavaVersion.VERSION_21 // Set Java 21
+    targetCompatibility = JavaVersion.VERSION_21 // Set Java 21
 }
 
 repositories {

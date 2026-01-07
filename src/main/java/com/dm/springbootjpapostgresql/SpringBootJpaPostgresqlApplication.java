@@ -44,6 +44,8 @@ import com.dm.springbootjpapostgresql.config.DatabaseProperties;
 import com.dm.springbootjpapostgresql.service.FileOps.*;
 
 @SpringBootApplication
+@ComponentScan("com.dm.springbootjpapostgresql")
+
 // @ComponentScan(basePackages = {
 //     "com.dm.springbootjpapostgresql.config",
 //     "com.dm.springbootjpapostgresql.model",

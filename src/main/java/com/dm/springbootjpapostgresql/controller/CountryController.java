@@ -1,6 +1,7 @@
 package com.dm.springbootjpapostgresql.controller;
 
 import com.dm.springbootjpapostgresql.utils.response.GlobalResponse;
+import com.dm.springbootjpapostgresql.SpringBootJpaPostgresqlApplication;
 import com.dm.springbootjpapostgresql.dto.CountryDTO;
 import com.dm.springbootjpapostgresql.mapper.CountryMapper;
 import com.dm.springbootjpapostgresql.model.Country;
@@ -9,6 +10,9 @@ import com.dm.springbootjpapostgresql.service.CountryService;
 //import com.unboundid.util.Nullable;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/countries")
 public class CountryController {
+    private static final Logger logger = LoggerFactory.getLogger(SpringBootJpaPostgresqlApplication.class);
 
     private final CountryService countryService;
 
@@ -37,7 +42,8 @@ public class CountryController {
 
     @GetMapping("/{countryId}")
     public ResponseEntity<GlobalResponse<CountryDTO>> getCountryByIsoCode(@PathVariable BigDecimal countryId,
-                                                                          @RequestAttribute Country country) {
+                                                                          @RequestAttribute("country") Country country) {
+        logger.info("Request attribute in controller = {}", country);
         CountryDTO countryDTO = CountryMapper.convertToCountryDto(country);
 
         return ResponseEntity.status(HttpStatus.OK).body(new GlobalResponse<>(countryDTO));
