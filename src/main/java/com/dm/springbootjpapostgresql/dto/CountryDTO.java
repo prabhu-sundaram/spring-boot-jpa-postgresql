@@ -1,7 +1,7 @@
 package com.dm.springbootjpapostgresql.dto;
 
-import com.dm.springbootjpapostgresql.model.Country;
-import com.dm.springbootjpapostgresql.model.enumeration.Status;
+import com.dm.springbootjpapostgresql.model.entity.Country;
+import com.dm.springbootjpapostgresql.model.entity.enumeration.Status;
 
 import lombok.NoArgsConstructor;
 import lombok.Getter;

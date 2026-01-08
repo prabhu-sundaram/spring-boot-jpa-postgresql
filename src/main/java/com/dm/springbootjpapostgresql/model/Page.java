@@ -6,6 +6,8 @@ import lombok.Data;
 
 import java.util.List;
 
+import com.dm.springbootjpapostgresql.model.model.Post2;
+
 @Data
 @Builder
 @AllArgsConstructor

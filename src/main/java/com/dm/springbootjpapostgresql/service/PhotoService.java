@@ -1,7 +1,8 @@
 package com.dm.springbootjpapostgresql.service;
 
-import com.dm.springbootjpapostgresql.collection.Photo;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.dm.springbootjpapostgresql.model.document.Photo;
 
 import java.io.IOException;
 

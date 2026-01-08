@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.dm.springbootjpapostgresql.model.montaji.CompanyDetails;
-import com.dm.springbootjpapostgresql.repository.montaji.CompanyDetailsRepository;
+import com.dm.springbootjpapostgresql.model.entity.montaji.CompanyDetails;
+import com.dm.springbootjpapostgresql.repository.jpa.montaji.CompanyDetailsRepository;
 
 @SpringBootTest 
 public class CompanyDetailsRepositoryTest {

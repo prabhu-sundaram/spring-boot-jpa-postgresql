@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dm.springbootjpapostgresql.model.Invoice;
 import com.dm.springbootjpapostgresql.exception.InvoiceNotFoundException;
+import com.dm.springbootjpapostgresql.model.entity.Invoice;
 import com.dm.springbootjpapostgresql.service.IInvoiceService;
 import com.dm.springbootjpapostgresql.utils.InvoiceUtil;
 

@@ -1,7 +1,7 @@
 package com.dm.springbootjpapostgresql.dto;
 
-import com.dm.springbootjpapostgresql.model.Post;
-import com.dm.springbootjpapostgresql.model.Comment;
+import com.dm.springbootjpapostgresql.model.entity.Comment;
+import com.dm.springbootjpapostgresql.model.entity.Post;
 
 public record CommentRecord(
     Long id,

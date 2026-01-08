@@ -3,8 +3,8 @@ package com.dm.springbootjpapostgresql.service;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.dm.springbootjpapostgresql.model.Country;
-import com.dm.springbootjpapostgresql.model.enumeration.Status;
+import com.dm.springbootjpapostgresql.model.entity.Country;
+import com.dm.springbootjpapostgresql.model.entity.enumeration.Status;
 
 public interface CountryService {
 

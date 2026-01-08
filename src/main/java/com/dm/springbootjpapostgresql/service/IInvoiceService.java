@@ -2,7 +2,7 @@ package com.dm.springbootjpapostgresql.service;
 
 import java.util.List;
 
-import com.dm.springbootjpapostgresql.model.Invoice;
+import com.dm.springbootjpapostgresql.model.entity.Invoice;
 
 public interface IInvoiceService {
 	

@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.dm.springbootjpapostgresql.model.Country;
-import com.dm.springbootjpapostgresql.model.enumeration.Status;
+import com.dm.springbootjpapostgresql.model.entity.Country;
+import com.dm.springbootjpapostgresql.model.entity.enumeration.Status;
+import com.dm.springbootjpapostgresql.repository.jpa.CountryRepository;
 
 @SpringBootTest 
 class CountryRepositoryTest {

@@ -23,26 +23,26 @@ import com.dm.springbootjpapostgresql.utils.StringToClobConverter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 
-import com.dm.springbootjpapostgresql.model.montaji.*;
-import com.dm.springbootjpapostgresql.repository.montaji.*;
+import com.dm.springbootjpapostgresql.repository.jpa.montaji.*;
+import com.dm.springbootjpapostgresql.repository.mongo.CreateCPIPRXRequestRepository;
+import com.dm.springbootjpapostgresql.repository.mongo.CreateCPIPRXResponseRepository;
 import com.dm.springbootjpapostgresql.dto.montaji.*;
 import com.dm.springbootjpapostgresql.exception.AttachmentValidationException;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
-import com.dm.springbootjpapostgresql.mapper.montaji.CreateCPIPRXRequestMapper;
-import com.dm.springbootjpapostgresql.mapper.montaji.CreateCPIPRXRequestMapper2;
-import com.dm.springbootjpapostgresql.mapper.montaji.CreateCPIPRXResponseMapper;
-import com.dm.springbootjpapostgresql.mapper.montaji.CreateCPIPRXResponseMapper2;
+import com.dm.springbootjpapostgresql.mapper.mongo.montaji.CreateCPIPRXRequestMapper;
+import com.dm.springbootjpapostgresql.mapper.mongo.montaji.CreateCPIPRXRequestMapper2;
+import com.dm.springbootjpapostgresql.mapper.mongo.montaji.CreateCPIPRXResponseMapper;
+import com.dm.springbootjpapostgresql.mapper.mongo.montaji.CreateCPIPRXResponseMapper2;
+import com.dm.springbootjpapostgresql.model.entity.montaji.*;
 import com.dm.springbootjpapostgresql.utils.StringToClobConverter;
 import com.dm.springbootjpapostgresql.utils.IdGenerator;
 import com.dm.springbootjpapostgresql.utils.IdGenerator2;
 import com.dm.springbootjpapostgresql.utils.IdGenerator3;
 
 //Mongo starts
-import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXRequest;
-import com.dm.springbootjpapostgresql.collection.montaji.CreateCPIPRXResponse;
-import com.dm.springbootjpapostgresql.collection.montaji.ResponseObj;
-import com.dm.springbootjpapostgresql.repository.CreateCPIPRXRequestRepository;
-import com.dm.springbootjpapostgresql.repository.CreateCPIPRXResponseRepository;
+import com.dm.springbootjpapostgresql.model.document.montaji.CreateCPIPRXRequest;
+import com.dm.springbootjpapostgresql.model.document.montaji.CreateCPIPRXResponse;
+import com.dm.springbootjpapostgresql.model.document.montaji.ResponseObj;
 
 //Mongo ends
 

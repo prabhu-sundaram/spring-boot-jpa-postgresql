@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.dto;
 
-import com.dm.springbootjpapostgresql.model.PassengerInfo;
+import com.dm.springbootjpapostgresql.model.entity.PassengerInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -3,7 +3,7 @@ package com.dm.springbootjpapostgresql.dto.montaji;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.dm.springbootjpapostgresql.model.montaji.Address;
+import com.dm.springbootjpapostgresql.model.entity.montaji.Address;
 
 import lombok.Builder;
 import lombok.Getter;

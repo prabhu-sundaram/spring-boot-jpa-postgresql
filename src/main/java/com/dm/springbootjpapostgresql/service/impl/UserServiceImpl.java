@@ -11,18 +11,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.dm.springbootjpapostgresql.model.montaji.CompanyDetails;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateRequestDto;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateResponseDto;
 import com.dm.springbootjpapostgresql.dto.montaji.UserFetchAllResponseDto;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
-import com.dm.springbootjpapostgresql.model.montaji.enumeration.IdType;
-import com.dm.springbootjpapostgresql.model.montaji.Nationality;
-import com.dm.springbootjpapostgresql.model.montaji.User;
-import com.dm.springbootjpapostgresql.model.montaji.enumeration.Gender;
-import com.dm.springbootjpapostgresql.repository.montaji.CompanyDetailsRepository;
-import com.dm.springbootjpapostgresql.repository.montaji.NationalityRepository;
-import com.dm.springbootjpapostgresql.repository.montaji.UserRepository;
+import com.dm.springbootjpapostgresql.model.entity.montaji.CompanyDetails;
+import com.dm.springbootjpapostgresql.model.entity.montaji.Nationality;
+import com.dm.springbootjpapostgresql.model.entity.montaji.User;
+import com.dm.springbootjpapostgresql.model.entity.montaji.enumeration.Gender;
+import com.dm.springbootjpapostgresql.model.entity.montaji.enumeration.IdType;
+import com.dm.springbootjpapostgresql.repository.jpa.montaji.CompanyDetailsRepository;
+import com.dm.springbootjpapostgresql.repository.jpa.montaji.NationalityRepository;
+import com.dm.springbootjpapostgresql.repository.jpa.montaji.UserRepository;
 import com.dm.springbootjpapostgresql.service.UserService;
 
 @Service

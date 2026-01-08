@@ -2,9 +2,9 @@ package com.dm.springbootjpapostgresql.interceptor;
 
 
 import com.dm.springbootjpapostgresql.dto.CountryDTO;
-import com.dm.springbootjpapostgresql.mapper.CountryMapper;
-import com.dm.springbootjpapostgresql.model.Country;
-import com.dm.springbootjpapostgresql.model.enumeration.Status;
+import com.dm.springbootjpapostgresql.mapper.jpa.CountryMapper;
+import com.dm.springbootjpapostgresql.model.entity.Country;
+import com.dm.springbootjpapostgresql.model.entity.enumeration.Status;
 import com.dm.springbootjpapostgresql.service.CountryService;
 import lombok.RequiredArgsConstructor;
 // import org.dm.constants.ApiStatusCodes;

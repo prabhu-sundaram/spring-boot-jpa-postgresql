@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dm.springbootjpapostgresql.model.Invoice;
+import com.dm.springbootjpapostgresql.repository.jpa.InvoiceRepository;
 import com.dm.springbootjpapostgresql.exception.InvoiceNotFoundException;
-import com.dm.springbootjpapostgresql.repository.InvoiceRepository;
+import com.dm.springbootjpapostgresql.model.entity.Invoice;
 import com.dm.springbootjpapostgresql.service.IInvoiceService;
 import com.dm.springbootjpapostgresql.utils.InvoiceUtil;
 

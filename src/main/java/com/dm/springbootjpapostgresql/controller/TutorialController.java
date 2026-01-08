@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dm.springbootjpapostgresql.model.Tutorial;
-import com.dm.springbootjpapostgresql.repository.TutorialRepository;
+import com.dm.springbootjpapostgresql.model.entity.Tutorial;
+import com.dm.springbootjpapostgresql.repository.jpa.TutorialRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController

@@ -3,11 +3,6 @@ package com.dm.springbootjpapostgresql.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//import org.modelmapper.ModelMapper;
-import com.dm.springbootjpapostgresql.mapper.PostMapper;
-//import com.dm.springbootjpapostgresql.mapper.CommentMapper;
-
-
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,12 +14,11 @@ import org.springframework.data.domain.Sort;
 import com.dm.springbootjpapostgresql.dto.PostDto;
 import com.dm.springbootjpapostgresql.dto.PostResponse;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
-//import com.dm.springbootjpapostgresql.model.Comment;
-import com.dm.springbootjpapostgresql.model.Post;
-import com.dm.springbootjpapostgresql.model.Category;
-
-import com.dm.springbootjpapostgresql.repository.PostRepository;
-import com.dm.springbootjpapostgresql.repository.CategoryRepository;
+import com.dm.springbootjpapostgresql.mapper.jpa.PostMapper;
+import com.dm.springbootjpapostgresql.model.entity.Category;
+import com.dm.springbootjpapostgresql.model.entity.Post;
+import com.dm.springbootjpapostgresql.repository.jpa.CategoryRepository;
+import com.dm.springbootjpapostgresql.repository.jpa.PostRepository;
 import com.dm.springbootjpapostgresql.service.PostService;
 
 @Service

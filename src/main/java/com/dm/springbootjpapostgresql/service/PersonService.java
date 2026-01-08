@@ -1,9 +1,10 @@
 package com.dm.springbootjpapostgresql.service;
 
-import com.dm.springbootjpapostgresql.collection.Person2;
 import org.bson.Document;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.dm.springbootjpapostgresql.model.document.Person2;
 
 import java.util.List;
 

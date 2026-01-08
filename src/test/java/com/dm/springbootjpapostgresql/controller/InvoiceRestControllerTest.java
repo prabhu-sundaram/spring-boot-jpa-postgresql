@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.dm.springbootjpapostgresql.model.Invoice;
+import com.dm.springbootjpapostgresql.model.entity.Invoice;
 
 @SpringBootTest
 public class InvoiceRestControllerTest {

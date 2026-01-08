@@ -18,9 +18,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.dm.springbootjpapostgresql.model.Post2;
 import com.dm.springbootjpapostgresql.profiles.ProfileManager;
-import com.dm.springbootjpapostgresql.repository.Post2Repository;
+import com.dm.springbootjpapostgresql.repository.redis.Post2Repository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,27 +39,18 @@ import java.util.stream.Stream;
 
 import com.dm.springbootjpapostgresql.service.HttpClient.*;
 import com.dm.springbootjpapostgresql.config.DatabaseProperties;
+import com.dm.springbootjpapostgresql.model.model.Post2;
 //import com.dm.springbootjpapostgresql.example.dbPkg.*;
 import com.dm.springbootjpapostgresql.service.FileOps.*;
 
 @SpringBootApplication
-@ComponentScan("com.dm.springbootjpapostgresql")
-
 // @ComponentScan(basePackages = {
-//     "com.dm.springbootjpapostgresql.config",
-//     "com.dm.springbootjpapostgresql.model",
-//     "com.dm.springbootjpapostgresql.collection",       
-//     "com.dm.springbootjpapostgresql.repository",
-//     "com.dm.springbootjpapostgresql.repository2",    
 //     "com.dm.springbootjpapostgresql.service",
 //     "com.dm.springbootjpapostgresql.controller",
-//     "com.dm.springbootjpapostgresql.interceptor",
-//     "com.dm.springbootjpapostgresql.mapper"
-// },
-// excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {Post2Repository.class})
-// )
+//     "com.dm.springbootjpapostgresql.config"
+// })
 // @EnableJpaRepositories(
-//     value = "com.dm.springbootjpapostgresql",
+//     basePackages = "com.dm.springbootjpapostgresql.repository.jpa",
 //     repositoryBaseClass = BaseJpaRepositoryImpl.class
 // )
 public class SpringBootJpaPostgresqlApplication {
@@ -272,5 +262,5 @@ public class SpringBootJpaPostgresqlApplication {
 
 	}	
 	}
-        
+
 

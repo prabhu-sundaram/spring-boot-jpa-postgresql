@@ -1,9 +1,10 @@
 package com.dm.springbootjpapostgresql.service;
 
-import com.dm.springbootjpapostgresql.model.User4;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.dm.springbootjpapostgresql.model.entity.User4;
 
 import java.util.Collection;
 import java.util.Collections;

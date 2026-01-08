@@ -1,7 +1,9 @@
 package com.dm.springbootjpapostgresql.repository;
 
-import com.dm.springbootjpapostgresql.model.Course;
-import com.dm.springbootjpapostgresql.model.Teacher;
+import com.dm.springbootjpapostgresql.model.entity.Course;
+import com.dm.springbootjpapostgresql.model.entity.Teacher;
+import com.dm.springbootjpapostgresql.repository.jpa.TeacherRepository;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -10,12 +10,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.dm.springbootjpapostgresql.dto.StudentDTO;
-import com.dm.springbootjpapostgresql.model.Student;
-import com.dm.springbootjpapostgresql.model.Tutorial;
+import com.dm.springbootjpapostgresql.model.entity.Guardian;
+import com.dm.springbootjpapostgresql.model.entity.Student;
+import com.dm.springbootjpapostgresql.model.entity.Tutorial;
 import com.dm.springbootjpapostgresql.dto.GuardianDTO;
 import com.dm.springbootjpapostgresql.dto.PostDto;
 import com.dm.springbootjpapostgresql.dto.PostResponse;
-import com.dm.springbootjpapostgresql.model.Guardian;
 import com.dm.springbootjpapostgresql.dto.StudentResponse;
 import com.dm.springbootjpapostgresql.utils.AppConstants;
 

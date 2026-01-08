@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.dm.springbootjpapostgresql.repository2.Person3Repository;
-import com.dm.springbootjpapostgresql.repository2.MyEmployeeRepository;
+import com.dm.springbootjpapostgresql.model.entity.pojo.inheritance.MappedSuperclass.MyEmployee;
+import com.dm.springbootjpapostgresql.repository.jpa.repository2.MyEmployeeRepository;
+import com.dm.springbootjpapostgresql.repository.jpa.repository2.Person3Repository;
 
 @SpringBootTest 
 public class MyEmployeeTest {

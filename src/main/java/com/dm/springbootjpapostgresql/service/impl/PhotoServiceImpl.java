@@ -1,7 +1,7 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
-import com.dm.springbootjpapostgresql.collection.Photo;
-import com.dm.springbootjpapostgresql.repository.PhotoRepository;
+import com.dm.springbootjpapostgresql.model.document.Photo;
+import com.dm.springbootjpapostgresql.repository.mongo.PhotoRepository;
 import com.dm.springbootjpapostgresql.service.PhotoService;
 
 import org.bson.BsonBinarySubType;

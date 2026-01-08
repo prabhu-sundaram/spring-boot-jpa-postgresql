@@ -1,7 +1,7 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
-import com.dm.springbootjpapostgresql.collection.Person2;
-import com.dm.springbootjpapostgresql.repository.Person2Repository;
+import com.dm.springbootjpapostgresql.model.document.Person2;
+import com.dm.springbootjpapostgresql.repository.mongo.Person2Repository;
 import com.dm.springbootjpapostgresql.service.PersonService;
 
 import org.bson.Document;

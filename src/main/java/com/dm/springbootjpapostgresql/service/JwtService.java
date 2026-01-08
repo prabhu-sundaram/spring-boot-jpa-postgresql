@@ -1,12 +1,13 @@
 package com.dm.springbootjpapostgresql.service;
 
-import com.dm.springbootjpapostgresql.model.User4;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import com.dm.springbootjpapostgresql.model.entity.User4;
 
 import javax.crypto.SecretKey;
 import java.util.Date;

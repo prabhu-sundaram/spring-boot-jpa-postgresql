@@ -1,0 +1,13 @@
+package com.dm.springbootjpapostgresql.model.document.montaji;
+
+import lombok.Setter;
+
+@Setter
+public class PreApproval{
+    private String dip;
+    private long dipWarehouseId;
+    private String releaseWithDetention;
+    private long releaseWithDetentionWarehouseId;
+    private String sampleDetention;
+    private long sampleDetentionWarehouseId;
+}

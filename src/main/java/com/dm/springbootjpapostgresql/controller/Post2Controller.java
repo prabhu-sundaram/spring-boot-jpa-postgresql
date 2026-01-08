@@ -1,7 +1,7 @@
 package com.dm.springbootjpapostgresql.controller;
 
-import com.dm.springbootjpapostgresql.model.CategoryStats;
 import com.dm.springbootjpapostgresql.model.Page;
+import com.dm.springbootjpapostgresql.model.model.CategoryStats;
 import com.dm.springbootjpapostgresql.service.Post2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

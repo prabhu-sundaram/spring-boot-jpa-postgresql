@@ -1,7 +1,7 @@
 package com.dm.springbootjpapostgresql.interceptor;
 
 import com.dm.springbootjpapostgresql.SpringBootJpaPostgresqlApplication;
-import com.dm.springbootjpapostgresql.model.Country;
+import com.dm.springbootjpapostgresql.model.entity.Country;
 import com.dm.springbootjpapostgresql.service.CountryService;
 import com.dm.springbootjpapostgresql.utils.UriHelperCountry;
 import jakarta.servlet.http.HttpServletRequest;

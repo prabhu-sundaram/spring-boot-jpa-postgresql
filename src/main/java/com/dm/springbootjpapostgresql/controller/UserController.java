@@ -21,10 +21,10 @@ import com.dm.springbootjpapostgresql.SpringBootJpaPostgresqlApplication;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateRequestDto;
 import com.dm.springbootjpapostgresql.dto.montaji.UserCreateResponseDto;
 import com.dm.springbootjpapostgresql.dto.montaji.UserFetchAllResponseDto;
-import com.dm.springbootjpapostgresql.model.montaji.Nationality;
-import com.dm.springbootjpapostgresql.model.montaji.User;
-import com.dm.springbootjpapostgresql.repository.montaji.NationalityRepository;
-import com.dm.springbootjpapostgresql.repository.montaji.UserRepository;
+import com.dm.springbootjpapostgresql.model.entity.montaji.Nationality;
+import com.dm.springbootjpapostgresql.model.entity.montaji.User;
+import com.dm.springbootjpapostgresql.repository.jpa.montaji.NationalityRepository;
+import com.dm.springbootjpapostgresql.repository.jpa.montaji.UserRepository;
 import com.dm.springbootjpapostgresql.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;

@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.dm.springbootjpapostgresql.pojo.inheritance.TablePerClass.Car;
+import com.dm.springbootjpapostgresql.model.entity.pojo.inheritance.TablePerClass.Car;
+import com.dm.springbootjpapostgresql.repository.jpa.repository2.CarRepository;
+import com.dm.springbootjpapostgresql.repository.jpa.repository2.VehicleRepository;
 
 @SpringBootTest
 public class CarRepositoryTest {

@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.controller;
 
-import com.dm.springbootjpapostgresql.collection.Person2;
+import com.dm.springbootjpapostgresql.model.document.Person2;
 import com.dm.springbootjpapostgresql.service.PersonService;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;

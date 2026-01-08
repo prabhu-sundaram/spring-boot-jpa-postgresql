@@ -14,11 +14,10 @@ import org.springframework.stereotype.Service;
 import com.dm.springbootjpapostgresql.dto.StudentDTO;
 import com.dm.springbootjpapostgresql.dto.StudentResponse;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
-import com.dm.springbootjpapostgresql.mapper.StudentMapper;
-import com.dm.springbootjpapostgresql.model.Guardian;
-import com.dm.springbootjpapostgresql.model.Student;
-//import com.dm.springbootjpapostgresql.repository.GuardianRepository;
-import com.dm.springbootjpapostgresql.repository.StudentRepository;
+import com.dm.springbootjpapostgresql.mapper.jpa.StudentMapper;
+import com.dm.springbootjpapostgresql.model.entity.Guardian;
+import com.dm.springbootjpapostgresql.model.entity.Student;
+import com.dm.springbootjpapostgresql.repository.jpa.StudentRepository;
 import com.dm.springbootjpapostgresql.service.StudentService;
 
 import org.slf4j.Logger;

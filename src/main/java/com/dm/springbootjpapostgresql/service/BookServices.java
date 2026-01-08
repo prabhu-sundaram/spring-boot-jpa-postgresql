@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.dm.springbootjpapostgresql.model.Book;
-import com.dm.springbootjpapostgresql.repository.BookRepository;
+
+import com.dm.springbootjpapostgresql.model.entity.Book;
+import com.dm.springbootjpapostgresql.repository.jpa.BookRepository;
 
 @Service
 public class BookServices {

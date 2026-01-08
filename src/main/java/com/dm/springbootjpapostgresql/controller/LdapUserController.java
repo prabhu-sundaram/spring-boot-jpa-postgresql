@@ -1,7 +1,8 @@
 package com.dm.springbootjpapostgresql.controller;
 
-import com.dm.springbootjpapostgresql.model.LdapUser;
-import com.dm.springbootjpapostgresql.repository.LdapUserRepository;
+import com.dm.springbootjpapostgresql.model.entry.LdapUser;
+import com.dm.springbootjpapostgresql.repository.ldap.LdapUserRepository;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

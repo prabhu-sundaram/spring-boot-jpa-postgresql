@@ -1,8 +1,9 @@
 package com.dm.springbootjpapostgresql.service;
 
-import com.dm.springbootjpapostgresql.model.CategoryStats;
 import com.dm.springbootjpapostgresql.model.Page;
-import com.dm.springbootjpapostgresql.repository.Post2Repository;
+import com.dm.springbootjpapostgresql.model.model.CategoryStats;
+import com.dm.springbootjpapostgresql.repository.redis.Post2Repository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
-import com.dm.springbootjpapostgresql.model.Country;
-import com.dm.springbootjpapostgresql.model.enumeration.Status;
-import com.dm.springbootjpapostgresql.repository.CountryRepository;
+import com.dm.springbootjpapostgresql.model.entity.Country;
+import com.dm.springbootjpapostgresql.model.entity.enumeration.Status;
+import com.dm.springbootjpapostgresql.repository.jpa.CountryRepository;
 import com.dm.springbootjpapostgresql.service.CountryService;
 
 import lombok.RequiredArgsConstructor;

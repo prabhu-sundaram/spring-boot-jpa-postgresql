@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dm.springbootjpapostgresql.dto.PostRecord;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
-import com.dm.springbootjpapostgresql.model.Category;
-import com.dm.springbootjpapostgresql.model.Post;
-import com.dm.springbootjpapostgresql.repository2.ForumRepository;
+import com.dm.springbootjpapostgresql.model.entity.Category;
+import com.dm.springbootjpapostgresql.model.entity.Post;
+import com.dm.springbootjpapostgresql.repository.jpa.repository2.ForumRepository;
 import com.dm.springbootjpapostgresql.service.ForumService;
 
 @Service

@@ -1,13 +1,13 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
-import com.dm.springbootjpapostgresql.model.Comment;
-import com.dm.springbootjpapostgresql.model.Post;
+import com.dm.springbootjpapostgresql.model.entity.Comment;
+import com.dm.springbootjpapostgresql.model.entity.Post;
 import com.dm.springbootjpapostgresql.exception.BlogAPIException;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
+import com.dm.springbootjpapostgresql.mapper.jpa.CommentMapper;
 import com.dm.springbootjpapostgresql.dto.CommentDto;
-import com.dm.springbootjpapostgresql.mapper.CommentMapper;
-import com.dm.springbootjpapostgresql.repository.CommentRepository;
-import com.dm.springbootjpapostgresql.repository.PostRepository;
+import com.dm.springbootjpapostgresql.repository.jpa.CommentRepository;
+import com.dm.springbootjpapostgresql.repository.jpa.PostRepository;
 import com.dm.springbootjpapostgresql.service.CommentService;
 //import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

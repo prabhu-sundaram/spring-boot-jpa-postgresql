@@ -1,10 +1,10 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
-import com.dm.springbootjpapostgresql.model.Category;
+import com.dm.springbootjpapostgresql.repository.jpa.CategoryRepository;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
-import com.dm.springbootjpapostgresql.mapper.CategoryMapper;
+import com.dm.springbootjpapostgresql.mapper.jpa.CategoryMapper;
+import com.dm.springbootjpapostgresql.model.entity.Category;
 import com.dm.springbootjpapostgresql.dto.CategoryDto;
-import com.dm.springbootjpapostgresql.repository.CategoryRepository;
 import com.dm.springbootjpapostgresql.service.CategoryService;
 //import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

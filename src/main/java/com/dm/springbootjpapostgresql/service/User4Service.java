@@ -1,7 +1,8 @@
 package com.dm.springbootjpapostgresql.service;
 
-import com.dm.springbootjpapostgresql.model.User4;
-import com.dm.springbootjpapostgresql.repository.User4Repository;
+import com.dm.springbootjpapostgresql.model.entity.User4;
+import com.dm.springbootjpapostgresql.repository.jpa.User4Repository;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

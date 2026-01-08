@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.dm.springbootjpapostgresql.model.Book;
+
+import com.dm.springbootjpapostgresql.model.entity.Book;
 import com.dm.springbootjpapostgresql.service.BookServices;
 import lombok.Getter;
 import lombok.Setter;

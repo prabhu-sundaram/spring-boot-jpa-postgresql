@@ -1,7 +1,7 @@
 package com.dm.springbootjpapostgresql.controller;
 
-import com.dm.springbootjpapostgresql.model.User4;
-import com.dm.springbootjpapostgresql.repository.User4Repository;
+import com.dm.springbootjpapostgresql.model.entity.User4;
+import com.dm.springbootjpapostgresql.repository.jpa.User4Repository;
 import com.dm.springbootjpapostgresql.service.User4Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

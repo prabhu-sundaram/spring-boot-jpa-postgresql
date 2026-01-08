@@ -2,7 +2,7 @@ package com.dm.springbootjpapostgresql.utils;
 
 import org.springframework.stereotype.Component;
 
-import com.dm.springbootjpapostgresql.model.Invoice;
+import com.dm.springbootjpapostgresql.model.entity.Invoice;
 
 @Component
 public class InvoiceUtil {
