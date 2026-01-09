@@ -27,6 +27,6 @@ public class ProductBatch{
     private double itemsTotalWeight;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "container_product_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "container_product_id", nullable = false)
     private ContainerProduct containerProduct;       
 }

@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.dm.springbootjpapostgresql.dto.PostRecord;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.dm.springbootjpapostgresql.dto.CommentRecord;
 
 //@Data
@@ -40,6 +42,7 @@ public class Post {
 	private String content;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 	
     @ManyToOne(fetch = FetchType.LAZY)

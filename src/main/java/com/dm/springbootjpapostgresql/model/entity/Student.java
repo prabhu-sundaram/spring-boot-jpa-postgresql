@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
         name="emailid_unique",
         columnNames = "email_address"
     )
-
     )
 
 public class Student {
@@ -45,13 +44,16 @@ public class Student {
     // @Embedded
     // private Guardian guardian;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_id", nullable = false)
+    private School school;
+
     public Student(String firstName, String lastName) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-   
     public Student(String firstName, String lastName, String email) {
         super();
         this.firstName = firstName;

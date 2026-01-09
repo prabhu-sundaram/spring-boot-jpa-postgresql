@@ -11,6 +11,7 @@ import org.hibernate.type.SqlTypes;
 import com.dm.springbootjpapostgresql.model.entity.montaji.enumeration.Gender;
 import com.dm.springbootjpapostgresql.model.entity.montaji.enumeration.IdType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
@@ -67,16 +68,14 @@ public class User {
     @Column(name = "gender")
     private Gender  gender;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @ManyToOne(targetEntity=Nationality.class, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nationality_id")
-    @JsonBackReference
     private Nationality nationality;
 
     @Column(name = "dob")
     private LocalDate dob;
 
-    @OneToMany(cascade = CascadeType.ALL,targetEntity= Address.class,mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
 
     @Column(name = "created_date", nullable = false)
@@ -89,8 +88,8 @@ public class User {
     @JoinColumn(name = "license_number", nullable = false)
     private CompanyDetails companyDetails;    
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
-    
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Request> requests; 
 
     @PrePersist

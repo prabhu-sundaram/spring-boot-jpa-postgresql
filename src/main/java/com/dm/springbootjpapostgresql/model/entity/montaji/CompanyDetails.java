@@ -2,6 +2,8 @@ package com.dm.springbootjpapostgresql.model.entity.montaji;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,9 +36,11 @@ public class CompanyDetails {
     private String contactEmail;
     private String contactPhone;
 
-    @OneToMany(mappedBy = "companyDetails", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "companyDetails")
+    @JsonIgnore
     private List<Request> requests;
-    @OneToMany(mappedBy = "companyDetails", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "companyDetails")
+    @JsonIgnore
     private List<User> users;
 
 }

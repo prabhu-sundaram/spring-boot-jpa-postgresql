@@ -56,8 +56,7 @@ public class Address {
     @Column(name = "active")
     private boolean active;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @ManyToOne(targetEntity=User.class, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

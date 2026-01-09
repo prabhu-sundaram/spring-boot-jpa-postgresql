@@ -31,7 +31,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-ldap'
-    implementation 'org.springframework.ldap:spring-ldap-core:3.2.4'
+    implementation 'org.springframework.ldap:spring-ldap-core'
 
     // Dependencies with explicit versions (or not managed by Spring Boot BOM)
     implementation 'com.graphql-java:graphql-java-tools:5.2.4'
@@ -50,6 +50,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.14.0'
     implementation 'com.oracle.database.jdbc:ucp:23.3.0.23.09'
     implementation 'com.oracle.database.jdbc:ojdbc10:19.22.0.0'
+    implementation 'com.oracle.database.security:oraclepki:23.26.0.0.0'
     implementation 'it.unimi.dsi:dsiutils:2.7.3'
     implementation 'com.google.guava:guava:33.0.0-jre'
     implementation 'org.json:json:20240303'

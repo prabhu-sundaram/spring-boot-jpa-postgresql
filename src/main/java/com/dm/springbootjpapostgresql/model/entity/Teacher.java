@@ -32,7 +32,7 @@ public class Teacher {
 //     (
 //         cascade=CascadeType.ALL
 //     )
-//     @JoinColumn(name = "teacher_id",referencedColumnName = "teacherId")
+//     @JoinColumn(name = "teacher_id")
 //     private List<Course> courses;
     
 }

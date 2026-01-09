@@ -30,21 +30,11 @@ public class Course {
     private String title;
     private Integer credits;
 
-    @OneToOne
-    (
-        mappedBy = "course"
-    )
+    @OneToOne(mappedBy = "course")
     private CourseMaterial courseMaterial;
 
-    @ManyToOne
-    (
-        cascade =CascadeType.ALL
-    )
-    @JoinColumn
-    (
-        name = "teacher_id"
-        ,referencedColumnName = "teacherId"
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     @ManyToMany

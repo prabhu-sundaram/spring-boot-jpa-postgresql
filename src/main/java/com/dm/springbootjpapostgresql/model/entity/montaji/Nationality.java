@@ -3,6 +3,7 @@ package com.dm.springbootjpapostgresql.model.entity.montaji;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 //import org.hibernate.annotations.JdbcTypeCode;
@@ -29,8 +30,8 @@ public class Nationality {
     @Column(name = "name_ar")
     private String nationalityNameAr;
 
-    @OneToMany(cascade = CascadeType.ALL,targetEntity= User.class,mappedBy = "nationality",fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "nationality")
+    @JsonIgnore
     private List<User> users = new ArrayList<>();
 
     /* 
