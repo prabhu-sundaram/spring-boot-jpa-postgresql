@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.controller;
+package com.dm.springbootjpapostgresql.controller.montaji;
 
 import java.util.List;
 
