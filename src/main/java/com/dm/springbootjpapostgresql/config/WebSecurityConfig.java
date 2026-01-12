@@ -50,10 +50,20 @@ public class WebSecurityConfig {
         // Configure security filter chain
                 httpSecurity
                  // .formLogin(Customizer.withDefaults()) // Enable form login with default settings
+
+                 // CORS & CSRF
                 .cors(Customizer.withDefaults()) // Enable CORS with default settings
                 .csrf(csrf -> csrf.disable())   //Disable CSRF protection
+
+                // Stateless session
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Set session management to STATELESS (i.e., no session, cookies, or forms)
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedEntryPoint())) // Configure custom authenticationEntryPoint
+                
+                // Exception handling — authentication ONLY
+                .exceptionHandling(exception -> 
+                    exception.authenticationEntryPoint(unauthorizedEntryPoint())
+                ) // Configure custom authenticationEntryPoint
+
+                // Authorization rules
                 .authorizeHttpRequests(
                         request -> request
                                 // Our public endpoints
@@ -68,9 +78,15 @@ public class WebSecurityConfig {
                                  // Our private endpoints
                                 .anyRequest().authenticated()
                 )// Set permissions on endpoints
+
                 //Authentication Mechanism	httpBasic() + JWT
                 .httpBasic(Customizer.withDefaults())   // Enable basic authentication 
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);// Add JWT token filter
+
+                // JWT filter — must NOT catch generic Exception
+                .addFilterBefore(
+                    jwtAuthenticationFilter, 
+                    UsernamePasswordAuthenticationFilter.class
+                );// Add JWT token filter
 
         return httpSecurity.build();
     }

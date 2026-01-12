@@ -18,6 +18,10 @@ public class StudentDTO
     private Long studentId;
 	private String firstName;
 	private String lastName;
+    private Integer age;
+    private String birthDate;
     private String email;
     //private Guardian guardian;
+    private Integer status;
+    private Boolean active;
 }

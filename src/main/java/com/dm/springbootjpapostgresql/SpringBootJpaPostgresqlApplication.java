@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.ldap.LdapRepositoriesAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +45,12 @@ import com.dm.springbootjpapostgresql.model.model.Post2;
 //import com.dm.springbootjpapostgresql.example.dbPkg.*;
 import com.dm.springbootjpapostgresql.service.FileOps.*;
 
-@SpringBootApplication
+@SpringBootApplication(
+    exclude = {
+        RedisRepositoriesAutoConfiguration.class,
+        LdapRepositoriesAutoConfiguration.class
+    }
+)
 // @ComponentScan(basePackages = {
 //     "com.dm.springbootjpapostgresql.service",
 //     "com.dm.springbootjpapostgresql.controller",

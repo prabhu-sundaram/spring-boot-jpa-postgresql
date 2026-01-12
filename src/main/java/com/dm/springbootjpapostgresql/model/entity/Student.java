@@ -1,5 +1,7 @@
 package com.dm.springbootjpapostgresql.model.entity;
 
+import java.time.ZonedDateTime;
+
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -38,12 +40,24 @@ public class Student {
     @Column(nullable = false)
 	private String lastName;
 	
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "birth_date")
+    private ZonedDateTime birthDate;  
+
     @Column(name = "email_address",nullable = false, unique = true)
     private String email;
 
     // @Embedded
     // private Guardian guardian;
 
+    @Column(name = "status",columnDefinition = "number default 1")
+    private Integer status;
+
+    @Column(name = "active",columnDefinition = "boolean default true")
+    private Boolean active;
+        
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id", nullable = false)
     private School school;
