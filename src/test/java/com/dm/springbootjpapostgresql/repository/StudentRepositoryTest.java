@@ -155,12 +155,12 @@ class StudentRepositoryTest {
 
     @Test
     public void printgetStudentByEmailAddress() {
-        Student student =
+        List<Student> students =
                 studentRepository.findByEmailAddress(
                         "shabbir@gmail.com"
                 );
 
-        System.out.println("student = " + student);
+        System.out.println("students = " + students);
     }
 
     @Test

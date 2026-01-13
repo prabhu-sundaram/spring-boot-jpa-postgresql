@@ -38,10 +38,15 @@ public void insertPost() {
                     null,
                     "prabhu",
                     "prabhu@gmail.com",
-                    String.format("Good review nr. %d", i)
+                    String.format("Good review nr. %d", i),
+                    null,
+                    null
                 )
             )
-            .toList()
+            .toList(),
+            null,
+            null,
+            null
     )
 );    
 

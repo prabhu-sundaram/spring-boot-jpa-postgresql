@@ -22,7 +22,6 @@ public class CategoryController {
     //     this.categoryService = categoryService;
     // }
 
-    // Build Add Category REST API
     @PostMapping
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto categoryDto){
@@ -30,20 +29,17 @@ public class CategoryController {
         return new ResponseEntity<>(savedCategory, HttpStatus.CREATED);
     }
 
-    // Build Get Category REST API
     @GetMapping("{id}")
     public ResponseEntity<CategoryDto> getCategory(@PathVariable("id") Long categoryId){
          CategoryDto categoryDto = categoryService.getCategory(categoryId);
          return ResponseEntity.ok(categoryDto);
     }
 
-    // Build Get All Categories REST API
     @GetMapping
     public ResponseEntity<List<CategoryDto>> getCategories(){
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
-    // Build Update Category REST API
     //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("{id}")
     public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto,
@@ -51,7 +47,6 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.updateCategory(categoryDto, categoryId));
     }
 
-    // Build Delete Category REST API
     //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable("id") Long categoryId){

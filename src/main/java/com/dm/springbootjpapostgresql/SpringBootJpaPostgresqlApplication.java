@@ -18,6 +18,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.core.io.Resource;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.dm.springbootjpapostgresql.profiles.ProfileManager;
@@ -245,7 +246,9 @@ public class SpringBootJpaPostgresqlApplication {
 
 	public static void main(String[] args) {
 		
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT+04:00"));
+        //TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        //TimeZone.setDefault(TimeZone.getTimeZone("GMT+04:00"));
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+05:30"));
 
 		//SpringApplication.run(SpringBootJpaPostgresqlApplication.class, args);
 

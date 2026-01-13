@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.model.entity;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.*;
 
@@ -44,7 +44,7 @@ public class Student {
     private Integer age;
 
     @Column(name = "birth_date")
-    private ZonedDateTime birthDate;  
+    private LocalDate birthDate;  
 
     @Column(name = "email_address",nullable = false, unique = true)
     private String email;

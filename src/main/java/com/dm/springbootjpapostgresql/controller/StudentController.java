@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.controller;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -418,7 +418,7 @@ public class StudentController {
 	}	
 	@GetMapping("/getStudentsByBirthDateAfter")
     public ResponseEntity<List<StudentDTO>> getStudentsByBirthDateAfter
-	(@RequestParam(required = true) ZonedDateTime birthDate)
+	(@RequestParam(required = true) LocalDate birthDate)
 	{
 		List<StudentDTO> students = studentService.getStudentsByBirthDateAfter(birthDate);
 		if (students.isEmpty()) {
@@ -428,7 +428,7 @@ public class StudentController {
 	}	
 	@GetMapping("/getStudentsByBirthDateBefore")
     public ResponseEntity<List<StudentDTO>> getStudentsByBirthDateBefore
-	(@RequestParam(required = true) ZonedDateTime birthDate)
+	(@RequestParam(required = true) LocalDate birthDate)
 	{
 		List<StudentDTO> students = studentService.getStudentsByBirthDateBefore(birthDate);
 		if (students.isEmpty()) {

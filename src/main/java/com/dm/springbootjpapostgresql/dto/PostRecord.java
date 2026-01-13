@@ -1,8 +1,10 @@
 package com.dm.springbootjpapostgresql.dto;
 
+import com.dm.springbootjpapostgresql.model.entity.Category;
 import com.dm.springbootjpapostgresql.model.entity.Comment;
 import com.dm.springbootjpapostgresql.model.entity.Post;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public record PostRecord(
@@ -10,7 +12,10 @@ public record PostRecord(
     String title,
     String description,
     String content,
-    List<CommentRecord> comments
+    List<CommentRecord> comments,
+    Long categoryId,
+    OffsetDateTime createdAt,
+    OffsetDateTime updatedAt
     ) 
 {
     public Post toPost() {

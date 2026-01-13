@@ -26,11 +26,11 @@ import com.dm.springbootjpapostgresql.dto.CommentRecord;
 @AllArgsConstructor
 @Entity
 @Table(name = "posts", uniqueConstraints = {@UniqueConstraint(columnNames = {"title"})})
-public class Post {
+public class Post extends BaseEntity{
 	
-	@Id  
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	// @Id  
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	// private Long id;
 	
 	@Column(name = "title", nullable = false)
 	private String title;
@@ -77,18 +77,23 @@ public class Post {
     
     public PostRecord toRecord() {
         return new PostRecord(
-            id,
-            title,
-            description,
-            content,
+            this.getId(), // Inherited from BaseEntity
+            this.title,
+            this.description,
+            this.content,
             comments.stream().map(comment ->
                 new CommentRecord(
                     comment.getId(),
                     comment.getName(),
                     comment.getEmail(),
-                    comment.getBody()
+                    comment.getBody(),
+                    comment.getCreatedAt(),
+                    comment.getUpdatedAt()
                 )
-            ).toList()
+            ).toList(),
+            this.getCategory().getId(),
+            this.getCreatedAt(), // Inherited from BaseEntity
+            this.getUpdatedAt()  // Inherited from BaseEntity            
         );
     }    
 }

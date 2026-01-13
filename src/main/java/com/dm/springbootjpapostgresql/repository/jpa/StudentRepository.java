@@ -13,7 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.dm.springbootjpapostgresql.model.entity.Student;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -62,8 +63,8 @@ public interface StudentRepository extends JpaRepository<Student,Long>{
     List<Student> findByAgeGreaterThanEqual(Integer age);
     List<Student> findByAgeBetween(Integer startAge, Integer endAge);
     List<Student> findByAgeIn(Collection<Integer> ages);
-    List<Student> findByBirthDateAfter(ZonedDateTime birthDate);
-    List<Student> findByBirthDateBefore(ZonedDateTime birthDate);
+    List<Student> findByBirthDateAfter(LocalDate birthDate);
+    List<Student> findByBirthDateBefore(LocalDate birthDate);
 
     List<Student> findByFirstNameAndLastName(String firstName,String lastName);
     List<Student> findByFirstNameOrLastName(String firstName,String lastName);
@@ -173,16 +174,16 @@ public interface StudentRepository extends JpaRepository<Student,Long>{
     @Transactional
     @Query(
     value = 
-    "insert into tbl_student (first_name,last_name, age, birth_date, email_address, status, active) values (:firstName, :last_name, :age, :birth_date, :email, :status, :active)"
+    "insert into tbl_student (first_name,last_name, age, birth_date, email_address, status, active) values (:firstName, :lastName, :age, :birthDate, :email, :status, :active)"
     ,nativeQuery = true)
     void insertUser(
         @Param("firstName") String firstName, 
         @Param("lastName") String lastName,
         @Param("age") Integer age, 
-        @Param("birthDate") ZonedDateTime birthDate, 
+        @Param("birthDate") LocalDate birthDate, 
         @Param("email") String email,
         @Param("status") Integer status, 
-        @Param("status") Boolean active
+        @Param("active") Boolean active
     );
 
 }

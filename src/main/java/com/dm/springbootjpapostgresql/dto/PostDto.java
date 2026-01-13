@@ -6,6 +6,7 @@ import lombok.Data;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import java.util.Set;
         description = "PostDto Model Information"
 )
 public class PostDto {
-    private long id;
+    private Long id;
 
     @Schema(
             description = "Blog Post Title"
@@ -47,4 +48,8 @@ public class PostDto {
             description = "Blog Post Category"
     )
     private Long categoryId;
+    
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
+
 }

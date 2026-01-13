@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.service.impl;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -157,8 +157,8 @@ public class StudentServiceImpl implements StudentService{
         // studentResponse.setLast(students.isLast());
 
         // return studentResponse;
-        Page<Student> page = studentRepository.findAll(pageable);
-        return studentMapper.toStudentResponse(page);
+        Page<Student> pageStudent = studentRepository.findAll(pageable);
+        return studentMapper.toStudentResponse(pageStudent);
 
     }
 
@@ -415,7 +415,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public List<StudentDTO> getStudentsByBirthDateAfter(ZonedDateTime birthDate)
+    public List<StudentDTO> getStudentsByBirthDateAfter(LocalDate birthDate)
     {
         List<Student> students=studentRepository.findByBirthDateAfter(birthDate);
         // List<StudentDTO> studentsDTO=students.stream().map(student->studentMapper.toDTO(student)).collect(Collectors.toList());
@@ -424,7 +424,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public List<StudentDTO> getStudentsByBirthDateBefore(ZonedDateTime birthDate)
+    public List<StudentDTO> getStudentsByBirthDateBefore(LocalDate birthDate)
     {
         List<Student> students=studentRepository.findByBirthDateBefore(birthDate);
         // List<StudentDTO> studentsDTO=students.stream().map(student->studentMapper.toDTO(student)).collect(Collectors.toList());
@@ -643,7 +643,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void insertUser(String firstName,String lastName,Integer age,ZonedDateTime birthDate,
+    public void insertUser(String firstName,String lastName,Integer age,LocalDate birthDate,
         String email,Integer status,Boolean active)
     {
         studentRepository.insertUser(firstName, lastName, age, birthDate, email, status, active);

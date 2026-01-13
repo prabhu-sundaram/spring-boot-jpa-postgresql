@@ -1,6 +1,6 @@
 package com.dm.springbootjpapostgresql.service;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -59,8 +59,8 @@ public interface StudentService {
     public List<StudentDTO> getStudentsByAgeGreaterThanEqual(Integer age);
     public List<StudentDTO> getStudentsByAgeBetween(Integer startAge, Integer endAge);
     public List<StudentDTO> getStudentsByAgeIn(Collection<Integer> ages);
-    public List<StudentDTO> getStudentsByBirthDateAfter(ZonedDateTime birthDate);
-    public List<StudentDTO> getStudentsByBirthDateBefore(ZonedDateTime birthDate);
+    public List<StudentDTO> getStudentsByBirthDateAfter(LocalDate birthDate);
+    public List<StudentDTO> getStudentsByBirthDateBefore(LocalDate birthDate);
 
     public List<StudentDTO> getStudentsByFirstNameAndLastName(String firstName,String lastName);
     public List<StudentDTO> getStudentsByFirstNameOrLastName(String firstName,String lastName);
@@ -92,6 +92,6 @@ public interface StudentService {
 
     public int updateStudentNameByEmail(String firstName, String email);
     public int updateStudentStatusByNameNative(Integer status, String firstName);
-    public void insertUser(String firstName,String lastName,Integer age,ZonedDateTime birthDate,
+    public void insertUser(String firstName,String lastName,Integer age,LocalDate birthDate,
         String email,Integer status,Boolean active);
 }

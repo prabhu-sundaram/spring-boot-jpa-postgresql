@@ -2,13 +2,15 @@ package com.dm.springbootjpapostgresql.dto;
 
 import lombok.Data;
 
+import java.time.OffsetDateTime;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Data
 public class CommentDto {
-    private long id;
+    private Long id;
     // name should not be null or empty
     @NotEmpty(message = "Name should not be null or empty")
     private String name;
@@ -24,4 +26,7 @@ public class CommentDto {
     @NotEmpty
     @Size(min = 10, message = "Comment body must be minimum 10 characters")
     private String body;
+
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 }

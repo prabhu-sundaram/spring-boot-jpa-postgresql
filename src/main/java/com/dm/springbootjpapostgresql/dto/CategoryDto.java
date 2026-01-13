@@ -1,5 +1,7 @@
 package com.dm.springbootjpapostgresql.dto;
 
+import java.time.OffsetDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,4 +15,6 @@ public class CategoryDto {
     private Long id;
     private String name;
     private String description;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;    
 }

@@ -29,9 +29,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto addCategory(CategoryDto categoryDto) {
-        Category category = categoryMapper.mapToEntity(categoryDto);
+        //Category category = categoryMapper.mapToEntity(categoryDto);
+        Category category = categoryMapper.toEntity(categoryDto);
         Category savedCategory = categoryRepository.save(category);
-        return categoryMapper.mapToDTO(savedCategory);
+        //return categoryMapper.mapToDTO(savedCategory);
+        return categoryMapper.toDto(savedCategory);
     }
 
     @Override
@@ -40,7 +42,8 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
 
-        return categoryMapper.mapToDTO(category);
+        //return categoryMapper.mapToDTO(category);
+        return categoryMapper.toDto(category);
     }
 
     @Override
@@ -48,8 +51,10 @@ public class CategoryServiceImpl implements CategoryService {
 
         List<Category> categories = categoryRepository.findAll();
 
-        return categories.stream().map((category) -> categoryMapper.mapToDTO(category))
-                .collect(Collectors.toList());
+        // return categories.stream().map((category) -> categoryMapper.mapToDTO(category))
+        //         .collect(Collectors.toList());
+        return categories.stream().map((category) -> categoryMapper.toDto(category))
+                .collect(Collectors.toList());        
     }
 
     @Override
@@ -58,13 +63,15 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
 
-        category.setName(categoryDto.getName());
-        category.setDescription(categoryDto.getDescription());
-        category.setId(categoryId);
+        // category.setName(categoryDto.getName());
+        // category.setDescription(categoryDto.getDescription());
+        // category.setId(categoryId);
 
+        categoryMapper.updateCategoryFromDto(categoryDto, category);
         Category updatedCategory = categoryRepository.save(category);
 
-        return categoryMapper.mapToDTO(updatedCategory);
+        //return categoryMapper.mapToDTO(updatedCategory);
+        return categoryMapper.toDto(updatedCategory);
     }
 
     @Override

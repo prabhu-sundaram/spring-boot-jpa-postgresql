@@ -53,22 +53,24 @@ public class PostServiceImpl implements PostService{
         // create Pageable instance
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
 
-        Page<Post> posts = postRepository.findAll(pageable);
+        Page<Post> pagePost = postRepository.findAll(pageable);
 
         // get content for page object
-        List<Post> listOfPosts = posts.getContent();
+        //List<Post> listOfPosts = pagePost.getContent();
 
-        List<PostDto> content= listOfPosts.stream().map(post -> postMapper.mapToDTO(post)).collect(Collectors.toList());
+        //List<PostDto> content= listOfPosts.stream().map(post -> postMapper.mapToDTO(post)).collect(Collectors.toList());
+        //List<PostDto> content= listOfPosts.stream().map(post -> postMapper.toDto(post)).collect(Collectors.toList());
 
-        PostResponse postResponse = new PostResponse();
-        postResponse.setContent(content);
-        postResponse.setPageNo(posts.getNumber());
-        postResponse.setPageSize(posts.getSize());
-        postResponse.setTotalElements(posts.getTotalElements());
-        postResponse.setTotalPages(posts.getTotalPages());
-        postResponse.setLast(posts.isLast());
+        // PostResponse postResponse = new PostResponse();
+        // postResponse.setContent(content);
+        // postResponse.setPageNo(posts.getNumber());
+        // postResponse.setPageSize(posts.getSize());
+        // postResponse.setTotalElements(posts.getTotalElements());
+        // postResponse.setTotalPages(posts.getTotalPages());
+        // postResponse.setLast(posts.isLast());
 
-        return postResponse;
+        // return postResponse;
+        return postMapper.toPostResponse(pagePost);
     }
 
 
@@ -79,7 +81,8 @@ public class PostServiceImpl implements PostService{
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", postDto.getCategoryId()));
 
         // convert DTO to entity
-        Post post = postMapper.mapToEntity(postDto);
+        //Post post = postMapper.mapToEntity(postDto);
+        Post post = postMapper.toEntity(postDto);
 
         //post.setCategory(category);
 
@@ -96,7 +99,8 @@ public class PostServiceImpl implements PostService{
         Post newPost = postRepository.save(post);
 
         // convert entity to DTO
-        PostDto postResponse = postMapper.mapToDTO(newPost);
+        //PostDto postResponse = postMapper.mapToDTO(newPost);
+        PostDto postResponse = postMapper.toDto(newPost);
         return postResponse;
     }
 
@@ -108,12 +112,15 @@ public class PostServiceImpl implements PostService{
         Category category = categoryRepository.findById(postDto.getCategoryId())
                         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", postDto.getCategoryId()));
 
-        post.setTitle(postDto.getTitle());
-        post.setDescription(postDto.getDescription());
-        post.setContent(postDto.getContent());
-        post.setCategory(category);
+        // post.setTitle(postDto.getTitle());
+        // post.setDescription(postDto.getDescription());
+        // post.setContent(postDto.getContent());
+        // post.setCategory(category);
+
+        postMapper.updatePostFromDto(postDto,post);
         Post updatedPost = postRepository.save(post);
-        return postMapper.mapToDTO(updatedPost);
+        //return postMapper.mapToDTO(updatedPost);
+        return postMapper.toDto(updatedPost);
 	}    
 
     @Override
@@ -126,7 +133,8 @@ public class PostServiceImpl implements PostService{
     @Override
     public PostDto getPostById(long id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
-        return postMapper.mapToDTO(post);
+        //return postMapper.mapToDTO(post);
+        return postMapper.toDto(post);
     }        
 
     @Override
@@ -137,8 +145,10 @@ public class PostServiceImpl implements PostService{
 
         List<Post> posts = postRepository.findByCategoryId(categoryId);
 
-        return posts.stream().map((post) -> postMapper.mapToDTO(post))
-                .collect(Collectors.toList());
+        // return posts.stream().map((post) -> postMapper.mapToDTO(post))
+        //         .collect(Collectors.toList());
+        return posts.stream().map((post) -> postMapper.toDto(post))
+                .collect(Collectors.toList());        
     }
 
   
