@@ -21,12 +21,12 @@ public class PreApproval{
     @Column(name = "id", nullable = false)
 	private Long id;    
     private String dip;
-    private long dipWarehouseId;
+    private Long dipWarehouseId;
     private String releaseWithDetention;
     @Column(name = "release_with_detention_wh_id")
-    private long releaseWithDetentionWarehouseId;
+    private Long releaseWithDetentionWarehouseId;
     private String sampleDetention;
-    private long sampleDetentionWarehouseId;
+    private Long sampleDetentionWarehouseId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_number", nullable = false)

@@ -10,7 +10,7 @@ public class MyEmployee extends Person3 {
         super(); // Call to the superclass default constructor
     }
     
-    public MyEmployee(long personId, String name, String company) {
+    public MyEmployee(Long personId, String name, String company) {
         super(personId, name);
         this.company = company;
     }

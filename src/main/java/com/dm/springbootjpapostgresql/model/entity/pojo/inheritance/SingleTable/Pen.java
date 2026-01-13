@@ -11,7 +11,7 @@ public class Pen extends MyProduct {
     public Pen() {
     }
 
-    public Pen(long productId, String name, String color) {
+    public Pen(Long productId, String name, String color) {
         super(productId, name);
         this.color = color;
     }

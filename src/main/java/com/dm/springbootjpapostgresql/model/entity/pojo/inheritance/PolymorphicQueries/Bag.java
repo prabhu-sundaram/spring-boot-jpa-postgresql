@@ -11,20 +11,20 @@ import org.hibernate.annotations.PolymorphismType;
 public class Bag implements Item {
 
     @Id
-    private long bagId;
+    private Long bagId;
 
     private String type;
 
-    public Bag(long bagId, String type) {
+    public Bag(Long bagId, String type) {
         this.bagId = bagId;
         this.type = type;
     }
 
-    public long getBagId() {
+    public Long getBagId() {
         return bagId;
     }
 
-    public void setBagId(long bagId) {
+    public void setBagId(Long bagId) {
         this.bagId = bagId;
     }
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class ProductDTO{
-    private long _id;
+    private Long _id;
     private String barcode;
     private String productId;
     private String groupId;

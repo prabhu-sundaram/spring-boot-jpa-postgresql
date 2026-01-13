@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class PreApprovalDTO{
     private String dip;
-    private long dipWarehouseId;
+    private Long dipWarehouseId;
     private String releaseWithDetention;
-    private long releaseWithDetentionWarehouseId;
+    private Long releaseWithDetentionWarehouseId;
     private String sampleDetention;
-    private long sampleDetentionWarehouseId;
+    private Long sampleDetentionWarehouseId;
 }

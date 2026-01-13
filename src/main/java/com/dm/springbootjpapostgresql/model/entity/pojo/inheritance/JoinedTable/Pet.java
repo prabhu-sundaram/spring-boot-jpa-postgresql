@@ -11,7 +11,7 @@ public class Pet extends Animal {
     public Pet() {
     }
 
-    public Pet(long animalId, String species, String name) {
+    public Pet(Long animalId, String species, String name) {
         super(animalId, species);
         this.name = name;
     }

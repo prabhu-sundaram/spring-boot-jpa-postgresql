@@ -13,12 +13,12 @@ import com.dm.springbootjpapostgresql.model.entity.Student;
 import com.dm.springbootjpapostgresql.dto.StudentDTO;
 
 public interface StudentService {
-    public StudentDTO getStudentById(long id);
+    public StudentDTO getStudentById(Long id);
     public List<StudentDTO> getAllStudents();
     public StudentDTO createStudent(StudentDTO studentDTO);
-    public StudentDTO updateStudent(StudentDTO studentDTO,long id);
-    public boolean checkStudentExists(long id);
-    public void deleteStudentById(long id);
+    public StudentDTO updateStudent(StudentDTO studentDTO,Long id);
+    public boolean checkStudentExists(Long id);
+    public void deleteStudentById(Long id);
     public void deleteAllStudents();
 
     //public List<StudentDTO> getAllStudentsByGuardianName(String name);

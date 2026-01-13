@@ -26,7 +26,7 @@ public class IdGenerator2 {
     return builder.toString();
   } 
 
-  private long getNextSequenceValue(String service) {
+  private Long getNextSequenceValue(String service) {
     Long sequenceValue=null;
     if(service=="CPIP") {
     sequenceValue = jdbcTemplate.queryForObject("SELECT CPIP_SEQ.NEXTVAL FROM DUAL", Long.class);

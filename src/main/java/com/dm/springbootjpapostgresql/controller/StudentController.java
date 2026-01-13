@@ -42,7 +42,7 @@ public class StudentController {
 	// }
 
 	@GetMapping("/{id}")
-	public ResponseEntity<StudentDTO> getStudent(@PathVariable(name="id") long id) {
+	public ResponseEntity<StudentDTO> getStudent(@PathVariable(name="id") Long id) {
 
 		return ResponseEntity.ok(studentService.getStudentById(id));
 	}
@@ -89,18 +89,18 @@ public class StudentController {
 	// }
     
 	@PutMapping("/{id}")
-	public ResponseEntity<StudentDTO> updateStudent(@PathVariable(name = "id") long id, @Valid @RequestBody StudentDTO studentDTO) {
+	public ResponseEntity<StudentDTO> updateStudent(@PathVariable(name = "id") Long id, @Valid @RequestBody StudentDTO studentDTO) {
 		StudentDTO studentDTOResponse = studentService.updateStudent(studentDTO, id);
 		return new ResponseEntity<>(studentDTOResponse, HttpStatus.OK);
 	}		
 
 	@GetMapping(value="/checkStudentExists/{id}",produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> checkStudentExists(@PathVariable(name="id") long id) {
+	public ResponseEntity<String> checkStudentExists(@PathVariable(name="id") Long id) {
 		return new ResponseEntity<>("Student exists: "+studentService.checkStudentExists(id) , HttpStatus.OK);
 	}	
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("id") long id) {
+	public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("id") Long id) {
 		try {
 			studentService.deleteStudentById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

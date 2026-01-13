@@ -18,7 +18,7 @@ public class StudentResponse
 private List<StudentDTO> content;
 private int pageNo;
 private int pageSize;
-private long totalElements;
+private Long totalElements;
 private int totalPages;
 private boolean last;
 }

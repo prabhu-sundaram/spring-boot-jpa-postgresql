@@ -13,13 +13,13 @@ public interface UserService {
     List<UserFetchAllResponseDto> getAllUsers();
     
 
-    // UserDto getUserById(long id);
+    // UserDto getUserById(Long id);
     // UserDto getUserByUserName(String userName);
 
-    // UserDto updateUser(UserDto userDto, long id);
+    // UserDto updateUser(UserDto userDto, Long id);
     // UserDto updateUserByUserName(UserDto userDto, String userName);
 
-    // void deleteUserById(long id);
+    // void deleteUserById(Long id);
     // void deleteUserByUserName(String userName);
 
 }

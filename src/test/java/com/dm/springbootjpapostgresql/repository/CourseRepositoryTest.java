@@ -56,11 +56,11 @@ class CourseRepositoryTest {
                 courseRepository.findAll(secondPageWithTwoRecords)
                         .getContent();
 
-        long totalElements =
+        Long totalElements =
                 courseRepository.findAll(secondPageWithTwoRecords)
                         .getTotalElements();
 
-        long totalPages =
+        int totalPages =
                 courseRepository.findAll(secondPageWithTwoRecords)
                         .getTotalPages();
 

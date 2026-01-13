@@ -13,24 +13,24 @@ import jakarta.persistence.InheritanceType;
 // @DiscriminatorFormula("case when author is not null then 1 else 2 end")
 public class MyProduct {
     @Id
-    private long productId;
+    private Long productId;
 
     private String name;
 
     public MyProduct() {
     }
 
-    public MyProduct(long productId, String name) {
+    public MyProduct(Long productId, String name) {
         super();
         this.productId = productId;
         this.name = name;
     }
 
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 

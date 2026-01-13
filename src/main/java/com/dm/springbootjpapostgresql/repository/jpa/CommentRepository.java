@@ -8,5 +8,5 @@ import com.dm.springbootjpapostgresql.model.entity.Comment;
 import java.util.List;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    List<Comment> findByPostId(long postId);
+    List<Comment> findByPostId(Long postId);
 }

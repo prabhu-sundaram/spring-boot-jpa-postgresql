@@ -9,7 +9,7 @@ public class Car extends Vehicle {
     public Car() {
     }
 
-    public Car(long vehicleId, String manufacturer, String engine) {
+    public Car(Long vehicleId, String manufacturer, String engine) {
         super(vehicleId, manufacturer);
         this.engine = engine;
     }

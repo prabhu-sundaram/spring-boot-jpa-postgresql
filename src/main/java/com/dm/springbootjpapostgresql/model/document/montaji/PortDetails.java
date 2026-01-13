@@ -12,7 +12,7 @@ public class PortDetails{
     private String billNumber;
     private String billDate;
     private String arrivalDate;
-    private long customsDeclarationNumber;
+    private Long customsDeclarationNumber;
     private String customsDeclarationDate;
     private String packageTypeId;
     private String packageTypeDesc;

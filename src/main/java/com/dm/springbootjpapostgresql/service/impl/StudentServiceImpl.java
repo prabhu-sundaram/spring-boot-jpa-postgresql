@@ -47,7 +47,7 @@ public class StudentServiceImpl implements StudentService{
     private static final Set<String> ALLOWED_SORT_FIELDS = Set.of("studentId", "firstName", "age");
 
     @Override
-    public StudentDTO getStudentById(long id)
+    public StudentDTO getStudentById(Long id)
     {
         Student student = studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("student","id",id));
         return studentMapper.toDTO(student);
@@ -73,7 +73,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public StudentDTO updateStudent(StudentDTO studentDTO,long id)
+    public StudentDTO updateStudent(StudentDTO studentDTO,Long id)
     {
         Student student=studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("student", "id", id));
 
@@ -102,13 +102,13 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public boolean checkStudentExists(long id)
+    public boolean checkStudentExists(Long id)
     {
         return studentRepository.existsById(id);
     }
 
     @Override
-    public void deleteStudentById(long id)
+    public void deleteStudentById(Long id)
     {
         Student student=studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("student", "id", id));
         studentRepository.delete(student);

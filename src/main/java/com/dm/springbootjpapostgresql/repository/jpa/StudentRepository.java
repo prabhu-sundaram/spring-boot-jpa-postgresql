@@ -21,7 +21,7 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long>{
 
-    //Student findById(long id);
+    //Student findById(Long id);
 // save() – to persist entities into the database
 // findById() – to find database record by its id
 // findAll() – to get all entities

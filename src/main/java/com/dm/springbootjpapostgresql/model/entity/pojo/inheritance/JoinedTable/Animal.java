@@ -10,22 +10,22 @@ import jakarta.persistence.InheritanceType;
 public class Animal {
 
     @Id
-    private long animalId;
+    private Long animalId;
 
     private String species;
     
     public Animal() {}    
 
-    public Animal(long animalId, String species) {
+    public Animal(Long animalId, String species) {
         this.animalId = animalId;
         this.species = species;
     }
 
-    public long getAnimalId() {
+    public Long getAnimalId() {
         return animalId;
     }
 
-    public void setAnimalId(long animalId) {
+    public void setAnimalId(Long animalId) {
         this.animalId = animalId;
     }
 

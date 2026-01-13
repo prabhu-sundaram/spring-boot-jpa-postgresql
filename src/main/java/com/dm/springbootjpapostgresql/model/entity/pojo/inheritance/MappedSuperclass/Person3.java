@@ -7,23 +7,23 @@ import jakarta.persistence.MappedSuperclass;
 public class Person3 {
 
     @Id
-    private long personId;
+    private Long personId;
 
     private String name;
 
     public Person3() {
     }
 
-    public Person3(long personId, String name) {
+    public Person3(Long personId, String name) {
         this.personId = personId;
         this.name = name;
     }
 
-    public long getPersonId() {
+    public Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(long personId) {
+    public void setPersonId(Long personId) {
         this.personId = personId;
     }
 
