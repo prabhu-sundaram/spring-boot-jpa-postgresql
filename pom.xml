@@ -202,6 +202,12 @@
 			<version>20240303</version>
 		</dependency>
 		<dependency>
+			<groupId>tools.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>3.0.0-rc2</version>
+			<scope>compile</scope>
+		</dependency>		
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>

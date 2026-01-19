@@ -16,7 +16,7 @@ private PetRepository petRepository;
 @Test
 public void savePet()
 {
-    Pet pet = new Pet(1, "dog", "lassie");
+    Pet pet = new Pet(1L, "dog", "lassie");
     petRepository.save(pet);
 
 }

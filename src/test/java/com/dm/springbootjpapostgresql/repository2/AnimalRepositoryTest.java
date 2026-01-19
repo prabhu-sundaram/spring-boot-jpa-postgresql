@@ -16,7 +16,7 @@ private AnimalRepository animalRepository;
 @Test
 public void saveAnimal()
 {
-    Animal animal = new Animal(2,"cat");
+    Animal animal = new Animal(2L,"cat");
     animalRepository.save(animal);
 }
 }

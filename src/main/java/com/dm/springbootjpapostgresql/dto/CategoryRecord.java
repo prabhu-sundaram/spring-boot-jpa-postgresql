@@ -5,8 +5,7 @@ import java.time.OffsetDateTime;
 public record CategoryRecord(
     Long id,
     String name,
-    String email,
-    String body,
+    String description,
     OffsetDateTime createdAt,
     OffsetDateTime updatedAt
     )

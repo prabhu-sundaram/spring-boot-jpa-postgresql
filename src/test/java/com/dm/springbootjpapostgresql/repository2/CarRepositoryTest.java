@@ -20,7 +20,7 @@ private VehicleRepository vehicleRepository;
 @Test
 public void testSaveCar()
 {
-    Car car = new Car(1, "audi", "xyz");
+    Car car = new Car(1L, "audi", "xyz");
     carRepository.save(car);
 
     System.out.println("vehicles:"+vehicleRepository.findAll().size());

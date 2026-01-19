@@ -54,6 +54,7 @@ dependencies {
     implementation 'it.unimi.dsi:dsiutils:2.7.3'
     implementation 'com.google.guava:guava:33.0.0-jre'
     implementation 'org.json:json:20240303'
+    implementation ('tools.jackson.datatype:jackson-datatype-jsr310:3.0.0-rc2')
     implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
     implementation 'com.unboundid:unboundid-ldapsdk:6.0.6'
 

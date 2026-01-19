@@ -30,10 +30,10 @@ private MyProductRepository myProductRepository;
 public void testSingleTable()
 {
 
-    Book2 book = new Book2(1, "1984", "George Orwell");
+    Book2 book = new Book2(1L, "1984", "George Orwell");
     book2Repository.save(book);
 
-    Pen pen = new Pen(2, "my pen", "blue");
+    Pen pen = new Pen(2L, "my pen", "blue");
     penRepository.save(pen);
 
     List<MyProduct> myProducts = myProductRepository.findAll();

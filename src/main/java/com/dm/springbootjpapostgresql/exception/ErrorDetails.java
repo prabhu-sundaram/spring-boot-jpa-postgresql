@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.dto;
+package com.dm.springbootjpapostgresql.exception;
 
 import java.util.Date;
 

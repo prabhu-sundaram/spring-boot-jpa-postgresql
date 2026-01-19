@@ -30,7 +30,7 @@ public class MyEmployeeTest {
 
         myEmployeeRepository.deleteAll();
 
-        MyEmployee emp = new MyEmployee(1, "john", "baeldung");
+        MyEmployee emp = new MyEmployee(1L, "john", "baeldung");
         myEmployeeRepository.save(emp);
         
         List<MyEmployee> employees = myEmployeeRepository.findAll();

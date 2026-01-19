@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.exception;
+package com.dm.springbootjpapostgresql.exception.handler;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.dm.springbootjpapostgresql.model.ErrorType;
+import com.dm.springbootjpapostgresql.exception.ErrorType;
 import com.dm.springbootjpapostgresql.exception.InvoiceNotFoundException;
 
 //@ControllerAdvice

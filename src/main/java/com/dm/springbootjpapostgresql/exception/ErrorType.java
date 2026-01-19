@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.model;
+package com.dm.springbootjpapostgresql.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
