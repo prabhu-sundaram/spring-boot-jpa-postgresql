@@ -5,25 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.hibernate.tool.schema.spi.SqlScriptException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.dm.springbootjpapostgresql.exception.BadRequestException;
-import com.dm.springbootjpapostgresql.exception.ConnectionException;
 import com.dm.springbootjpapostgresql.exception.ErrorResponseDto;
-import com.dm.springbootjpapostgresql.exception.InternalServerErrorException;
-import com.dm.springbootjpapostgresql.exception.MappingException;
-import com.dm.springbootjpapostgresql.exception.StoredProcedureException;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
@@ -56,56 +49,37 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
         log.error("Inside MethodArgumentNotValidException: ", ex);
 
-        String errorMessage = ex.getBindingResult().getFieldErrors().stream()
-                .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                .collect(Collectors.joining(", "));
-        if (errorMessage.isEmpty()){
-            errorMessage = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
-        }
+        // String errorMessage = ex.getBindingResult().getFieldErrors().stream()
+        //         .map(error -> error.getField() + ": " + error.getDefaultMessage())
+        //         .collect(Collectors.joining(", "));
+        // if (errorMessage.isEmpty()){
+        //     errorMessage = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+        // }
+
+        // ErrorResponseDto errorResponse = ErrorResponseDto.builder()
+        //         .timestamp(Instant.now())
+        //         .message(errorMessage)
+        //         .status(HttpStatus.BAD_REQUEST)
+        //         .build();
+
+        // return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+
+        Map<String, String> errors = new HashMap<>();
+        
+        // Extract each error message and the field it belongs to
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            errors.put(error.getField(), error.getDefaultMessage());
+        });
 
         ErrorResponseDto errorResponse = ErrorResponseDto.builder()
                 .timestamp(Instant.now())
-                .message(errorMessage)
+                .message("Validation Failed")
                 .status(HttpStatus.BAD_REQUEST)
+                // You can add an 'errors' field to your Dto if you want to send the Map
                 .build();
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorResponseDto> handleBadRequestException(BadRequestException ex) {
-        log.error("BadRequest Exception: ", ex);
-
-        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
-                .timestamp(Instant.now())
-                .message(ex.getMessage())
-                .status(HttpStatus.BAD_REQUEST)
-                .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(InternalServerErrorException.class)
-    public ResponseEntity<ErrorResponseDto> handleInternalServerErrorException(InternalServerErrorException ex) {
-        log.error("InternalServer Exception: ", ex);
-
-        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
-                .timestamp(Instant.now())
-                .message(ex.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(MappingException.class)
-    public ResponseEntity<ErrorResponseDto> handleMappingException(MappingException ex) {
-        log.error("Mapping Exception: ", ex);
-
-        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
-                .timestamp(Instant.now())
-                .message(ex.getMessage())
-                .status(HttpStatus.BAD_REQUEST)
-                .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        // Alternatively, return just the 'errors' map for a cleaner API
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);        
     }
 
     @ExceptionHandler(NotFoundException.class)
@@ -118,31 +92,6 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(ConnectionException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // Sets the status code automatically
-    public ErrorResponseDto handleConnectionException(ConnectionException ex) {
-        log.error("JDBC closure issue: ", ex);
-        
-        // No need for ResponseEntity wrapper; @RestControllerAdvice handles serialization
-        return ErrorResponseDto.builder()
-                .timestamp(Instant.now())
-                .message(ex.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .build();
-    }
-
-    @ExceptionHandler(StoredProcedureException.class)
-    public ResponseEntity<ErrorResponseDto> handleStoredProcedureException(StoredProcedureException ex) {
-        log.error("Stored procedure error response: ", ex);
-
-        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
-                .timestamp(Instant.now())
-                .message(ex.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // Catch database-specific errors (Oracle Procedure Failures)
@@ -184,18 +133,6 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(SqlScriptException.class)
-    public ResponseEntity<ErrorResponseDto> handleSqlScriptException(SqlScriptException ex) {
-        log.error("Unable to load sql script Exception: ", ex);
-
-        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
-                .timestamp(Instant.now())
-                .message(ex.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(RuntimeException.class)

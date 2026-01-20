@@ -1,7 +1,5 @@
 package com.dm.springbootjpapostgresql.dto;
 
-import com.dm.springbootjpapostgresql.model.entity.Category;
-import com.dm.springbootjpapostgresql.model.entity.Comment;
 import com.dm.springbootjpapostgresql.model.entity.Post;
 
 import java.time.OffsetDateTime;

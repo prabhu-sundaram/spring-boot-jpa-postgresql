@@ -2,6 +2,7 @@ package com.dm.springbootjpapostgresql.exception.handler;
 
 import java.util.Date;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +13,7 @@ import com.dm.springbootjpapostgresql.exception.InvoiceNotFoundException;
 
 //@ControllerAdvice
 @RestControllerAdvice
+@Order(1)
 public class InvoiceErrorHandler {
 	/**
 	 * In case of InvoiceNotFoundException is thrown

@@ -8,6 +8,6 @@ import lombok.Setter;
 public class SqlScriptException extends RuntimeException {
 
     public SqlScriptException(String message) {
-        super(message   );
+        super(message);
     }
 }
