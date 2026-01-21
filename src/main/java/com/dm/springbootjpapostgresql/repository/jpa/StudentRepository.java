@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.dm.springbootjpapostgresql.model.entity.Student;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -116,7 +115,7 @@ public interface StudentRepository extends JpaRepository<Student,Long>{
     @Modifying
     @Transactional
     @Query("update Student s set s.status = :status where s.firstName = :firstName")
-    int updateStudentSetStatusForFirstName(@Param("status") Integer status, 
+    Integer updateStudentSetStatusForFirstName(@Param("status") Integer status, 
     @Param("firstName") String firstName);
 
     //Native
@@ -162,13 +161,13 @@ public interface StudentRepository extends JpaRepository<Student,Long>{
         value="update tbl_student s set s.first_name=:firstName where s.email_address=:email"
         ,nativeQuery = true
     )
-    int updateStudentNameByEmail(@Param("firstName") String firstName,@Param("email") String email);
+    Integer updateStudentNameByEmail(@Param("firstName") String firstName,@Param("email") String email);
 
     @Modifying
     @Transactional
     @Query(value = "update tbl_student s set s.status = :status where s.firstName = :firstName", 
     nativeQuery = true)
-    int updateStudentSetStatusForNameNative(@Param("status") Integer status, @Param("firstName") String firstName);
+    Integer updateStudentSetStatusForNameNative(@Param("status") Integer status, @Param("firstName") String firstName);
 
     @Modifying
     @Transactional

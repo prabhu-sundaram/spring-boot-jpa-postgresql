@@ -26,11 +26,11 @@ public class RequestCPIP extends Request{
     
     private String consignmentPurposeId; 
     @Column(nullable=true)  
-    private int noOfContainers;
+    private Integer noOfContainers;
     @Column(nullable=true)
-    private int noOfContainers2;
+    private Integer noOfContainers2;
     @Column(nullable=true)
-    private int productCount;
+    private Integer productCount;
 
     @OneToOne(mappedBy = "requestCPIP", cascade = CascadeType.ALL, orphanRemoval = true)
     private ReqPortDetails reqPortDetails;

@@ -7,7 +7,7 @@ public class PortDetailsDTO{
     private String portTypeId;
     private String portOfEntryId;
     private String portOfEntryDesc;
-    private int countryOfOriginId;
+    private Integer countryOfOriginId;
     private String countryOfOriginDesc;
     private String billNumber;
     private String billDate;
@@ -16,7 +16,7 @@ public class PortDetailsDTO{
     private String customsDeclarationDate;
     private String packageTypeId;
     private String packageTypeDesc;
-    private int numberOfPackages;
+    private Integer numberOfPackages;
     private String transportNumber;
     private String vesselName;
     private double grossWeight;

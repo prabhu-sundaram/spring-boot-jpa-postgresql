@@ -27,7 +27,17 @@ import com.dm.springbootjpapostgresql.repository.jpa.montaji.*;
 import com.dm.springbootjpapostgresql.repository.mongo.CreateCPIPRXRequestRepository;
 import com.dm.springbootjpapostgresql.repository.mongo.CreateCPIPRXResponseRepository;
 import com.dm.springbootjpapostgresql.dto.montaji.*;
-import com.dm.springbootjpapostgresql.exception.AttachmentValidationException;
+import com.dm.springbootjpapostgresql.exception.BaseException;
+import com.dm.springbootjpapostgresql.exception.MontajiAttachmentValidationException;
+import com.dm.springbootjpapostgresql.exception.MontajiCompanyValidationException;
+import com.dm.springbootjpapostgresql.exception.MontajiDuplicateReuestException;
+import com.dm.springbootjpapostgresql.exception.MontajiEmptyRequestDateException;
+import com.dm.springbootjpapostgresql.exception.MontajiIOException;
+import com.dm.springbootjpapostgresql.exception.MontajiInvalidApplicantDMUserIdException;
+import com.dm.springbootjpapostgresql.exception.MontajiInvalidDtReferenceNoException;
+import com.dm.springbootjpapostgresql.exception.MontajiInvalidRequestSourceException;
+import com.dm.springbootjpapostgresql.exception.MontajiInvalidRequestTypeException;
+import com.dm.springbootjpapostgresql.exception.MontajiMismatchUserCompanyException;
 import com.dm.springbootjpapostgresql.exception.ResourceNotFoundException;
 import com.dm.springbootjpapostgresql.mapper.mongo.montaji.CreateCPIPRXRequestMapper;
 import com.dm.springbootjpapostgresql.mapper.mongo.montaji.CreateCPIPRXRequestMapper2;
@@ -101,7 +111,7 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
 
     @Override
     @Transactional
-    public CreateCPIPRXResponseDTO createCPIPRX(CreateCPIPRXRequestDTO createCPIPRXRequestDTO) throws AttachmentValidationException, IOException {
+    public CreateCPIPRXResponseDTO createCPIPRX(CreateCPIPRXRequestDTO createCPIPRXRequestDTO) {
         // Access the request headers
         String contentType = request.getHeader("Content-Type");
         String accept = request.getHeader("Accept");
@@ -114,35 +124,53 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
 
         //Optional<CompanyDetails> companyDetails=companyDetailsRepository.findById(createCPIPRXRequestDTO.companyDetails.licensenumber);
         CompanyDetailsDTO companyDetailsDTO = createCPIPRXRequestDTO.getCompanyDetails();
-        // CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber())
-        // .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "licenseNumber", companyDetailsDTO.getLicensenumber()));
-        // CompanyDetails companyDetails=companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode())
-        // .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "importerCode", companyDetailsDTO.getImporterCode()));        
+
+        // // CompanyDetails companyDetails=companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber())
+        // // .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "licenseNumber", companyDetailsDTO.getLicensenumber()));
+        // // CompanyDetails companyDetails=companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode())
+        // // .orElseThrow(() -> new ResourceNotFoundException("CompanyDetails", "importerCode", companyDetailsDTO.getImporterCode()));        
+        // Optional<CompanyDetails> companyDetailsOptional=companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode());
+
+        // CompanyDetails companyDetails;
+
+        // if(companyDetailsOptional.isPresent())
+        // {
+        //     companyDetails=companyDetailsOptional.get();
+        // }
+        // else
+        // {
+        //     // createCPIPRXErrorResponseDTO.setIsSuccess("false");
+        //     // createCPIPRXErrorResponseDTO.setErrorCode("002");
+        //     // createCPIPRXErrorResponseDTO.setErrorDescription("Please Verify Company Details");
+        //     // createCPIPRXErrorResponseDTO.setData(null);
+        //     // createCPIPRXErrorResponseDTO.setResponse(null);      
+        //     CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+        //                                                                                 .isSuccess("false")
+        //                                                                                 .errorCode("002")
+        //                                                                                 .errorDescription("Please Verify Company Details")
+        //                                                                                 .data(null)
+        //                                                                                 .response(null)
+        //                                                                                 .build();                
+        //     return createCPIPRXErrorResponseDTO;
+        // }
+
+        if(companyDetailsDTO.getLicensenumber()==null || companyDetailsRepository.findById(companyDetailsDTO.getLicensenumber()).isEmpty())
+        throw new MontajiCompanyValidationException("License number " + companyDetailsDTO.getLicensenumber());
+
+        if(companyDetailsDTO.getImporterCode()==null || companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode()).isEmpty())
+        throw new MontajiCompanyValidationException("Importer code " + companyDetailsDTO.getImporterCode());
+
         Optional<CompanyDetails> companyDetailsOptional=companyDetailsRepository.findByImporterCode(companyDetailsDTO.getImporterCode());
 
-        CompanyDetails companyDetails;
+        CompanyDetails companyDetails = null;
 
         if(companyDetailsOptional.isPresent())
         {
             companyDetails=companyDetailsOptional.get();
         }
-        else
-        {
-            // createCPIPRXErrorResponseDTO.setIsSuccess("false");
-            // createCPIPRXErrorResponseDTO.setErrorCode("002");
-            // createCPIPRXErrorResponseDTO.setErrorDescription("Please Verify Company Details");
-            // createCPIPRXErrorResponseDTO.setData(null);
-            // createCPIPRXErrorResponseDTO.setResponse(null);      
-            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
-                                                                                        .isSuccess("false")
-                                                                                        .errorCode("002")
-                                                                                        .errorDescription("Please Verify Company Details")
-                                                                                        .data(null)
-                                                                                        .response(null)
-                                                                                        .build();                
-            return createCPIPRXErrorResponseDTO;
-        }
 
+        //--------------------------------
+        
         RequestDetailsDTO requestDetailsDTO = createCPIPRXRequestDTO.getRequestDetails();
         
         if(requestDetailsDTO.getRequestSource()==null||requestDetailsDTO.getRequestSource().isEmpty()||!requestDetailsDTO.getRequestSource().equals("DT"))
@@ -152,14 +180,15 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
             // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter Valid RequestSource");
             // createCPIPRXErrorResponseDTO.setData(null);
             // createCPIPRXErrorResponseDTO.setResponse(null);    
-            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
-                                                                                        .isSuccess("false")
-                                                                                        .errorCode("101")
-                                                                                        .errorDescription("Please Enter Valid RequestSource")
-                                                                                        .data(null)
-                                                                                        .response(null)
-                                                                                        .build();               
-            return createCPIPRXErrorResponseDTO;
+            // CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+            //                                                                             .isSuccess("false")
+            //                                                                             .errorCode("101")
+            //                                                                             .errorDescription("Please Enter Valid RequestSource")
+            //                                                                             .data(null)
+            //                                                                             .response(null)
+            //                                                                             .build();               
+            // return createCPIPRXErrorResponseDTO;
+            throw new MontajiInvalidRequestSourceException(requestDetailsDTO.getRequestSource());
         }
         if(requestDetailsDTO.getDtReferenceNo()==null||requestDetailsDTO.getDtReferenceNo().isEmpty())
         {
@@ -168,14 +197,15 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
             // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter Valid dtReferenceNo");
             // createCPIPRXErrorResponseDTO.setData(null);
             // createCPIPRXErrorResponseDTO.setResponse(null);
-            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
-                                                                                        .isSuccess("false")
-                                                                                        .errorCode("102")
-                                                                                        .errorDescription("Please Enter Valid dtReferenceNo")
-                                                                                        .data(null)
-                                                                                        .response(null)
-                                                                                        .build();           
-            return createCPIPRXErrorResponseDTO;   
+            // CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+            //                                                                             .isSuccess("false")
+            //                                                                             .errorCode("102")
+            //                                                                             .errorDescription("Please Enter Valid dtReferenceNo")
+            //                                                                             .data(null)
+            //                                                                             .response(null)
+            //                                                                             .build();           
+            // return createCPIPRXErrorResponseDTO;   
+            throw new MontajiInvalidDtReferenceNoException(requestDetailsDTO.getDtReferenceNo());
         }        
 
         //Optional<Request> request=requestRepository.findByDtReferenceNo(requestDetailsDTO.getDtReferenceNo());
@@ -190,15 +220,16 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
                 // createCPIPRXErrorResponseDTO.setErrorDescription("Request is already created with given dtReferenceNo");
                 // createCPIPRXErrorResponseDTO.setData(null);
                 // createCPIPRXErrorResponseDTO.setResponse(null);
-                CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
-                                                                                            .isSuccess("false")
-                                                                                            .errorCode("103")
-                                                                                            .errorDescription("Request is already created with given dtReferenceNo")
-                                                                                            .data(null)
-                                                                                            .response(null)
-                                                                                            .build();             
-                return createCPIPRXErrorResponseDTO;  
+                // CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                //                                                                             .isSuccess("false")
+                //                                                                             .errorCode("103")
+                //                                                                             .errorDescription("Request is already created with given dtReferenceNo")
+                //                                                                             .data(null)
+                //                                                                             .response(null)
+                //                                                                             .build();             
+                // return createCPIPRXErrorResponseDTO;  
             // }
+            throw new MontajiDuplicateReuestException(requestDetailsDTO.getDtReferenceNo());
         }
         //User user = userRepository.findByUserName(requestDetailsDTO.getCreatedBy()).orElse(null);
         //User user2 = UserRepository.findSingleUserByUserName(requestDetailsDTO.getCreatedBy()).orElse(null);
@@ -216,30 +247,36 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
             // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter applicantDMUserId");
             // createCPIPRXErrorResponseDTO.setData(null);
             // createCPIPRXErrorResponseDTO.setResponse(null);
-            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
-                                                                                        .isSuccess("false")
-                                                                                        .errorCode("104")
-                                                                                        .errorDescription("Please Enter valid applicantDMUserId")
-                                                                                        .data(null)
-                                                                                        .response(null)
-                                                                                        .build();            
-            return createCPIPRXErrorResponseDTO; 
+            // CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+            //                                                                             .isSuccess("false")
+            //                                                                             .errorCode("104")
+            //                                                                             .errorDescription("Please Enter valid applicantDMUserId")
+            //                                                                             .data(null)
+            //                                                                             .response(null)
+            //                                                                             .build();            
+            // return createCPIPRXErrorResponseDTO; 
+            throw new MontajiInvalidApplicantDMUserIdException(requestDetailsDTO.getApplicantDMUserId());
         }
 
         if (userOptional.isPresent() && companyDetailsOptional.isPresent()) {
             User user2 = userOptional.get();
+            logger.info("user2: " + user2.getCompanyDetails().getLicenseNumber());
             CompanyDetails companyDetails2 = companyDetailsOptional.get();
+            logger.info("companyDetails2: " + companyDetails2.getLicenseNumber());
             Boolean isUserSameCompany=user2.getCompanyDetails().equals(companyDetails2);
+            logger.info("isUserSameCompany: " + isUserSameCompany);
+
             if(!isUserSameCompany)
             {
-                CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
-                                                                                            .isSuccess("false")
-                                                                                            .errorCode("105")
-                                                                                            .errorDescription("User and Company are not matching")
-                                                                                            .data(null)
-                                                                                            .response(null)
-                                                                                            .build();            
-                return createCPIPRXErrorResponseDTO; 
+                // CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+                //                                                                             .isSuccess("false")
+                //                                                                             .errorCode("105")
+                //                                                                             .errorDescription("User and Company are not matching")
+                //                                                                             .data(null)
+                //                                                                             .response(null)
+                //                                                                             .build();            
+                // return createCPIPRXErrorResponseDTO; 
+                throw new MontajiMismatchUserCompanyException();
             }
 
         }
@@ -252,14 +289,15 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
             // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter Valid Request Type");
             // createCPIPRXErrorResponseDTO.setData(null);
             // createCPIPRXErrorResponseDTO.setResponse(null);
-            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
-                                                                                        .isSuccess("false")
-                                                                                        .errorCode("105")
-                                                                                        .errorDescription("Please Enter Valid Request Type")
-                                                                                        .data(null)
-                                                                                        .response(null)
-                                                                                        .build();               
-            return createCPIPRXErrorResponseDTO;  
+            // CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+            //                                                                             .isSuccess("false")
+            //                                                                             .errorCode("106")
+            //                                                                             .errorDescription("Please Enter Valid Request Type")
+            //                                                                             .data(null)
+            //                                                                             .response(null)
+            //                                                                             .build();               
+            // return createCPIPRXErrorResponseDTO;  
+            throw new MontajiInvalidRequestTypeException(requestDetailsDTO.getRequestType());
         }
         if(requestDetailsDTO.getRequestDate()==null)
         {
@@ -268,14 +306,15 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
             // createCPIPRXErrorResponseDTO.setErrorDescription("Please Enter Request Date");
             // createCPIPRXErrorResponseDTO.setData(null);
             // createCPIPRXErrorResponseDTO.setResponse(null);
-            CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
-                                                                                        .isSuccess("false")
-                                                                                        .errorCode("106")
-                                                                                        .errorDescription("Please Enter Request Date")
-                                                                                        .data(null)
-                                                                                        .response(null)
-                                                                                        .build();               
-            return createCPIPRXErrorResponseDTO;  
+            // CreateCPIPRXResponseDTO createCPIPRXErrorResponseDTO=CreateCPIPRXResponseDTO.builder()
+            //                                                                             .isSuccess("false")
+            //                                                                             .errorCode("107")
+            //                                                                             .errorDescription("Please Enter Request Date")
+            //                                                                             .data(null)
+            //                                                                             .response(null)
+            //                                                                             .build();               
+            // return createCPIPRXErrorResponseDTO;  
+            throw new MontajiEmptyRequestDateException();
         }        
         ConsignmentDetailsDTO consignmentDetailsDTO = createCPIPRXRequestDTO.getConsignmentDetails();
         ConsignmentRequestDetailsDTO consignmentRequestDetailsDTO = consignmentDetailsDTO.getRequestdetails();
@@ -421,12 +460,12 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
             { 
             
             if (attachmentDTO.getFileName() == null || attachmentDTO.getFileType() == null || attachmentDTO.getFileContent() == null) {
-                throw new AttachmentValidationException("Missing required fields: fileName, fileType, fileContent");
+                throw new MontajiAttachmentValidationException("Missing required fields: fileName, fileType, fileContent");
             }
         
             // Validate file type (optional)
             if (!isValidFileType(attachmentDTO.getFileType())) {
-                throw new AttachmentValidationException("Unsupported file type: " + attachmentDTO.getFileType());
+                throw new MontajiAttachmentValidationException("Unsupported file type: " + attachmentDTO.getFileType());
             }
         
             // Extract base64 content and decode
@@ -440,8 +479,9 @@ CreateCPIPRXResponseRepository createCPIPRXResponseRepository;
             File file = new File(filePath);
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 fos.write(decodedBytes);
-            } catch (IOException e) {
-                throw new IOException("Error saving attachment: " + e.getMessage());
+            } catch (IOException ex) {
+                //throw new IOException("Error saving attachment: " + e.getMessage());
+                throw new MontajiIOException("Error saving attachment", ex);
             }            
 
                 Clob fileContentClob = stringToClobConverter.convertToDatabaseColumn(attachmentDTO.getFileContent());

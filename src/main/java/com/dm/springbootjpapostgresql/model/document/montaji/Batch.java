@@ -4,8 +4,8 @@ import lombok.Setter;
 
 @Setter
 public class Batch{
-    private int serialNo;
+    private Integer serialNo;
     private double itemsUnitWeight;
-    private int itemsQuantity;
+    private Integer itemsQuantity;
     private double itemsTotalWeight;
 }

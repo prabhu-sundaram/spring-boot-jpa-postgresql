@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.dm.springbootjpapostgresql.exception.AttachmentValidationException;
 import com.dm.springbootjpapostgresql.exception.BadRequestException;
 import com.dm.springbootjpapostgresql.exception.ConnectionException;
 import com.dm.springbootjpapostgresql.exception.ErrorResponseDto;

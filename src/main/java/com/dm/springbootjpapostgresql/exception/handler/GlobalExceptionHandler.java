@@ -130,9 +130,9 @@ public class GlobalExceptionHandler {
         ErrorResponseDto errorResponse = ErrorResponseDto.builder()
                 .timestamp(Instant.now())
                 .message(ex.getMessage())
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(RuntimeException.class)

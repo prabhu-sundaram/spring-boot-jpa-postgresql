@@ -11,18 +11,18 @@ import jakarta.persistence.Table;
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private String title;
 	private String description;
 	private String author;
 	private double price;
-	private int pages;
+	private Integer pages;
 
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Book(int id, String title, String description, String author, double price, int pages) {
+	public Book(Integer id, String title, String description, String author, double price, Integer pages) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -31,10 +31,10 @@ public class Book {
 		this.price = price;
 		this.pages = pages;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -61,10 +61,10 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getPages() {
+	public Integer getPages() {
 		return pages;
 	}
-	public void setPages(int pages) {
+	public void setPages(Integer pages) {
 		this.pages = pages;
 	}
 	@Override

@@ -42,7 +42,7 @@ public class BookController {
 	}
 //	@GetMapping("/getBook/{id}")
 	@QueryMapping("getBook")
-	public Book getBookById(@Argument int id){
+	public Book getBookById(@Argument Integer id){
 		return bookServices.getBookById(id);
 	}
 }
@@ -51,12 +51,12 @@ class BookInput{
 	private String description;
 	private String author;
 	private double price;
-	private int pages;
+	private Integer pages;
 	public BookInput() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BookInput(String title, String description, String author, double price, int pages) {
+	public BookInput(String title, String description, String author, double price, Integer pages) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -88,10 +88,10 @@ class BookInput{
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getPages() {
+	public Integer getPages() {
 		return pages;
 	}
-	public void setPages(int pages) {
+	public void setPages(Integer pages) {
 		this.pages = pages;
 	}
 	@Override

@@ -570,7 +570,7 @@ public class StudentServiceImpl implements StudentService{
     }
     
     @Override
-    public int updateStudentStatusByFirstName(Integer status, String firstName)
+    public Integer updateStudentStatusByFirstName(Integer status, String firstName)
     {
         return studentRepository.updateStudentSetStatusForFirstName(status, firstName);
     }
@@ -631,13 +631,13 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public int updateStudentNameByEmail(String firstName, String email)
+    public Integer updateStudentNameByEmail(String firstName, String email)
     {
         return studentRepository.updateStudentNameByEmail(firstName, email);
     }
 
     @Override
-    public int updateStudentStatusByNameNative(Integer status, String firstName)
+    public Integer updateStudentStatusByNameNative(Integer status, String firstName)
     {
         return studentRepository.updateStudentSetStatusForNameNative(status, firstName);
     }

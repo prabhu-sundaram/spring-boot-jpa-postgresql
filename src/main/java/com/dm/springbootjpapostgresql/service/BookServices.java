@@ -25,7 +25,7 @@ public class BookServices {
 		return book;
 	}
 	//Get Customer findById
-	public Book getBookById(int id) {
+	public Book getBookById(Integer id) {
 		return bookRepository.findById(id).get();
 	}
 }

@@ -5,9 +5,9 @@ import java.util.List;
 public class RequestCPIPBuilder extends RequestBuilder<RequestCPIP> {
 
     private String consignmentPurposeId;
-    private int noOfContainers;
-    private int noOfContainers2;
-    private int productCount;
+    private Integer noOfContainers;
+    private Integer noOfContainers2;
+    private Integer productCount;
     private ReqPortDetails reqPortDetails;
     private List<Container> containers;
     private PreApproval preApproval;
@@ -17,17 +17,17 @@ public class RequestCPIPBuilder extends RequestBuilder<RequestCPIP> {
         return this;
     }
 
-    public RequestCPIPBuilder setNoOfContainers(int noOfContainers) {
+    public RequestCPIPBuilder setNoOfContainers(Integer noOfContainers) {
         this.noOfContainers = noOfContainers;
         return this;
     }    
 
-    public RequestCPIPBuilder setNoOfContainers2(int noOfContainers2) {
+    public RequestCPIPBuilder setNoOfContainers2(Integer noOfContainers2) {
         this.noOfContainers2 = noOfContainers2;
         return this;
     }  
 
-    public RequestCPIPBuilder setProductCount(int productCount) {
+    public RequestCPIPBuilder setProductCount(Integer productCount) {
         this.productCount = productCount;
         return this;
     }      

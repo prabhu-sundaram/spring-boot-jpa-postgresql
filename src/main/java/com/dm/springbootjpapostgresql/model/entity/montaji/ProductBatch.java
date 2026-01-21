@@ -21,9 +21,9 @@ public class ProductBatch{
     @Column(name = "id", nullable = false)
 	private Long id;    
 
-    private int serialNo;
+    private Integer serialNo;
     private double itemsUnitWeight;
-    private int itemsQuantity;
+    private Integer itemsQuantity;
     private double itemsTotalWeight;
 
     @ManyToOne(fetch = FetchType.LAZY)

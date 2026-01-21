@@ -60,7 +60,7 @@ class CourseRepositoryTest {
                 courseRepository.findAll(secondPageWithTwoRecords)
                         .getTotalElements();
 
-        int totalPages =
+        Integer totalPages =
                 courseRepository.findAll(secondPageWithTwoRecords)
                         .getTotalPages();
 

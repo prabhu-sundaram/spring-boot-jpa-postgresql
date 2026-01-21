@@ -10,8 +10,8 @@ public class Container{
     private String containerTypeId;
     private String containerNumber;
     private String storageTemperatureId;
-    private int containerTotalQuantity;
-    private int productsCount;
+    private Integer containerTotalQuantity;
+    private Integer productsCount;
     private double containerTotalWeight;
     private ArrayList<Product> products;
 }

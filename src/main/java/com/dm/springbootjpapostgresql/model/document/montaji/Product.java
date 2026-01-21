@@ -14,8 +14,8 @@ public class Product{
     private String subCategoryId;
     private String countryId;
     private String brandId;
-    private int noOfBatches;
-    private int productTotalQuantity;
+    private Integer noOfBatches;
+    private Integer productTotalQuantity;
     private double productUnitWeight;
     private double productTotalWeight;
     private ArrayList<Batch> batches;

@@ -34,7 +34,7 @@ public class UserFetchAllResponseDto {
     private String nationalityNameEn;
     private String nationalityNameAr;      
     private LocalDate dob;
-    private int Age;
+    private Integer Age;
     private List<Address> addresses;
     private String licenseNumber;
     private String companyName;

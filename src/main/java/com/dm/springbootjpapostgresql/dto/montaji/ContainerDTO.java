@@ -10,8 +10,7 @@ public class ContainerDTO{
     private String containerTypeId;
     private String containerNumber;
     private String storageTemperatureId;
-    private int containerTotalQuantity;
-    //private int productsCount;
+    private Integer containerTotalQuantity;
     private double containerTotalWeight;
     private ArrayList<ProductDTO> products;
 }

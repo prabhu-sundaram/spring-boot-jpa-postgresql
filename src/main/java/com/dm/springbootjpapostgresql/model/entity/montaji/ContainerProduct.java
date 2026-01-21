@@ -32,10 +32,10 @@ public class ContainerProduct{
     private String countryId;
     private String brandId;
     @Column(nullable=true)
-    private int noOfBatches;
+    private Integer noOfBatches;
     @Column(nullable=true)
-    private int noOfBatches2;
-    private int productTotalQuantity;
+    private Integer noOfBatches2;
+    private Integer productTotalQuantity;
     private double productUnitWeight;
     private double productTotalWeight;
 

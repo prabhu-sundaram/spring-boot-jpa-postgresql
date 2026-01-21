@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public class BatchDTO{
-    private int serialNo;
+    private Integer serialNo;
     private double itemsUnitWeight;
-    private int itemsQuantity;
+    private Integer itemsQuantity;
     private double itemsTotalWeight;
 }

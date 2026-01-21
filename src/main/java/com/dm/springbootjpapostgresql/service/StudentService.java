@@ -80,7 +80,7 @@ public interface StudentService {
     public List<StudentDTO> getStudentsByStatusAndFirstNameNamedParams(Integer status, String firstName);
     public List<StudentDTO> getStudentsByStudentStatusAndFirstName(Integer studentStatus, String firstName);
     public List<StudentDTO> getAllStudentsByFirstNameList(Collection<String> firstNames);    
-    public int updateStudentStatusByFirstName(Integer status, String firstName);
+    public Integer updateStudentStatusByFirstName(Integer status, String firstName);
 	
 	//Native
     public List<StudentDTO> getAllActiveStudentsNative();
@@ -90,8 +90,8 @@ public interface StudentService {
     public StudentResponse getAllStudentsWithPaginationNative(Pageable pageable);
     public List<StudentDTO> getAllStudentsByStatusAndNameNamedParamsNative(Integer status, String firstName);
 
-    public int updateStudentNameByEmail(String firstName, String email);
-    public int updateStudentStatusByNameNative(Integer status, String firstName);
+    public Integer updateStudentNameByEmail(String firstName, String email);
+    public Integer updateStudentStatusByNameNative(Integer status, String firstName);
     public void insertUser(String firstName,String lastName,Integer age,LocalDate birthDate,
         String email,Integer status,Boolean active);
 }

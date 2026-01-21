@@ -27,11 +27,11 @@ public class Container{
     private String containerNumber;
     private String storageTemperatureId;
     @Column(nullable=true)
-    private int noOfProducts;
+    private Integer noOfProducts;
     @Column(nullable=true)
-    private int noOfProducts2;
-    private int containerTotalQuantity;
-    private int productsCount;
+    private Integer noOfProducts2;
+    private Integer containerTotalQuantity;
+    private Integer productsCount;
     private double containerTotalWeight;
 
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, orphanRemoval = true)
