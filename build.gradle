@@ -31,7 +31,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-ldap'
+    implementation 'org.springframework.boot:spring-boot-starter-activemq'
     implementation 'org.springframework.ldap:spring-ldap-core'
+    
 
     // Dependencies with explicit versions (or not managed by Spring Boot BOM)
     implementation 'com.graphql-java:graphql-java-tools:5.2.4'
