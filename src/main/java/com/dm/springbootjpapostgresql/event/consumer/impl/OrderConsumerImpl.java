@@ -1,12 +1,13 @@
-package com.dm.springbootjpapostgresql.service;
+package com.dm.springbootjpapostgresql.event.consumer.impl;
 
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import com.dm.springbootjpapostgresql.dto.UserOrder;
+import com.dm.springbootjpapostgresql.event.consumer.OrderConsumer;
 
 @Component
-public class OrderConsumer {
+public class OrderConsumerImpl implements OrderConsumer {
 
     // destination matches the queue name used in the producer
     @JmsListener(destination = "order-queue")

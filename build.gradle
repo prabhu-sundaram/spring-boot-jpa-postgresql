@@ -33,6 +33,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-ldap'
     implementation 'org.springframework.boot:spring-boot-starter-activemq'
     implementation 'org.springframework.ldap:spring-ldap-core'
+	implementation("org.springframework.kafka:spring-kafka")
+	
     
 
     // Dependencies with explicit versions (or not managed by Spring Boot BOM)
@@ -71,6 +73,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // Version managed by Spring Boot parent
     testImplementation 'org.springframework.graphql:spring-graphql-test' // Version managed by Spring Boot parent
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation("org.springframework.kafka:spring-kafka-test")
 
     // Annotation processors
     compileOnly 'org.projectlombok:lombok'

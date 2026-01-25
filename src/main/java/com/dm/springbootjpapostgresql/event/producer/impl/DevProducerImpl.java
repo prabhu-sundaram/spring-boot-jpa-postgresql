@@ -1,11 +1,13 @@
-package com.dm.springbootjpapostgresql.service;
+package com.dm.springbootjpapostgresql.event.producer.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
+import com.dm.springbootjpapostgresql.event.producer.DevProducer;
+
 @Service
-public class DevProducer {
+public class DevProducerImpl implements DevProducer {
 
     @Autowired
     private JmsTemplate jmsTemplate;

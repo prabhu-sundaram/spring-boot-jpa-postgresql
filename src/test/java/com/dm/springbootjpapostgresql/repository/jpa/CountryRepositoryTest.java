@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.repository;
+package com.dm.springbootjpapostgresql.repository.jpa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

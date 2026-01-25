@@ -1,4 +1,4 @@
-package com.dm.springbootjpapostgresql.repository;
+package com.dm.springbootjpapostgresql.repository.jpa;
 
 import com.dm.springbootjpapostgresql.model.entity.Student;
 import com.dm.springbootjpapostgresql.repository.jpa.StudentRepository;
