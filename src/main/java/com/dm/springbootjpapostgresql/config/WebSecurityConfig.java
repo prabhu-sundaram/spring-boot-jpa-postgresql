@@ -72,6 +72,7 @@ public class WebSecurityConfig {
                                     "/swagger-ui.html",
                                     "/v3/api-docs/**",
                                     "/api-docs/**",
+                                    "/actuator/**",
                                     "/api/User/register", 
                                     "/api/User/login"
                                 ).permitAll()

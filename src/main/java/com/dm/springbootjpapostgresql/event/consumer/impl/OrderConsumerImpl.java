@@ -9,6 +9,12 @@ import com.dm.springbootjpapostgresql.event.consumer.OrderConsumer;
 @Component
 public class OrderConsumerImpl implements OrderConsumer {
 
+    @JmsListener(destination = "dev.test.queue")
+    public void receiveText(String text) {
+        System.out.println("CONSUMER RECEIVED DATA:");
+        System.out.println("text: " + text);
+    }
+
     // destination matches the queue name used in the producer
     @JmsListener(destination = "order-queue")
     public void receiveOrder(UserOrder order) {

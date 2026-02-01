@@ -11,6 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.ldap.LdapRepositoriesAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration;
+import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
+import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -50,6 +53,9 @@ import com.dm.springbootjpapostgresql.service.FileOps.*;
     exclude = {
         RedisRepositoriesAutoConfiguration.class,
         LdapRepositoriesAutoConfiguration.class
+        // KafkaAutoConfiguration.class,      // Stops Kafka
+        // JmsAutoConfiguration.class,        // Stops ActiveMQ/JMS
+        // ActiveMQAutoConfiguration.class    // Specifically stops ActiveMQ setup     
     }
 )
 // @ComponentScan(basePackages = {

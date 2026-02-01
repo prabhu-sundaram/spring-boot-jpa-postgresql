@@ -34,6 +34,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-activemq'
     implementation 'org.springframework.ldap:spring-ldap-core'
 	implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 	
     
 
